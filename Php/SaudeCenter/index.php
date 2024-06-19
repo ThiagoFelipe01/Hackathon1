@@ -7,11 +7,11 @@
         <h4>Facilitar o agendamento de vacinas e visitas para idosos é essencial para garantir sua saúde e bem-estar.<br> 
             Este serviço permite que familiares e cuidadores marquem compromissos médicos de forma rápida e 
             eficiente, assegurando que os idosos recebam a atenção necessária sem complicações.</h4>
-        <a class="btn btn-primary btn-lg" href="#" role="button">Agendar Vacina!</a>
+        <a class="btn btn-primary btn-lg" href="#" role="button">Agende Agora</a>
     </div>
 
     <div class="containerimg">
-        <img src="imagens/idoso.png" alt="">
+        <img src="imagens/vacinaidoso.png" alt="a">
     </div>
 </div>
 
