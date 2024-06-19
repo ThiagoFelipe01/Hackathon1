@@ -1,0 +1,40 @@
+{
+  "name": "testetypescript",
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "nodemon",
+    "migrate": "knex migrate:latest",
+    "migrate:make": "knex migrate:make createUsuarios",
+    "migrate:rollback": "knex migrate:rollback",
+    "test": "jest --watch"
+  },
+  "keywords": [],
+  "author": "samuel",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^20.12.2",
+    "jest": "^29.6.2",
+    "nodemon": "^3.0.1",
+    "ts-node": "10.9.2",
+    "typescript": "^5.4.3"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.19.2",
+    "express-async-errors": "^3.1.1",
+    "listen": "^1.0.1",
+    "mysql": "^2.18.1",
+    "mysql2": "^3.10.1",
+    "use": "^3.1.1"
+  },
+  "main": "knex.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ThiagoFelipe01/Hackathon1.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ThiagoFelipe01/Hackathon1/issues"
+  },
+  "homepage": "https://github.com/ThiagoFelipe01/Hackathon1#readme",
+  "description": ""
+}
