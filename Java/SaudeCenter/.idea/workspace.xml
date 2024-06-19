@@ -4,26 +4,18 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5cbb86a9-888b-46f1-9af3-a22f3719d138" name="Changes" comment="Testando">
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/hackathon/dao/AgendamentoDao.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/hackathon/dao/IdosoDao.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/hackathon/model/Agendamento.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/hackathon/model/Idoso.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/hackathon/service/AgendamentoService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/hackathon/service/IdosoService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/hackathon/views/AlertasForm.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/hackathon/views/MenuForm.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/hackathon/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/views/Cadastro.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/hackathon/views/IdosoCadastroForm.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/views/Historico.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/hackathon/views/AgendamentoForm.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/views/Registro.java" beforeDir="false" />
+    <list default="true" id="5cbb86a9-888b-46f1-9af3-a22f3719d138" name="Changes" comment="Classes criadas e conexão com o banco feito.">
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/hackathon/views/AgendamentoForm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/hackathon/views/Historico.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ChangesViewManager">
+    <option name="groupingKeys">
+      <option value="directory" />
+    </option>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -151,7 +143,15 @@
       <option name="project" value="LOCAL" />
       <updated>1718806030227</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="Classes criadas e conexão com o banco feito.">
+      <option name="closed" value="true" />
+      <created>1718809914827</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1718809914827</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -168,6 +168,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Criando Branch" />
     <MESSAGE value="Testando" />
-    <option name="LAST_COMMIT_MESSAGE" value="Testando" />
+    <MESSAGE value="Classes criadas e conexão com o banco feito." />
+    <option name="LAST_COMMIT_MESSAGE" value="Classes criadas e conexão com o banco feito." />
   </component>
 </project>
