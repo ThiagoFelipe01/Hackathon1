@@ -1,4 +1,4 @@
-<?php include 'navbar.php'; ?>
+<?php include 'templates/navbar.php'; ?>
 
 <div class="content">
     <h1>Serviços</h1>
