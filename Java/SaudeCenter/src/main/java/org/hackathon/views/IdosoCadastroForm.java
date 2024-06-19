@@ -1,10 +1,10 @@
-package org.example.views;
+package org.hackathon.views;
 
 import javax.swing.*;
 import java.awt.*;
 
 
-public class Cadastro {
+public class IdosoCadastroForm {
     private JLabel labelNome;
     private JTextField campoNome;
     private JLabel labelIdade;
