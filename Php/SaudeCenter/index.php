@@ -1,54 +1,57 @@
-<?php include 'navbar.php'; ?>
-<?php include('templates/header.php'); ?>
+<?php include 'templates/navbar.php'; ?>
+<?php include 'templates/header.php'; ?>
 
-<div class="cardscont">
-<div class="row">
-    <div class="col-sm-6 mb-3 sm-0">
-            <img src="imagens/doc.jpg" class="card-img-top" alt="vacina">
-            <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-            </div>
+<div class="containerini">
+    <div class="content">
+        <h1>Bem-vindo ao nosso site!</h1>
+        <h4>Facilitar o agendamento de vacinas e visitas para idosos é essencial para garantir sua saúde e bem-estar.<br> 
+            Este serviço permite que familiares e cuidadores marquem compromissos médicos de forma rápida e 
+            eficiente, assegurando que os idosos recebam a atenção necessária sem complicações.</h4>
+        <a class="btn btn-primary btn-lg" href="#" role="button">Agendar Vacina!</a>
     </div>
-    <div class="col-sm-6">
-            <img src="imagens/visita.png" class="card-img-top" alt="vacina">
-            <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-            </div>
+
+    <div class="containerimg">
+        <img src="imagens/idoso.png" alt="">
     </div>
 </div>
-</div>
 
-<div class="content">
-    <h1>Bem-vindo ao nosso site!</h1>
-    <p>Conteúdo da página inicial.</p>
-</div>
 <div class="container">
-    <h2>Agendamento de Vacina e Visita</h2>
-    <form action="agendamento.php" method="post">
-        <label for="nome">Nome:</label>
-        <input type="text" id="nome" name="nome" required>
-
-        <label for="email">Email:</label>
-        <input type="email" id="email" name="email" required>
-
-        <label for="telefone">Telefone:</label>
-        <input type="text" id="telefone" name="telefone" required>
-
-        <label for="tipo_agendamento">Tipo de Agendamento:</label>
-        <select id="tipo_agendamento" name="tipo_agendamento" required>
-            <option value="vacina">Vacina</option>
-            <option value="visita">Visita</option>
-        </select>
-
-        <label for="data_agendamento">Data:</label>
-        <input type="date" id="data_agendamento" name="data_agendamento" required>
-
-        <label for="horario">Horário:</label>
-        <input type="time" id="horario" name="horario" required>
-
-        <input type="submit" value="Agendar">
-    </form>
+        <h2>Agendamento de Vacina e Visita</h2>
+        <form action="agendamento.php" method="post">
+            <div class="form-group">
+                <label for="nome">Nome:</label>
+                <input type="text" id="nome" name="nome" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="telefone">Telefone:</label>
+                <input type="text" id="telefone" name="telefone" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="tipo_agendamento">Tipo de Agendamento:</label>
+                <select id="tipo_agendamento" name="tipo_agendamento" class="form-control" required>
+                    <option value="visita">Visita</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="data_agendamento">Data:</label>
+                <input type="date" id="data_agendamento" name="data_agendamento" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="horario">Horário:</label>
+                <input type="time" id="horario" name="horario" class="form-control" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Agendar</button>
+        </form>
+    </div>
 </div>
-<?php include('templates/footer.php'); ?>
+
+<?php include 'templates/footer.php'; ?>
+
+<!-- Bootstrap JS, Popper.js, and jQuery -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
