@@ -70,6 +70,6 @@ public class Alerta {
 
     @Override
     public String toString() {
-        return STR."Alerta{id=\{id}, idosoId=\{idosoId}, mensagem='\{mensagem}\{'\''}, dataAlerta=\{dataAlerta}, horarioAlerta=\{horarioAlerta}\{'}'}";
+        return "Id: " + id + " Idoso: " + idosoId + " Messagem: " + mensagem + " Data Alerta: " + dataAlerta + " Horario Alerta: " + horarioAlerta;
     }
 }

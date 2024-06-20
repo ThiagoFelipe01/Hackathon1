@@ -68,6 +68,6 @@ public class Usuario {
 
     @Override
     public String toString() {
-        return STR."Usuario{id=\{id}, nome='\{nome}\{'\''}, email='\{email}\{'\''}, senha='\{senha}\{'\''}, tipoUsuario='\{tipoUsuario}\{'\''}\{'}'}";
+        return "Id: " + id + " Nome: " + nome + " Email: " + email + " Senha: " + senha + " Tipo Usuarios: " + tipoUsuario;
     }
 }

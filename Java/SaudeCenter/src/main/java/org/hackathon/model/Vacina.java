@@ -57,6 +57,6 @@ public class Vacina {
 
     @Override
     public String toString() {
-        return STR."Vacina{id=\{id}, nome='\{nome}\{'\''}, descricao='\{descricao}\{'\''}, intervaloRecomendado=\{intervaloRecomendado}\{'}'}";
+        return "Id: " + id + " Nome: " + nome + " Descrição: " + descricao + " Intervalo Recomendado: " + intervaloRecomendado;
     }
 }

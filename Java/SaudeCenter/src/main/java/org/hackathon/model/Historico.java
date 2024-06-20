@@ -21,9 +21,6 @@ public class Historico {
         this.dataVacinacao = dataVacinacao;
     }
 
-    public Historico() {
-    }
-
     public int getId() {
         return id;
     }
@@ -58,6 +55,6 @@ public class Historico {
 
     @Override
     public String toString() {
-        return STR."Historico{id=\{id}, idosoId=\{idosoId}, vacinaId=\{vacinaId}, dataVacinacao=\{dataVacinacao}\{'}'}";
+        return "Id: " + id + " Idoso: " + idosoId + " Vacina: " + vacinaId + " Data Vacinação: " + dataVacinacao;
     }
 }

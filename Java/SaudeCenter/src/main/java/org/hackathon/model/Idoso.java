@@ -1,117 +1,80 @@
 package org.hackathon.model;
 
 public class Idoso {
-    private int id;
+    private Integer id;
     private String nome;
     private int idade;
-    private String endereco;
-    private String telefone;
-    private String historicoMedico;
-    private String alergias;
-    private String condicoesPreexistentes;
-    private String observacoes;
+    private int cpf;
+    private int telefone;
+    private String medicamento;
 
-    public Idoso(String nome, int idade, String endereco, String telefone, String historicoMedico, String alergias, String condicoesPreexistentes, String observacoes) {
+    public Idoso(String nome, int idade, int cpf, int telefone, String medicamento) {
         this.nome = nome;
         this.idade = idade;
-        this.endereco = endereco;
+        this.cpf = cpf;
         this.telefone = telefone;
-        this.historicoMedico = historicoMedico;
-        this.alergias = alergias;
-        this.condicoesPreexistentes = condicoesPreexistentes;
-        this.observacoes = observacoes;
+        this.medicamento = medicamento;
     }
 
-    public Idoso(int id, String nome, int idade, String endereco, String telefone, String historicoMedico, String alergias, String condicoesPreexistentes, String observacoes) {
+    public Idoso(Integer id, String nome, int idade, int cpf, int telefone, String medicamento) {
         this.id = id;
         this.nome = nome;
         this.idade = idade;
-        this.endereco = endereco;
+        this.cpf = cpf;
         this.telefone = telefone;
-        this.historicoMedico = historicoMedico;
-        this.alergias = alergias;
-        this.condicoesPreexistentes = condicoesPreexistentes;
-        this.observacoes = observacoes;
-    }
-
-    public Idoso() {
-
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    public void setIdade(int idade) {
-        this.idade = idade;
-    }
-
-    public void setEndereco(String endereco) {
-        this.endereco = endereco;
-    }
-
-    public void setTelefone(String telefone) {
-        this.telefone = telefone;
-    }
-
-    public void setHistoricoMedico(String historicoMedico) {
-        this.historicoMedico = historicoMedico;
-    }
-
-    public void setAlergias(String alergias) {
-        this.alergias = alergias;
-    }
-
-    public void setCondicoesPreexistentes(String condicoesPreexistentes) {
-        this.condicoesPreexistentes = condicoesPreexistentes;
-    }
-
-    public void setObservacoes(String observacoes) {
-        this.observacoes = observacoes;
+        this.medicamento = medicamento;
     }
 
     public String getNome() {
         return nome;
     }
 
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
     public int getIdade() {
         return idade;
     }
 
-    public String getEndereco() {
-        return endereco;
+    public void setIdade(int idade) {
+        this.idade = idade;
     }
 
-    public String getTelefone() {
+    public int getCpf() {
+        return cpf;
+    }
+
+    public void setCpf(int cpf) {
+        this.cpf = cpf;
+    }
+
+    public int getTelefone() {
         return telefone;
     }
 
-    public String getHistoricoMedico() {
-        return historicoMedico;
+    public void setTelefone(int telefone) {
+        this.telefone = telefone;
     }
 
-    public String getAlergias() {
-        return alergias;
+    public Integer getId() {
+        return id;
     }
 
-    public String getCondicoesPreexistentes() {
-        return condicoesPreexistentes;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
-    public String getObservacoes() {
-        return observacoes;
+    public String getMedicamento() {
+        return medicamento;
+    }
+
+    public void setMedicamento(String medicamento) {
+        this.medicamento = medicamento;
     }
 
     @Override
     public String toString() {
-        return STR."Idoso{id=\{id}, nome='\{nome}\{'\''}, idade=\{idade}, endereco='\{endereco}\{'\''}, telefone='\{telefone}\{'\''}, historicoMedico='\{historicoMedico}\{'\''}, alergias='\{alergias}\{'\''}, condicoesPreexistentes='\{condicoesPreexistentes}\{'\''}, observacoes='\{observacoes}\{'\''}\{'}'}";
+        return "Id: " + id + " Nome: " + nome + " CPF: " + cpf + " Telefone: " + telefone;
     }
 }

@@ -4,21 +4,18 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5cbb86a9-888b-46f1-9af3-a22f3719d138" name="Changes" comment="subindo as classes editadas da branch">
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/hackathon/dao/AlertaDao.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/hackathon/dao/HistoricoDao.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/hackathon/dao/UsuarioDao.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/hackathon/dao/VacinaDao.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/hackathon/model/Alerta.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/hackathon/model/Historico.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/hackathon/model/Usuario.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/hackathon/model/Vacina.java" afterDir="false" />
+    <list default="true" id="5cbb86a9-888b-46f1-9af3-a22f3719d138" name="Changes" comment="Classes criadas e conexão com o banco feito.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/hackathon/dao/AgendamentoDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/hackathon/dao/AgendamentoDao.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/hackathon/dao/IdosoDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/hackathon/dao/IdosoDao.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/hackathon/model/Agendamento.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/hackathon/model/Agendamento.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/hackathon/model/Alerta.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/hackathon/model/Alerta.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/hackathon/model/Historico.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/hackathon/model/Historico.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/hackathon/model/Idoso.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/hackathon/model/Idoso.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/hackathon/views/AlertasForm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/hackathon/views/AlertaForm.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/hackathon/model/Usuario.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/hackathon/model/Usuario.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/hackathon/model/Vacina.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/hackathon/model/Vacina.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/hackathon/service/IdosoService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/hackathon/service/IdosoService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/hackathon/views/IdosoCadastroForm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/hackathon/views/IdosoCadastroForm.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -71,16 +68,30 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "Application.IdosoCadastroForm$Main.executor": "Run",
     "Application.Main.executor": "Run",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "git-widget-placeholder": "Wellington",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/workspace-java/locadora"
+    "last_opened_file_path": "C:/workspace-java/Hackathon1-Thiago/Hackathon1-Thiago/Java/SaudeCenter"
   }
 }]]></component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Application.IdosoCadastroForm$Main">
+    <configuration name="IdosoCadastroForm$Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="org.hackathon.views.IdosoCadastroForm$Main" />
+      <module name="Hackathon1" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.hackathon.views.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="org.hackathon.Main" />
       <module name="Hackathon1" />
@@ -96,6 +107,7 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.IdosoCadastroForm$Main" />
         <item itemvalue="Application.Main" />
         <item itemvalue="Application.Main" />
       </list>
@@ -205,7 +217,15 @@
       <option name="project" value="LOCAL" />
       <updated>1718817297946</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="Classes criadas e conexão com o banco feito.">
+      <option name="closed" value="true" />
+      <created>1718844613186</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1718844613186</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -222,9 +242,9 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Criando Branch" />
     <MESSAGE value="Testando" />
-    <MESSAGE value="Classes criadas e conexão com o banco feito." />
     <MESSAGE value="adicionando as funcionalidades nas classes IdosoService, IdosoDao, Idoso" />
     <MESSAGE value="subindo as classes editadas da branch" />
-    <option name="LAST_COMMIT_MESSAGE" value="subindo as classes editadas da branch" />
+    <MESSAGE value="Classes criadas e conexão com o banco feito." />
+    <option name="LAST_COMMIT_MESSAGE" value="Classes criadas e conexão com o banco feito." />
   </component>
 </project>

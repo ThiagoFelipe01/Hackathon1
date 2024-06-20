@@ -58,7 +58,6 @@ public class Agendamento {
 
     @Override
     public String toString() {
-        return String.format("Agendamento{id=%d, idosoId=%d, dataAgendamento=%s, horario=%s}",
-                id, idosoId, dataAgendamento, horario);
+        return "Id: " + id + " Idoso: " + idosoId + " Data Agendamento: " + dataAgendamento + " Horario: " + horario;
     }
 }
