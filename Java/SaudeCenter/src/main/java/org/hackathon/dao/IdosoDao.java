@@ -44,5 +44,4 @@ public class IdosoDao {
         ps.setInt(5, idoso.getId());
         ps.execute();
     }
-
 }

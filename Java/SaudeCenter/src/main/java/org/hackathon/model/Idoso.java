@@ -6,20 +6,23 @@ public class Idoso {
     private int idade;
     private int cpf;
     private int telefone;
+    private String medicamento;
 
-    public Idoso(String nome, int idade, int cpf) {
+    public Idoso(String nome, int idade, int cpf, int telefone, String medicamento) {
         this.nome = nome;
         this.idade = idade;
         this.cpf = cpf;
         this.telefone = telefone;
+        this.medicamento = medicamento;
     }
 
-    public Idoso(Integer id, String nome, int idade, int cpf, int telefone) {
+    public Idoso(Integer id, String nome, int idade, int cpf, int telefone, String medicamento) {
         this.id = id;
         this.nome = nome;
         this.idade = idade;
         this.cpf = cpf;
         this.telefone = telefone;
+        this.medicamento = medicamento;
     }
 
     public String getNome() {
@@ -60,6 +63,14 @@ public class Idoso {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public String getMedicamento() {
+        return medicamento;
+    }
+
+    public void setMedicamento(String medicamento) {
+        this.medicamento = medicamento;
     }
 
     @Override
