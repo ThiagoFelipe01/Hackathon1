@@ -1,4 +1,4 @@
 package org.hackathon.views;
 
-public class AlertasForm {
+public class AlertaForm {
 }

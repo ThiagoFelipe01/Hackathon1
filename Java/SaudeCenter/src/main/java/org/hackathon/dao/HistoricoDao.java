@@ -1,15 +1,15 @@
 package org.hackathon.dao;
 
-import org.hackathon.model.Agendamento;
+import org.hackathon.model.Historico;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AgendamentoDao {
+public class HistoricoDao {
     private Connection connection;
 
-    public AgendamentoDao() throws SQLException {
+    public HistoricoDao() throws SQLException {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             connection = DriverManager.getConnection(
@@ -19,41 +19,45 @@ public class AgendamentoDao {
         }
     }
 
-    public void salvar(Agendamento agendamento) {
-        String sql = "INSERT INTO agendamentos (idoso_id, data_agendamento, horario) VALUES (?, ?, ?)";
+    public Connection getConnection() {
+        return connection;
+    }
+
+    public void salvar(Historico historico) {
+        String sql = "INSERT INTO historico_vacinacao (idoso_id, vacina_id, data_vacinacao) VALUES (?, ?, ?)";
         try (PreparedStatement stmt = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
-            stmt.setInt(1, agendamento.getIdosoId());
-            stmt.setDate(2, new java.sql.Date(agendamento.getDataAgendamento().getTime()));
-            stmt.setTime(3, new java.sql.Time(agendamento.getHorario().getTime()));
+            stmt.setInt(1, historico.getIdosoId());
+            stmt.setInt(2, historico.getVacinaId());
+            stmt.setDate(3, new java.sql.Date(historico.getDataVacinacao().getTime()));
             stmt.executeUpdate();
 
             ResultSet generatedKeys = stmt.getGeneratedKeys();
             if (generatedKeys.next()) {
-                agendamento.setId(generatedKeys.getInt(1));
+                historico.setId(generatedKeys.getInt(1));
             } else {
-                throw new SQLException("Falha ao obter o ID gerado para o agendamento.");
+                throw new SQLException("Falha ao obter o ID gerado para o histórico de vacinação.");
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
-    public List<Agendamento> listar() {
-        List<Agendamento> agendamentos = new ArrayList<>();
-        String sql = "SELECT * FROM agendamentos";
+    public List<Historico> listar() {
+        List<Historico> historicoVacinacoes = new ArrayList<>();
+        String sql = "SELECT * FROM historico_vacinacao";
         try (Statement stmt = connection.createStatement(); ResultSet rs = stmt.executeQuery(sql)) {
             while (rs.next()) {
-                Agendamento agendamento = new Agendamento();
-                agendamento.setId(rs.getInt("id"));
-                agendamento.setIdosoId(rs.getInt("idoso_id"));
-                agendamento.setDataAgendamento(rs.getDate("data_agendamento"));
-                agendamento.setHorario(rs.getTime("horario"));
-                agendamentos.add(agendamento);
+                Historico historico = new Historico();
+                historico.setId(rs.getInt("id"));
+                historico.setIdosoId(rs.getInt("idoso_id"));
+                historico.setVacinaId(rs.getInt("vacina_id"));
+                historico.setDataVacinacao(rs.getDate("data_vacinacao"));
+                historicoVacinacoes.add(historico);
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return agendamentos;
+        return historicoVacinacoes;
     }
 
     public void fechar() {
