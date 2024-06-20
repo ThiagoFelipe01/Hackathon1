@@ -1,10 +1,16 @@
 package org.hackathon.views;
 
+import org.hackathon.model.Idoso;
+import org.hackathon.service.IdosoService;
+
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
 
+import static java.lang.Integer.parseInt;
 
-public class IdosoCadastroForm {
+public class IdosoCadastroForm extends JFrame {
+    private IdosoService service;
     private JLabel labelNome;
     private JTextField campoNome;
     private JLabel labelIdade;
@@ -13,12 +19,18 @@ public class IdosoCadastroForm {
     private JTextField campoCpf;
     private JLabel labelTelefone;
     private JTextField campoTelefone;
+    private JLabel labelSimNao;
     private JLabel labelMedicamento;
     private JTextField campoMedicamento;
+    private JButton botaoCadastrar;
+    private JRadioButton radioSim;
+    private JRadioButton radioNao;
 
-    private JPanel painel() {
+    public JPanel painel() {
         JPanel painelEntrada = new JPanel(new GridBagLayout());
         GridBagConstraints constraints = new GridBagConstraints();
+        painelEntrada.setPreferredSize(new Dimension(400, 300));
+        painelEntrada.revalidate();
         constraints.insets = new Insets(5, 5, 5, 5);
 
         labelNome = new JLabel("Digite seu nome");
@@ -61,17 +73,147 @@ public class IdosoCadastroForm {
         constraints.gridy = 3;
         painelEntrada.add(campoTelefone, constraints);
 
-        labelMedicamento = new JLabel("Usa algum Medicamento");
+        labelSimNao = new JLabel("Voce Usa algum Medicamento");
         constraints.gridx = 0;
         constraints.gridy = 4;
+        painelEntrada.add(labelSimNao, constraints);
+
+        radioSim = new JRadioButton("Sim");
+        radioSim.addActionListener(this::acaoBotaoSim);
+        constraints.gridx = 0;
+        constraints.gridy = 5;
+        painelEntrada.add(radioSim, constraints);
+
+        radioNao = new JRadioButton("Não");
+        radioNao.addActionListener(this::acaoBotaoNao);
+        constraints.gridx = 1;
+        constraints.gridy = 5;
+        painelEntrada.add(radioNao, constraints);
+
+        ButtonGroup grupoRadio = new ButtonGroup();
+        grupoRadio.add(radioSim);
+        grupoRadio.add(radioNao);
+
+        labelMedicamento = new JLabel("Nome do Medicamento");
+        constraints.gridx = 0;
+        constraints.gridy = 6;
+        labelMedicamento.setVisible(false);
         painelEntrada.add(labelMedicamento, constraints);
 
         campoMedicamento = new JTextField(20);
         constraints.gridx = 1;
-        constraints.gridy = 4;
+        constraints.gridy = 6;
+        campoMedicamento.setVisible(false);
         painelEntrada.add(campoMedicamento, constraints);
 
-        return painel();
+
+        botaoCadastrar = new JButton("Salvar");
+        botaoCadastrar.addActionListener(e -> salvar());
+        constraints.gridx = 0;
+        constraints.gridy = 7;
+        constraints.gridwidth = 2;
+        constraints.anchor = GridBagConstraints.CENTER;
+        painelEntrada.add(botaoCadastrar, constraints);
+
+        return painelEntrada;
     }
 
+    private void acaoBotaoSim(ActionEvent e) {
+        if (radioSim.isSelected()) {
+            labelMedicamento.setVisible(true);
+            campoMedicamento.setVisible(true);
+        }
+    }
+
+    private void acaoBotaoNao(ActionEvent e) {
+        if (radioNao.isSelected()) {
+            labelMedicamento.setVisible(false);
+            campoMedicamento.setVisible(false);
+        }
+    }
+
+    public void validarCampos() {
+        if (campoNome.getText().trim().isEmpty()) {
+            throw new IllegalArgumentException("O campo nome não pode ser vazio");
+        }
+
+        if (!campoNome.getText().matches("[a-zA-Z\\s]+")) {
+            throw new IllegalArgumentException("O campo nome deve conter apenas letras");
+        }
+
+        if (campoIdade.getText().trim().isEmpty()) {
+            throw new IllegalArgumentException("O campo Idade Não pode ser vazio");
+        }
+
+        if (!campoIdade.getText().matches("\\d+")) {
+            throw new IllegalArgumentException("O campo Idade deve conter apenas um número inteiro");
+        }
+
+        if (campoCpf.getText().trim().isEmpty()) {
+            throw new IllegalArgumentException("O campo CPF Não pode ser vazio");
+        }
+
+        if (!campoCpf.getText().matches("\\d+")) {
+            throw new IllegalArgumentException("O campo CPF deve conter apenas números");
+        }
+
+        if (campoCpf.getText().length() != 11) {
+            throw new IllegalArgumentException("O campo CPF deve conter exatamente 11 dígitos");
+        }
+
+        if (campoTelefone.getText().trim().isEmpty()) {
+            throw new IllegalArgumentException("O campo Telefone Não pode ser vazio");
+        }
+
+        if (!campoTelefone.getText().matches("\\d+")) {
+            throw new IllegalArgumentException("O campo Telefone deve conter apenas números");
+        }
+
+        if (campoTelefone.getText().length() != 11) {
+            throw new IllegalArgumentException("O campo Telefone deve conter exatamente 11 dígitos");
+        }
+
+    }
+
+    private void salvar() {
+        try {
+            validarCampos();
+            service.salvar(construirIdoso());
+            limpaCampos();
+        } catch (IllegalArgumentException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage(), "Erro de Validação", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    private void limpaCampos() {
+        campoNome.setText("");
+        campoIdade.setText("");
+        campoCpf.setText("");
+        campoTelefone.setText("");
+    }
+
+    private Idoso construirIdoso() {
+        return campoCpf.getText().isEmpty()
+                ? new Idoso(campoNome.getText(), parseInt(campoIdade.getText()),
+                parseInt(campoTelefone.getText()))
+                : new Idoso(campoNome.getText(),
+                parseInt(campoIdade.getText()),
+                parseInt(campoCpf.getText())
+        );
+    }
+
+
+    public static class Main {
+        public static void main(String[] args) {
+            SwingUtilities.invokeLater(() -> {
+                JFrame frame = new JFrame("Cadastro de Idoso");
+                frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                IdosoCadastroForm cadastroForm = new IdosoCadastroForm();
+                frame.getContentPane().add(cadastroForm.painel());
+                frame.pack();
+                frame.setLocationRelativeTo(null);
+                frame.setVisible(true);
+            });
+        }
+    }
 }

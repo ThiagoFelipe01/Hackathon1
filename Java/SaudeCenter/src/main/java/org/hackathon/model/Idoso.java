@@ -7,7 +7,7 @@ public class Idoso {
     private int cpf;
     private int telefone;
 
-    public Idoso(String nome, int idade, int cpf, int telefone) {
+    public Idoso(String nome, int idade, int cpf) {
         this.nome = nome;
         this.idade = idade;
         this.cpf = cpf;
