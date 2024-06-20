@@ -75,6 +75,7 @@ public class Idoso {
 
     @Override
     public String toString() {
-        return "Id: " + id + " Nome: " + nome + " CPF: " + cpf + " Telefone: " + telefone;
+        return "Id: " + id + " Nome: " + nome + " CPF: " + cpf + " Telefone: "
+                + telefone + " medicamento: " + medicamento;
     }
 }

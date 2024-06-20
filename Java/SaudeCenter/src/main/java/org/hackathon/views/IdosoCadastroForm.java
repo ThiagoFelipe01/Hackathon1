@@ -11,6 +11,8 @@ import static java.lang.Integer.parseInt;
 
 public class IdosoCadastroForm extends JFrame {
     private IdosoService service;
+    private JLabel labelId;
+    private JTextField campoId;
     private JLabel labelNome;
     private JTextField campoNome;
     private JLabel labelIdade;
@@ -23,15 +25,29 @@ public class IdosoCadastroForm extends JFrame {
     private JLabel labelMedicamento;
     private JTextField campoMedicamento;
     private JButton botaoCadastrar;
+    private JButton botaoCancelar;
     private JRadioButton radioSim;
     private JRadioButton radioNao;
 
     public JPanel painel() {
+        setTitle("Tela de Cadastro");
         JPanel painelEntrada = new JPanel(new GridBagLayout());
         GridBagConstraints constraints = new GridBagConstraints();
-        painelEntrada.setPreferredSize(new Dimension(400, 300));
+        painelEntrada.setPreferredSize(new Dimension(370, 300));
         painelEntrada.revalidate();
         constraints.insets = new Insets(5, 5, 5, 5);
+
+        /*labelId = new JLabel("ID");
+        constraints.gridx = 0;
+        constraints.gridy = 0;
+        labelId.setVisible(false);
+        painelEntrada.add(labelId, constraints);
+
+        campoId = new JTextField(20);
+        constraints.gridx = 1;
+        constraints.gridy = 0;
+        labelId.setVisible(false);
+        painelEntrada.add(campoId, constraints);*/
 
         labelNome = new JLabel("Digite seu nome");
         constraints.gridx = 0;
@@ -76,6 +92,8 @@ public class IdosoCadastroForm extends JFrame {
         labelSimNao = new JLabel("Voce Usa algum Medicamento");
         constraints.gridx = 0;
         constraints.gridy = 4;
+        constraints.gridwidth = 2;
+        constraints.anchor = GridBagConstraints.CENTER;
         painelEntrada.add(labelSimNao, constraints);
 
         radioSim = new JRadioButton("Sim");
@@ -94,26 +112,37 @@ public class IdosoCadastroForm extends JFrame {
         grupoRadio.add(radioSim);
         grupoRadio.add(radioNao);
 
+        constraints.gridx = 0;
+        constraints.gridy = 5;
+
+
         labelMedicamento = new JLabel("Nome do Medicamento");
         constraints.gridx = 0;
         constraints.gridy = 6;
+        constraints.anchor = GridBagConstraints.WEST;
         labelMedicamento.setVisible(false);
         painelEntrada.add(labelMedicamento, constraints);
 
-        campoMedicamento = new JTextField(20);
+        campoMedicamento = new JTextField(18);
         constraints.gridx = 1;
         constraints.gridy = 6;
+        constraints.anchor = GridBagConstraints.EAST;
         campoMedicamento.setVisible(false);
         painelEntrada.add(campoMedicamento, constraints);
 
 
-        botaoCadastrar = new JButton("Salvar");
+        botaoCadastrar = new JButton("Cadatrar");
         botaoCadastrar.addActionListener(e -> salvar());
+        constraints.gridx = 1;
+        constraints.gridy = 7;
+        painelEntrada.add(botaoCadastrar, constraints);
+
+        botaoCancelar = new JButton("Cancelar");
+        botaoCancelar.addActionListener(e -> limpaCampos());
         constraints.gridx = 0;
         constraints.gridy = 7;
-        constraints.gridwidth = 2;
-        constraints.anchor = GridBagConstraints.CENTER;
-        painelEntrada.add(botaoCadastrar, constraints);
+        constraints.anchor = GridBagConstraints.WEST;
+        painelEntrada.add(botaoCancelar, constraints);
 
         return painelEntrada;
     }
@@ -193,12 +222,16 @@ public class IdosoCadastroForm extends JFrame {
     }
 
     private Idoso construirIdoso() {
-        return campoCpf.getText().isEmpty()
-                ? new Idoso(campoNome.getText(), parseInt(campoIdade.getText()),
-                parseInt(campoTelefone.getText()))
-                : new Idoso(campoNome.getText(),
+        return campoId.getText().isEmpty()
+                ? new Idoso(campoNome.getText(), parseInt(campoCpf.getText()), parseInt(campoIdade.getText()),
+                parseInt(campoTelefone.getText()), campoMedicamento.getText())
+                : new Idoso(
+                parseInt(campoId.getText()),
+                campoNome.getText(),
                 parseInt(campoIdade.getText()),
-                parseInt(campoCpf.getText())
+                parseInt(campoCpf.getText()),
+                parseInt(campoTelefone.getText()),
+                campoMedicamento.getText()
         );
     }
 
