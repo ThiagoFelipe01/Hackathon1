@@ -10,7 +10,7 @@
     </div>
 
     <div class="containerimg">
-        <img src="imagens/vacinaidoso.png" alt="a">
+        <img src="imagens/vacinaidoso.png" alt="a" widht="320px" height="270px">
     </div>
 </div>
 
