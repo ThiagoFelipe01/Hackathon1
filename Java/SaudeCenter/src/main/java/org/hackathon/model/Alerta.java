@@ -1,5 +1,6 @@
 package org.hackathon.model;
 
+import java.sql.Time;
 import java.util.Date;
 
 public class Alerta {
@@ -7,16 +8,16 @@ public class Alerta {
     private int idosoId;
     private String mensagem;
     private Date dataAlerta;
-    private Date horarioAlerta;
+    private Time horarioAlerta;
 
-    public Alerta(int idosoId, String mensagem, Date dataAlerta, Date horarioAlerta) {
+    public Alerta(int idosoId, String mensagem, Date dataAlerta, Time horarioAlerta) {
         this.idosoId = idosoId;
         this.mensagem = mensagem;
         this.dataAlerta = dataAlerta;
         this.horarioAlerta = horarioAlerta;
     }
 
-    public Alerta(int id, int idosoId, String mensagem, Date dataAlerta, Date horarioAlerta) {
+    public Alerta(int id, int idosoId, String mensagem, Date dataAlerta, Time horarioAlerta) {
         this.id = id;
         this.idosoId = idosoId;
         this.mensagem = mensagem;
@@ -48,7 +49,7 @@ public class Alerta {
         this.dataAlerta = dataAlerta;
     }
 
-    public void setHorarioAlerta(Date horarioAlerta) {
+    public void setHorarioAlerta(Time horarioAlerta) {
         this.horarioAlerta = horarioAlerta;
     }
 
@@ -64,7 +65,7 @@ public class Alerta {
         return dataAlerta;
     }
 
-    public Date getHorarioAlerta() {
+    public Time getHorarioAlerta() {
         return horarioAlerta;
     }
 
