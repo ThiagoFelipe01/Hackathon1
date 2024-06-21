@@ -4,6 +4,8 @@ import org.hackathon.service.AgendamentoService;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.Calendar;
 
 public class AgendamentoForm extends JFrame {
@@ -18,10 +20,9 @@ public class AgendamentoForm extends JFrame {
     private JComboBox<Integer> comboAnoVisita;
     private JLabel labelHoraVisita;
     private JComboBox<String> comboHoraVisita;
-    private JLabel labelTipoVisita;
-    private JTextField campoTipoVisita;
     private JButton botaoAgendar;
     private JButton botaoVoltar;
+    private JLabel labelCadastro;
 
     public JPanel painel() {
         setTitle("Tela de Agendamento");
@@ -32,12 +33,18 @@ public class AgendamentoForm extends JFrame {
         constraints.insets = new Insets(5, 5, 5, 5);
 
         botaoVoltar = new JButton("Voltar");
-        botaoVoltar.addActionListener(e -> voltar());
+        botaoVoltar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                voltar();
+                dispose();
+            }
+        });
         constraints.gridx = 0;
         constraints.gridy = 0;
         painelEntrada.add(botaoVoltar, constraints);
 
-        labelNome = new JLabel("Nome Completo:");
+        labelNome = new JLabel("Nome:");
         constraints.gridx = 0;
         constraints.gridy = 1;
         painelEntrada.add(labelNome, constraints);
@@ -98,19 +105,9 @@ public class AgendamentoForm extends JFrame {
         constraints.gridy = 5;
         painelEntrada.add(comboHoraVisita, constraints);
 
-        labelTipoVisita = new JLabel("Tipo de Visita:");
-        constraints.gridx = 0;
-        constraints.gridy = 6;
-        painelEntrada.add(labelTipoVisita, constraints);
-
-        campoTipoVisita = new JTextField(20);
-        constraints.gridx = 1;
-        constraints.gridy = 6;
-        painelEntrada.add(campoTipoVisita, constraints);
-
         botaoAgendar = new JButton("Agendar Visita");
         botaoAgendar.addActionListener(e -> salvar());
-        constraints.gridx = 0;
+        constraints.gridx = 1;
         constraints.gridy = 7;
         constraints.gridwidth = 2;
         constraints.anchor = GridBagConstraints.CENTER;
@@ -135,26 +132,24 @@ public class AgendamentoForm extends JFrame {
 
     private void limpaCampos() {
         campoNome.setText("");
-        campoTipoVisita.setText("");
     }
 
-    public void  voltar() {
+    public void voltar() {
         MenuForm menuForm = new MenuForm();
         menuForm.setVisible(true);
-        dispose();
     }
 
-    public static class Main {
-        public static void main(String[] args) {
-            SwingUtilities.invokeLater(() -> {
-                JFrame frame = new JFrame("Agendamento de Visita");
-                frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                AgendamentoForm agendamentoForm = new AgendamentoForm();
-                frame.getContentPane().add(agendamentoForm.painel());
-                frame.pack();
-                frame.setLocationRelativeTo(null);
-                frame.setVisible(true);
-            });
-        }
+
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(() -> {
+            JFrame frame = new JFrame("Agendamento de Visita");
+            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            AgendamentoForm agendamentoForm = new AgendamentoForm();
+            frame.getContentPane().add(agendamentoForm.painel());
+            frame.pack();
+            frame.setLocationRelativeTo(null);
+            frame.setVisible(true);
+        });
     }
 }
+
