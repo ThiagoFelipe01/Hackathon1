@@ -1,19 +1,27 @@
 package org.hackathon.views;
 
+import org.hackathon.service.AgendamentoService;
+
 import javax.swing.*;
 import java.awt.*;
-
+import java.util.Calendar;
 
 public class AgendamentoForm extends JFrame {
+    private AgendamentoService service;
     private JLabel labelNome;
     private JTextField campoNome;
-    private JLabel labelDataVisita;
-    private JComboBox<String> comboDataVisita;
+    private JLabel labelDiaVisita;
+    private JComboBox<Integer> comboDiaVisita;
+    private JLabel labelMesVisita;
+    private JComboBox<String> comboMesVisita;
+    private JLabel labelAnoVisita;
+    private JComboBox<Integer> comboAnoVisita;
     private JLabel labelHoraVisita;
     private JComboBox<String> comboHoraVisita;
     private JLabel labelTipoVisita;
     private JTextField campoTipoVisita;
     private JButton botaoAgendar;
+    private JButton botaoVoltar;
 
     public JPanel painel() {
         setTitle("Tela de Agendamento");
@@ -23,50 +31,87 @@ public class AgendamentoForm extends JFrame {
         painelEntrada.revalidate();
         constraints.insets = new Insets(5, 5, 5, 5);
 
-        labelNome = new JLabel("Nome Completo:");
+        botaoVoltar = new JButton("Voltar");
+        botaoVoltar.addActionListener(e -> voltar());
         constraints.gridx = 0;
         constraints.gridy = 0;
+        painelEntrada.add(botaoVoltar, constraints);
+
+        labelNome = new JLabel("Nome Completo:");
+        constraints.gridx = 0;
+        constraints.gridy = 1;
         painelEntrada.add(labelNome, constraints);
 
         campoNome = new JTextField(20);
         constraints.gridx = 1;
-        constraints.gridy = 0;
+        constraints.gridy = 1;
         painelEntrada.add(campoNome, constraints);
 
-        labelDataVisita = new JLabel("Data da Visita:");
+        labelDiaVisita = new JLabel("Dia da Visita:");
         constraints.gridx = 0;
-        constraints.gridy = 1;
-        painelEntrada.add(labelDataVisita, constraints);
+        constraints.gridy = 2;
+        painelEntrada.add(labelDiaVisita, constraints);
 
-        comboDataVisita = new JComboBox<>(new String[]{"10/07/2024", "11/07/2024"});
+        comboDiaVisita = new JComboBox<>();
+        for (int i = 1; i <= 30; i++) {
+            comboDiaVisita.addItem(i);
+        }
         constraints.gridx = 1;
-        constraints.gridy = 1;
-        painelEntrada.add(comboDataVisita, constraints);
+        constraints.gridy = 2;
+        painelEntrada.add(comboDiaVisita, constraints);
+
+        labelMesVisita = new JLabel("Mês da Visita:");
+        constraints.gridx = 0;
+        constraints.gridy = 3;
+        painelEntrada.add(labelMesVisita, constraints);
+
+        comboMesVisita = new JComboBox<>(new String[]{"Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho",
+                "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"});
+        constraints.gridx = 1;
+        constraints.gridy = 3;
+        painelEntrada.add(comboMesVisita, constraints);
+
+        labelAnoVisita = new JLabel("Ano da Visita:");
+        constraints.gridx = 0;
+        constraints.gridy = 4;
+        painelEntrada.add(labelAnoVisita, constraints);
+
+        comboAnoVisita = new JComboBox<>();
+        int currentYear = Calendar.getInstance().get(Calendar.YEAR);
+        comboAnoVisita.addItem(currentYear);
+        comboAnoVisita.addItem(currentYear + 1);
+        constraints.gridx = 1;
+        constraints.gridy = 4;
+        painelEntrada.add(comboAnoVisita, constraints);
 
         labelHoraVisita = new JLabel("Hora da Visita:");
         constraints.gridx = 0;
-        constraints.gridy = 2;
+        constraints.gridy = 5;
         painelEntrada.add(labelHoraVisita, constraints);
 
-        comboHoraVisita = new JComboBox<>(new String[]{"08:00", "09:00"});
+        comboHoraVisita = new JComboBox<>();
+        for (int hora = 8; hora <= 18; hora++) {
+            String horaFormatada = String.format("%02d:00", hora);
+            comboHoraVisita.addItem(horaFormatada);
+        }
         constraints.gridx = 1;
-        constraints.gridy = 2;
+        constraints.gridy = 5;
         painelEntrada.add(comboHoraVisita, constraints);
 
         labelTipoVisita = new JLabel("Tipo de Visita:");
         constraints.gridx = 0;
-        constraints.gridy = 3;
+        constraints.gridy = 6;
         painelEntrada.add(labelTipoVisita, constraints);
 
         campoTipoVisita = new JTextField(20);
         constraints.gridx = 1;
-        constraints.gridy = 3;
+        constraints.gridy = 6;
         painelEntrada.add(campoTipoVisita, constraints);
 
         botaoAgendar = new JButton("Agendar Visita");
-        //botaoAgendar.addActionListener(e -> agendar());
+        botaoAgendar.addActionListener(e -> salvar());
         constraints.gridx = 0;
-        constraints.gridy = 4;
+        constraints.gridy = 7;
         constraints.gridwidth = 2;
         constraints.anchor = GridBagConstraints.CENTER;
         painelEntrada.add(botaoAgendar, constraints);
@@ -74,7 +119,30 @@ public class AgendamentoForm extends JFrame {
         return painelEntrada;
     }
 
+    public void validarCampos() {
 
+    }
+
+    private void salvar() {
+        try {
+            validarCampos();
+            //service.salvar(construirIdoso());
+            limpaCampos();
+        } catch (IllegalArgumentException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage(), "Erro de Validação", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    private void limpaCampos() {
+        campoNome.setText("");
+        campoTipoVisita.setText("");
+    }
+
+    public void  voltar() {
+        MenuForm menuForm = new MenuForm();
+        menuForm.setVisible(true);
+        dispose();
+    }
 
     public static class Main {
         public static void main(String[] args) {
@@ -90,4 +158,3 @@ public class AgendamentoForm extends JFrame {
         }
     }
 }
-
