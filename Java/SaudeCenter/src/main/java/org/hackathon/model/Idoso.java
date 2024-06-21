@@ -6,23 +6,23 @@ public class Idoso {
     private int idade;
     private int cpf;
     private int telefone;
-    private String medicamento;
+    private String Alergia;
 
-    public Idoso(String nome, int idade, int cpf, int telefone, String medicamento) {
+    public Idoso(String nome, int idade, int cpf, int telefone, String Alergia) {
         this.nome = nome;
         this.idade = idade;
         this.cpf = cpf;
         this.telefone = telefone;
-        this.medicamento = medicamento;
+        this.Alergia = Alergia;
     }
 
-    public Idoso(Integer id, String nome, int idade, int cpf, int telefone, String medicamento) {
+    public Idoso(Integer id, String nome, int idade, int cpf, int telefone, String Alergia) {
         this.id = id;
         this.nome = nome;
         this.idade = idade;
         this.cpf = cpf;
         this.telefone = telefone;
-        this.medicamento = medicamento;
+        this.Alergia = Alergia;
     }
 
     public String getNome() {
@@ -65,17 +65,17 @@ public class Idoso {
         this.id = id;
     }
 
-    public String getMedicamento() {
-        return medicamento;
+    public String getAlergia() {
+        return Alergia;
     }
 
-    public void setMedicamento(String medicamento) {
-        this.medicamento = medicamento;
+    public void setAlergia(String alergia) {
+        this.Alergia = alergia;
     }
 
     @Override
     public String toString() {
         return "Id: " + id + " Nome: " + nome + " CPF: " + cpf + " Telefone: "
-                + telefone + " medicamento: " + medicamento;
+                + telefone + " medicamento: " + Alergia;
     }
 }

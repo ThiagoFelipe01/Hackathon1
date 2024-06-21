@@ -4,10 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5cbb86a9-888b-46f1-9af3-a22f3719d138" name="Changes" comment="adicionando botao voltar nas Classes AgendamentoForm e IdosoCadastroForm, e adicinando alguns metodos">
+    <list default="true" id="5cbb86a9-888b-46f1-9af3-a22f3719d138" name="Changes" comment="adicionando e arrumando alguns erros na classe AgendamentoForm">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/hackathon/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/hackathon/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/hackathon/views/AgendamentoForm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/hackathon/views/AgendamentoForm.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/hackathon/dao/AgendamentoDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/hackathon/dao/AgendamentoDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/hackathon/dao/IdosoDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/hackathon/dao/IdosoDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/hackathon/model/Agendamento.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/hackathon/model/Agendamento.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/hackathon/model/Idoso.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/hackathon/model/Idoso.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/hackathon/views/IdosoCadastroForm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/hackathon/views/IdosoCadastroForm.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/hackathon/views/AgendamentoForm$Main.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/hackathon/views/AgendamentoForm.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/hackathon/views/AgendamentoForm.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -55,23 +60,23 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Application.Agendamento.executor": "Run",
-    "Application.AgendamentoForm$Main.executor": "Run",
-    "Application.AgendamentoForm.executor": "Run",
-    "Application.IdosoCadastroForm (1).executor": "Run",
-    "Application.IdosoCadastroForm$Main.executor": "Run",
-    "Application.IdosoCadastroForm.executor": "Run",
-    "Application.Main.executor": "Run",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "Thiago",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/workspace-java/locadora"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.Agendamento.executor&quot;: &quot;Run&quot;,
+    &quot;Application.AgendamentoForm$Main.executor&quot;: &quot;Run&quot;,
+    &quot;Application.AgendamentoForm.executor&quot;: &quot;Run&quot;,
+    &quot;Application.IdosoCadastroForm (1).executor&quot;: &quot;Run&quot;,
+    &quot;Application.IdosoCadastroForm$Main.executor&quot;: &quot;Run&quot;,
+    &quot;Application.IdosoCadastroForm.executor&quot;: &quot;Run&quot;,
+    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;Thiago&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/workspace-java/locadora&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager" selected="Application.AgendamentoForm">
     <configuration name="Agendamento" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="org.hackathon.model.Agendamento" />
@@ -261,7 +266,15 @@
       <option name="project" value="LOCAL" />
       <updated>1718844534080</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="adicionando e arrumando alguns erros na classe AgendamentoForm">
+      <option name="closed" value="true" />
+      <created>1718934997473</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1718934997473</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -283,6 +296,7 @@
     <MESSAGE value="subindo as classes editadas da branch" />
     <MESSAGE value="adicionando as funcionalidades nas classes" />
     <MESSAGE value="editando a Tela de cadastro" />
-    <option name="LAST_COMMIT_MESSAGE" value="editando a Tela de cadastro" />
+    <MESSAGE value="adicionando e arrumando alguns erros na classe AgendamentoForm" />
+    <option name="LAST_COMMIT_MESSAGE" value="adicionando e arrumando alguns erros na classe AgendamentoForm" />
   </component>
 </project>

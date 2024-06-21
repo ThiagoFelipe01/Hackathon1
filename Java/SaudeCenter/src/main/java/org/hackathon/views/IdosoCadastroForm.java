@@ -21,9 +21,11 @@ public class IdosoCadastroForm extends JFrame {
     private JTextField campoCpf;
     private JLabel labelTelefone;
     private JTextField campoTelefone;
+    private JLabel labelAlergia;
+    private JTextField campoAlergia;
+    private JLabel labelHitoricoMedico;
+    private JTextField campoHistoricoMedico;
     private JLabel labelSimNao;
-    private JLabel labelMedicamento;
-    private JTextField campoMedicamento;
     private JButton botaoCadastrar;
     private JButton botaoCancelar;
     private JButton botaoVoltar;
@@ -34,7 +36,7 @@ public class IdosoCadastroForm extends JFrame {
         setTitle("Tela de Cadastro");
         JPanel painelEntrada = new JPanel(new GridBagLayout());
         GridBagConstraints constraints = new GridBagConstraints();
-        painelEntrada.setPreferredSize(new Dimension(370, 300));
+        painelEntrada.setPreferredSize(new Dimension(450, 300));
         painelEntrada.revalidate();
         constraints.insets = new Insets(5, 5, 5, 5);
 
@@ -96,46 +98,43 @@ public class IdosoCadastroForm extends JFrame {
         constraints.gridy = 4;
         painelEntrada.add(campoTelefone, constraints);
 
-        labelSimNao = new JLabel("Voce Usa algum Medicamento?");
+        labelSimNao = new JLabel("Voce tem Alergia?");
         constraints.gridx = 0;
         constraints.gridy = 5;
-        constraints.gridwidth = 2;
-        constraints.anchor = GridBagConstraints.CENTER;
         painelEntrada.add(labelSimNao, constraints);
 
         radioSim = new JRadioButton("Sim");
         radioSim.addActionListener(this::acaoBotaoSim);
         constraints.gridx = 0;
         constraints.gridy = 6;
+        constraints.gridwidth = 2;
+        constraints.anchor = GridBagConstraints.WEST;
         painelEntrada.add(radioSim, constraints);
 
         radioNao = new JRadioButton("Não");
         radioNao.addActionListener(this::acaoBotaoNao);
-        constraints.gridx = 1;
+        constraints.gridx = 0;
         constraints.gridy = 6;
+        constraints.anchor = GridBagConstraints.CENTER;
         painelEntrada.add(radioNao, constraints);
 
         ButtonGroup grupoRadio = new ButtonGroup();
         grupoRadio.add(radioSim);
         grupoRadio.add(radioNao);
 
-        constraints.gridx = 0;
-        constraints.gridy = 6;
+        constraints.gridwidth = 1;
 
-
-        labelMedicamento = new JLabel("Nome Medicamento");
+        labelAlergia = new JLabel("Alergia do que?");
         constraints.gridx = 0;
         constraints.gridy = 7;
-        constraints.anchor = GridBagConstraints.WEST;
-        labelMedicamento.setVisible(false);
-        painelEntrada.add(labelMedicamento, constraints);
+        labelAlergia.setVisible(false);
+        painelEntrada.add(labelAlergia, constraints);
 
-        campoMedicamento = new JTextField(18);
+        campoAlergia = new JTextField(20);
         constraints.gridx = 1;
         constraints.gridy = 7;
-        constraints.anchor = GridBagConstraints.EAST;
-        campoMedicamento.setVisible(false);
-        painelEntrada.add(campoMedicamento, constraints);
+        campoAlergia.setVisible(false);
+        painelEntrada.add(campoAlergia, constraints);
 
 
         botaoCadastrar = new JButton("Cadatrar");
@@ -157,15 +156,15 @@ public class IdosoCadastroForm extends JFrame {
 
     private void acaoBotaoSim(ActionEvent e) {
         if (radioSim.isSelected()) {
-            labelMedicamento.setVisible(true);
-            campoMedicamento.setVisible(true);
+            labelAlergia.setVisible(true);
+            campoAlergia.setVisible(true);
         }
     }
 
     private void acaoBotaoNao(ActionEvent e) {
         if (radioNao.isSelected()) {
-            labelMedicamento.setVisible(false);
-            campoMedicamento.setVisible(false);
+            labelAlergia.setVisible(false);
+            campoAlergia.setVisible(false);
         }
     }
 
@@ -238,14 +237,14 @@ public class IdosoCadastroForm extends JFrame {
     private Idoso construirIdoso() {
         return campoId.getText().isEmpty()
                 ? new Idoso(campoNome.getText(), parseInt(campoCpf.getText()), parseInt(campoIdade.getText()),
-                parseInt(campoTelefone.getText()), campoMedicamento.getText())
+                parseInt(campoTelefone.getText()), campoAlergia.getText())
                 : new Idoso(
                 parseInt(campoId.getText()),
                 campoNome.getText(),
                 parseInt(campoIdade.getText()),
                 parseInt(campoCpf.getText()),
                 parseInt(campoTelefone.getText()),
-                campoMedicamento.getText()
+                campoAlergia.getText()
         );
     }
 
