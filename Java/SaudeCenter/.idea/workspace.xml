@@ -4,21 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5cbb86a9-888b-46f1-9af3-a22f3719d138" name="Changes" comment="Fazendo as interface.">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/hackathon/dao/AgendamentoDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/hackathon/dao/AgendamentoDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/hackathon/dao/IdosoDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/hackathon/dao/IdosoDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/hackathon/dao/VacinaDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/hackathon/dao/VacinaDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/hackathon/model/Agendamento.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/hackathon/model/Agendamento.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/hackathon/model/Idoso.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/hackathon/model/Idoso.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/hackathon/model/Vacina.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/hackathon/model/Vacina.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/hackathon/service/IdosoService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/hackathon/service/IdosoService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/hackathon/service/VacinaService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/hackathon/service/VacinaService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/hackathon/views/AgendamentoForm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/hackathon/views/AgendamentoForm.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/hackathon/views/IdosoCadastroForm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/hackathon/views/IdosoCadastroForm.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/hackathon/views/MenuForm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/hackathon/views/MenuForm.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/hackathon/views/VacinaForm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/hackathon/views/VacinaForm.java" afterDir="false" />
-    </list>
+    <list default="true" id="5cbb86a9-888b-46f1-9af3-a22f3719d138" name="Changes" comment="Adicionando novos campos na tela de vacina e alerta" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -282,7 +268,23 @@
       <option name="project" value="LOCAL" />
       <updated>1718941871204</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="Adicionando novos campos na tela de vacina e alerta">
+      <option name="closed" value="true" />
+      <created>1719016379025</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1719016379025</updated>
+    </task>
+    <task id="LOCAL-00017" summary="Adicionando novos campos na tela de vacina e alerta">
+      <option name="closed" value="true" />
+      <created>1719016431962</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1719016431962</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -304,6 +306,7 @@
     <MESSAGE value="Classes criadas e conexão com o banco feito." />
     <MESSAGE value="Projeto unido, fazendo testes." />
     <MESSAGE value="Fazendo as interface." />
-    <option name="LAST_COMMIT_MESSAGE" value="Fazendo as interface." />
+    <MESSAGE value="Adicionando novos campos na tela de vacina e alerta" />
+    <option name="LAST_COMMIT_MESSAGE" value="Adicionando novos campos na tela de vacina e alerta" />
   </component>
 </project>
