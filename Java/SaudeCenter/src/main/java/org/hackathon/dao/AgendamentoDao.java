@@ -54,7 +54,7 @@ public class AgendamentoDao {
     }
 
     public void deletar(int id) throws SQLException {
-        String sql = "delete from agendamento where id = ?";
+        String sql = "delete from agendamentos where id = ?";
         PreparedStatement ps = connection.prepareStatement(sql);
         ps.setInt(1, id);
         ps.execute();
