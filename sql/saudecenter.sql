@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 22/06/2024 às 21:53
+-- Tempo de geração: 22/06/2024 às 21:59
 -- Versão do servidor: 10.4.28-MariaDB
 -- Versão do PHP: 8.2.4
 
@@ -71,7 +71,7 @@ CREATE TABLE `idosos` (
   `id` int(11) NOT NULL,
   `nome` varchar(100) NOT NULL,
   `idade` int(11) NOT NULL,
-  `cpf` char(11) NOT NULL,
+  `cpf` varchar(11) NOT NULL,
   `endereco` varchar(255) NOT NULL,
   `telefone` varchar(15) DEFAULT NULL,
   `historico_medico` text DEFAULT NULL,
