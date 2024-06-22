@@ -200,7 +200,7 @@ public class AgendamentoForm extends JFrame {
 
     public void deletar() {
         if (!agendamentoSelecionado()) {
-            JOptionPane.showMessageDialog(null, "Selecione um diretor para poder deletar!", "Erro de Validação", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Selecione um Agendamento para poder deletar!", "Erro de Validação", JOptionPane.ERROR_MESSAGE);
         } else {
             service.deletar(construirAgendamento());
             limparCampos();

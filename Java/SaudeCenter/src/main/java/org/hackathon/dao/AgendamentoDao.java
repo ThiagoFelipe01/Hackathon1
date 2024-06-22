@@ -20,10 +20,10 @@ public class AgendamentoDao {
     }
 
     public void inserir(Agendamento agendamento) throws SQLException {
-        String sql = "insert into agendamento(nome,dataVisita,horaVisita) values(?,?,?)";
+        String sql = "insert into agendamentos(nome,dataVisita,horaVisita) values(?,?,?)";
         PreparedStatement ps = connection.prepareStatement(sql);
         ps.setString(1, agendamento.getNome());
-        ps.setDate(2, (Date) agendamento.getDataVisita());
+        ps.setDate(2, agendamento.getDataVisita());
         ps.setTime(3, agendamento.getHoraVisita());
         ps.execute();
     }
@@ -31,7 +31,7 @@ public class AgendamentoDao {
     public List<Agendamento> listarTodos() throws SQLException {
         List<Agendamento> agendamentos = new ArrayList<Agendamento>();
 
-        ResultSet rs = connection.prepareStatement("select * from diretor").executeQuery();
+        ResultSet rs = connection.prepareStatement("select * from agendamentos").executeQuery();
         while (rs.next()) {
             agendamentos.add(new Agendamento(
                     rs.getInt("id"),
@@ -44,7 +44,7 @@ public class AgendamentoDao {
     }
 
     public void atualizar(Agendamento agendamento) throws SQLException {
-        String sql = "update agendamento set nome = ?, dataVisita = ?, horaVisita = ?, where id = ?";
+        String sql = "update agendamentos set nome = ?, dataVisita = ?, horaVisita = ?, where id = ?";
         PreparedStatement ps = connection.prepareStatement(sql);
         ps.setString(1, agendamento.getNome());
         ps.setDate(2, agendamento.getDataVisita());

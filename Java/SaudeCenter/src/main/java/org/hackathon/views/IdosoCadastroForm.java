@@ -310,7 +310,12 @@ public class IdosoCadastroForm extends JFrame {
         campoNome.setText("");
         campoIdade.setText("");
         campoCpf.setText("");
+        campoEndereco.setText("");
         campoTelefone.setText("");
+        campoHistoricoMedico.setText("");
+        campoAlergia.setText("");
+        campoCondicoesPreExistente.setText("");
+
     }
 
     private Idoso construirIdoso() {
