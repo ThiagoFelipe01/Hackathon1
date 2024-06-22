@@ -1,4 +1,6 @@
 package org.hackathon.views;
 
-public class MenuForm {
+import javax.swing.*;
+
+public class MenuForm extends JFrame {
 }

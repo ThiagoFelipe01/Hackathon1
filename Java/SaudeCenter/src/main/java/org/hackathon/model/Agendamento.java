@@ -1,63 +1,57 @@
 package org.hackathon.model;
 
+import java.sql.Time;
 import java.util.Date;
+import java.util.Timer;
 
 public class Agendamento {
-    private int id;
-    private int idosoId;
-    private Date dataAgendamento;
-    private Date horario;
+    private Integer id;
+    private String nome;
+    private Date dataVisita;
+    private Timer horaVisita;
 
-    public Agendamento(int idosoId, Date dataAgendamento, Date horario) {
-        this.idosoId = idosoId;
-        this.dataAgendamento = dataAgendamento;
-        this.horario = horario;
+    public Agendamento(Date dataVisita, Timer horaVisita, String nome) {
+        this.dataVisita = dataVisita;
+        this.horaVisita = horaVisita;
+        this.nome = nome;
     }
 
-    public Agendamento(int id, int idosoId, Date dataAgendamento, Date horario) {
+    public Agendamento(Integer id, String nome, Date dataVisita, Timer horaVisita) {
         this.id = id;
-        this.idosoId = idosoId;
-        this.dataAgendamento = dataAgendamento;
-        this.horario = horario;
+        this.nome = nome;
+        this.dataVisita = dataVisita;
+        this.horaVisita = horaVisita;
     }
 
-    public Agendamento() {
-    }
-
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
-    public int getIdosoId() {
-        return idosoId;
+    public String getNome() {
+        return nome;
     }
 
-    public void setIdosoId(int idosoId) {
-        this.idosoId = idosoId;
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
-    public Date getDataAgendamento() {
-        return dataAgendamento;
+    public java.sql.Date getDataVisita() {
+        return (java.sql.Date) dataVisita;
     }
 
-    public void setDataAgendamento(Date dataAgendamento) {
-        this.dataAgendamento = dataAgendamento;
+    public void setDataVisita(Date dataVisita) {
+        this.dataVisita = dataVisita;
     }
 
-    public Date getHorario() {
-        return horario;
+    public Time getHoraVisita() {
+        return (Time) dataVisita;
     }
 
-    public void setHorario(Date horario) {
-        this.horario = horario;
-    }
-
-    @Override
-    public String toString() {
-        return "Id: " + id + " Idoso: " + idosoId + " Data Agendamento: " + dataAgendamento + " Horario: " + horario;
+    public void setHoraVisita(Timer horaVisita) {
+        this.horaVisita = horaVisita;
     }
 }

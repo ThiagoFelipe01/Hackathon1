@@ -6,12 +6,6 @@ public class Vacina {
     private String descricao;
     private int intervaloRecomendado;
 
-    public Vacina(String nome, String descricao, int intervaloRecomendado) {
-        this.nome = nome;
-        this.descricao = descricao;
-        this.intervaloRecomendado = intervaloRecomendado;
-    }
-
     public Vacina(int id, String nome, String descricao, int intervaloRecomendado) {
         this.id = id;
         this.nome = nome;
@@ -19,8 +13,13 @@ public class Vacina {
         this.intervaloRecomendado = intervaloRecomendado;
     }
 
-    public Vacina() {
+    public Vacina(String nome, String descricao, int intervaloRecomendado) {
+        this.nome = nome;
+        this.descricao = descricao;
+        this.intervaloRecomendado = intervaloRecomendado;
+    }
 
+    public Vacina() {
     }
 
     public int getId() {
@@ -31,32 +30,32 @@ public class Vacina {
         this.id = id;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
-    }
-
-    public void setIntervaloRecomendado(int intervaloRecomendado) {
-        this.intervaloRecomendado = intervaloRecomendado;
-    }
-
     public String getNome() {
         return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
     public String getDescricao() {
         return descricao;
     }
 
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
+    }
+
     public int getIntervaloRecomendado() {
         return intervaloRecomendado;
     }
 
+    public void setIntervaloRecomendado(int intervaloRecomendado) {
+        this.intervaloRecomendado = intervaloRecomendado;
+    }
+
     @Override
     public String toString() {
-        return "Id: " + id + " Nome: " + nome + " Descrição: " + descricao + " Intervalo Recomendado: " + intervaloRecomendado;
+        return "Vacina{" + "id=" + id + ", nome='" + nome + '\'' + ", descricao='" + descricao + '\'' + ", intervaloRecomendado=" + intervaloRecomendado + '}';
     }
 }

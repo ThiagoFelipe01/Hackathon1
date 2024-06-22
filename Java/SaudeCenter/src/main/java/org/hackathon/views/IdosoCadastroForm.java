@@ -6,11 +6,13 @@ import org.hackathon.service.IdosoService;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
-
+import java.awt.event.ActionListener;
 import static java.lang.Integer.parseInt;
 
 public class IdosoCadastroForm extends JFrame {
     private IdosoService service;
+    private JLabel labelId;
+    private JTextField campoId;
     private JLabel labelNome;
     private JTextField campoNome;
     private JLabel labelIdade;
@@ -19,116 +21,134 @@ public class IdosoCadastroForm extends JFrame {
     private JTextField campoCpf;
     private JLabel labelTelefone;
     private JTextField campoTelefone;
+    private JLabel labelAlergia;
+    private JTextField campoAlergia;
     private JLabel labelSimNao;
-    private JLabel labelMedicamento;
-    private JTextField campoMedicamento;
     private JButton botaoCadastrar;
+    private JButton botaoCancelar;
+    private JButton botaoVoltar;
     private JRadioButton radioSim;
     private JRadioButton radioNao;
 
     public JPanel painel() {
+        setTitle("Tela de Cadastro");
         JPanel painelEntrada = new JPanel(new GridBagLayout());
         GridBagConstraints constraints = new GridBagConstraints();
-        painelEntrada.setPreferredSize(new Dimension(400, 300));
+        painelEntrada.setPreferredSize(new Dimension(450, 300));
         painelEntrada.revalidate();
         constraints.insets = new Insets(5, 5, 5, 5);
 
-        labelNome = new JLabel("Digite seu nome");
+        botaoVoltar = new JButton("Voltar");
+        botaoVoltar.addActionListener(e -> voltar());
         constraints.gridx = 0;
         constraints.gridy = 0;
+        painelEntrada.add(botaoVoltar, constraints);
+
+        labelNome = new JLabel("Digite seu nome");
+        constraints.gridx = 0;
+        constraints.gridy = 1;
         painelEntrada.add(labelNome, constraints);
 
         campoNome = new JTextField(20);
         constraints.gridx = 1;
-        constraints.gridy = 0;
+        constraints.gridy = 1;
         painelEntrada.add(campoNome, constraints);
 
         labelIdade = new JLabel("Digite sua idade");
         constraints.gridx = 0;
-        constraints.gridy = 1;
+        constraints.gridy = 2;
         painelEntrada.add(labelIdade, constraints);
 
         campoIdade = new JTextField(20);
         constraints.gridx = 1;
-        constraints.gridy = 1;
+        constraints.gridy = 2;
         painelEntrada.add(campoIdade, constraints);
 
         labelCpf = new JLabel("Digite seu CPF");
         constraints.gridx = 0;
-        constraints.gridy = 2;
+        constraints.gridy = 3;
         painelEntrada.add(labelCpf, constraints);
 
         campoCpf = new JTextField(20);
         constraints.gridx = 1;
-        constraints.gridy = 2;
+        constraints.gridy = 3;
         painelEntrada.add(campoCpf, constraints);
 
         labelTelefone = new JLabel("Digite seu telefone");
         constraints.gridx = 0;
-        constraints.gridy = 3;
+        constraints.gridy = 4;
         painelEntrada.add(labelTelefone, constraints);
 
         campoTelefone = new JTextField(20);
         constraints.gridx = 1;
-        constraints.gridy = 3;
+        constraints.gridy = 4;
         painelEntrada.add(campoTelefone, constraints);
 
-        labelSimNao = new JLabel("Voce Usa algum Medicamento");
-        constraints.gridx = 0;
-        constraints.gridy = 4;
-        painelEntrada.add(labelSimNao, constraints);
-
-        radioSim = new JRadioButton("Sim");
-        radioSim.addActionListener(this::acaoBotaoSim);
+        labelSimNao = new JLabel("Você tem Alergia?");
         constraints.gridx = 0;
         constraints.gridy = 5;
-        painelEntrada.add(radioSim, constraints);
+        painelEntrada.add(labelSimNao, constraints);
+
+        JPanel painelRadioBotoes = new JPanel(new FlowLayout(FlowLayout.LEFT, 5, 0));
+        radioSim = new JRadioButton("Sim");
+        radioSim.addActionListener(this::acaoBotaoSim);
+        painelRadioBotoes.add(radioSim);
 
         radioNao = new JRadioButton("Não");
         radioNao.addActionListener(this::acaoBotaoNao);
-        constraints.gridx = 1;
-        constraints.gridy = 5;
-        painelEntrada.add(radioNao, constraints);
+        painelRadioBotoes.add(radioNao);
 
         ButtonGroup grupoRadio = new ButtonGroup();
         grupoRadio.add(radioSim);
         grupoRadio.add(radioNao);
 
-        labelMedicamento = new JLabel("Nome do Medicamento");
+        constraints.gridx = 1;
+        constraints.gridy = 5;
+        constraints.gridwidth = 2;
+        constraints.anchor = GridBagConstraints.WEST;
+        painelEntrada.add(painelRadioBotoes, constraints);
+
+        labelAlergia = new JLabel("Alergia do que?");
         constraints.gridx = 0;
         constraints.gridy = 6;
-        labelMedicamento.setVisible(false);
-        painelEntrada.add(labelMedicamento, constraints);
+        constraints.gridwidth = 1;
+        labelAlergia.setVisible(false);
+        painelEntrada.add(labelAlergia, constraints);
 
-        campoMedicamento = new JTextField(20);
+        campoAlergia = new JTextField(20);
         constraints.gridx = 1;
         constraints.gridy = 6;
-        campoMedicamento.setVisible(false);
-        painelEntrada.add(campoMedicamento, constraints);
+        campoAlergia.setVisible(false);
+        painelEntrada.add(campoAlergia, constraints);
 
-
-        botaoCadastrar = new JButton("Salvar");
+        botaoCadastrar = new JButton("Cadastrar");
         botaoCadastrar.addActionListener(e -> salvar());
+        constraints.gridx = 1;
+        constraints.gridy = 7;
+        constraints.anchor = GridBagConstraints.EAST;
+        painelEntrada.add(botaoCadastrar, constraints);
+
+        botaoCancelar = new JButton("Cancelar");
+        botaoCancelar.addActionListener(e -> limpaCampos());
         constraints.gridx = 0;
         constraints.gridy = 7;
-        constraints.gridwidth = 2;
-        constraints.anchor = GridBagConstraints.CENTER;
-        painelEntrada.add(botaoCadastrar, constraints);
+        constraints.anchor = GridBagConstraints.WEST;
+        painelEntrada.add(botaoCancelar, constraints);
 
         return painelEntrada;
     }
 
     private void acaoBotaoSim(ActionEvent e) {
         if (radioSim.isSelected()) {
-            labelMedicamento.setVisible(true);
-            campoMedicamento.setVisible(true);
+            labelAlergia.setVisible(true);
+            campoAlergia.setVisible(true);
         }
     }
 
     private void acaoBotaoNao(ActionEvent e) {
         if (radioNao.isSelected()) {
-            labelMedicamento.setVisible(false);
-            campoMedicamento.setVisible(false);
+            labelAlergia.setVisible(false);
+            campoAlergia.setVisible(false);
         }
     }
 
@@ -190,18 +210,28 @@ public class IdosoCadastroForm extends JFrame {
         campoIdade.setText("");
         campoCpf.setText("");
         campoTelefone.setText("");
+        campoAlergia.setText("");
+    }
+
+    public void voltar() {
+        MenuForm menuForm = new MenuForm();
+        menuForm.setVisible(true);
+        dispose();
     }
 
     private Idoso construirIdoso() {
-        return campoCpf.getText().isEmpty()
-                ? new Idoso(campoNome.getText(), parseInt(campoIdade.getText()),
-                parseInt(campoTelefone.getText()))
-                : new Idoso(campoNome.getText(),
+        return campoId.getText().isEmpty()
+                ? new Idoso(campoNome.getText(), parseInt(campoCpf.getText()), parseInt(campoIdade.getText()),
+                parseInt(campoTelefone.getText()), campoAlergia.getText())
+                : new Idoso(
+                parseInt(campoId.getText()),
+                campoNome.getText(),
                 parseInt(campoIdade.getText()),
-                parseInt(campoCpf.getText())
+                parseInt(campoCpf.getText()),
+                parseInt(campoTelefone.getText()),
+                campoAlergia.getText()
         );
     }
-
 
     public static class Main {
         public static void main(String[] args) {
