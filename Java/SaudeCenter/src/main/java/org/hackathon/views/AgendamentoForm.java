@@ -37,18 +37,14 @@ public class AgendamentoForm extends JFrame {
 
         setTitle("Agendamento de Visitas");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
         setSize(450, 450);
 
         getContentPane().add(montarPainelEntrada(), BorderLayout.NORTH);
         getContentPane().add(montarPainelSaida(), BorderLayout.CENTER);
 
-        setLocationRelativeTo(null);
-
-        service = new AgendamentoService();
         createMenuBar();
-        setContentPane(montarPainelEntrada());
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        pack();
+
         setLocationRelativeTo(null);
         setVisible(true);
     }
@@ -113,7 +109,7 @@ public class AgendamentoForm extends JFrame {
         constraints.gridy = 3;
         painelEntrada.add(campoHoraVisita, constraints);
 
-        botaoSalvar = new JButton("Salvar/Editar");
+        botaoSalvar = new JButton("Salvar / Editar");
         botaoSalvar.addActionListener(e -> salvar());
         constraints.gridx = 0;
         constraints.gridy = 4;
