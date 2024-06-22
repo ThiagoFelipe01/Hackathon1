@@ -3,8 +3,6 @@ package org.hackathon.dao;
 import org.hackathon.model.Idoso;
 
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
 
 public class IdosoDao {
     private Connection connection;
@@ -24,11 +22,11 @@ public class IdosoDao {
     }
 
     public void inserir (Idoso idoso) throws  SQLException {
-        String sql = "insert into idoso(nome,idade,cpf,telefone,alergia) values(?,?,?,?,?)";
+        String sql = "insert into idosos(nome,idade,cpf,telefone,alergia) values(?,?,?,?,?)";
         PreparedStatement ps = connection.prepareStatement(sql);
         ps.setString(1, idoso.getNome());
         ps.setInt(2, idoso.getIdade());
-        ps.setInt(3, idoso.getCpf());
+        ps.setString(3, idoso.getCpf());
         ps.setInt(4, idoso.getTelefone());
         ps.setString(5,idoso.getAlergia());
         ps.execute();
@@ -36,11 +34,11 @@ public class IdosoDao {
 
 
     public void  atualizar(Idoso idoso) throws SQLException {
-        String sql = "update idoso set nome = ?, idade = ?, cpf = ?, telefone = ?, alergia = ? where id = ?";
+        String sql = "update idosos set nome = ?, idade = ?, cpf = ?, telefone = ?, alergia = ? where id = ?";
         PreparedStatement ps = connection.prepareStatement(sql);
         ps.setString(1, idoso.getNome());
         ps.setInt(2, idoso.getIdade());
-        ps.setInt(3, idoso.getCpf());
+        ps.setString(3, idoso.getCpf());
         ps.setInt(4, idoso.getTelefone());
         ps.setString(5, idoso.getAlergia());
         ps.setInt(6, idoso.getId());

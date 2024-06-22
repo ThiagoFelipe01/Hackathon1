@@ -3,9 +3,6 @@ package org.hackathon.dao;
 import org.hackathon.model.Agendamento;
 
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Timer;
 
 public class AgendamentoDao {
     private Connection connection;

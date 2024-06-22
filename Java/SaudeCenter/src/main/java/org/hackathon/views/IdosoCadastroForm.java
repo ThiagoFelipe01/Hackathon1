@@ -6,12 +6,11 @@ import org.hackathon.service.IdosoService;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
-
+import java.awt.event.ActionListener;
 import static java.lang.Integer.parseInt;
 
 public class IdosoCadastroForm extends JFrame {
     private IdosoService service;
-    private JLabel labelId;
     private JTextField campoId;
     private JLabel labelNome;
     private JTextField campoNome;
@@ -19,46 +18,47 @@ public class IdosoCadastroForm extends JFrame {
     private JTextField campoIdade;
     private JLabel labelCpf;
     private JTextField campoCpf;
+    private JLabel labelEndereco;
+    private JTextField campoEndereco;
     private JLabel labelTelefone;
     private JTextField campoTelefone;
+    private JLabel labelTemHistMedico;
+    private JLabel labelHistoricoMedico;
+    private JTextField campoHistoricoMedico;
     private JLabel labelAlergia;
     private JTextField campoAlergia;
-    private JLabel labelHitoricoMedico;
-    private JTextField campoHistoricoMedico;
-    private JLabel labelSimNao;
+    private JLabel labelTemCondPreExistente;
+    private JLabel labelCondicoesPreExistente;
+    private JTextField campoCondicoesPreExistente;
+    private JLabel labelTemAlergia;
     private JButton botaoCadastrar;
     private JButton botaoCancelar;
-    private JButton botaoVoltar;
-    private JRadioButton radioSim;
-    private JRadioButton radioNao;
+    private JRadioButton radioHistSim;
+    private JRadioButton radioHistNao;
+    private JRadioButton radioAlergiaSim;
+    private JRadioButton radioAlergiaNao;
+    private JRadioButton radioCondSim;
+    private JRadioButton radioCondNao;
+
+    public IdosoCadastroForm() {
+        service = new IdosoService();
+        createMenuBar(); // Adiciona a barra de menu
+        setContentPane(painel());
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        pack();
+        setLocationRelativeTo(null);
+        setVisible(true);
+    }
 
     public JPanel painel() {
         setTitle("Tela de Cadastro");
         JPanel painelEntrada = new JPanel(new GridBagLayout());
         GridBagConstraints constraints = new GridBagConstraints();
-        painelEntrada.setPreferredSize(new Dimension(450, 300));
+        painelEntrada.setPreferredSize(new Dimension(450, 450));
         painelEntrada.revalidate();
-        constraints.insets = new Insets(5, 5, 5, 5);
+        constraints.insets = new Insets(10, 5, 5, 5);
 
-        /*labelId = new JLabel("ID");
-        constraints.gridx = 0;
-        constraints.gridy = 0;
-        labelId.setVisible(false);
-        painelEntrada.add(labelId, constraints);
-
-        campoId = new JTextField(20);
-        constraints.gridx = 1;
-        constraints.gridy = 0;
-        labelId.setVisible(false);
-        painelEntrada.add(campoId, constraints);*/
-
-        botaoVoltar = new JButton("Voltar");
-        botaoVoltar.addActionListener(e -> voltar());
-        constraints.gridx = 0;
-        constraints.gridy = 0;
-        painelEntrada.add(botaoVoltar, constraints);
-
-        labelNome = new JLabel("Digite seu nome");
+        labelNome = new JLabel("Digite seu nome:");
         constraints.gridx = 0;
         constraints.gridy = 1;
         painelEntrada.add(labelNome, constraints);
@@ -68,7 +68,7 @@ public class IdosoCadastroForm extends JFrame {
         constraints.gridy = 1;
         painelEntrada.add(campoNome, constraints);
 
-        labelIdade = new JLabel("Digite sua idade");
+        labelIdade = new JLabel("Digite sua idade:");
         constraints.gridx = 0;
         constraints.gridy = 2;
         painelEntrada.add(labelIdade, constraints);
@@ -78,7 +78,7 @@ public class IdosoCadastroForm extends JFrame {
         constraints.gridy = 2;
         painelEntrada.add(campoIdade, constraints);
 
-        labelCpf = new JLabel("Digite seu CPF");
+        labelCpf = new JLabel("Digite seu CPF:");
         constraints.gridx = 0;
         constraints.gridy = 3;
         painelEntrada.add(labelCpf, constraints);
@@ -88,84 +88,164 @@ public class IdosoCadastroForm extends JFrame {
         constraints.gridy = 3;
         painelEntrada.add(campoCpf, constraints);
 
-        labelTelefone = new JLabel("Digite seu telefone");
+        labelEndereco = new JLabel("Digite seu Endereço:");
         constraints.gridx = 0;
         constraints.gridy = 4;
+        painelEntrada.add(labelEndereco, constraints);
+
+        campoEndereco = new JTextField(20);
+        constraints.gridx = 1;
+        constraints.gridy = 4;
+        painelEntrada.add(campoEndereco, constraints);
+
+        labelTelefone = new JLabel("Digite seu telefone:");
+        constraints.gridx = 0;
+        constraints.gridy = 5;
         painelEntrada.add(labelTelefone, constraints);
 
         campoTelefone = new JTextField(20);
         constraints.gridx = 1;
-        constraints.gridy = 4;
+        constraints.gridy = 5;
         painelEntrada.add(campoTelefone, constraints);
 
-        labelSimNao = new JLabel("Voce tem Alergia?");
+        labelTemHistMedico = new JLabel("Tem Histórico médico?");
         constraints.gridx = 0;
-        constraints.gridy = 5;
-        painelEntrada.add(labelSimNao, constraints);
+        constraints.gridy = 6;
+        painelEntrada.add(labelTemHistMedico, constraints);
 
-        radioSim = new JRadioButton("Sim");
-        radioSim.addActionListener(this::acaoBotaoSim);
-        constraints.gridx = 0;
+        JPanel painelRadioHist = new JPanel(new FlowLayout(FlowLayout.LEFT, 30, 0));
+        radioHistSim = new JRadioButton("Sim");
+        radioHistSim.addActionListener(e -> toggleHistoricoMedico(true));
+        painelRadioHist.add(radioHistSim);
+
+        radioHistNao = new JRadioButton("Não");
+        radioHistNao.addActionListener(e -> toggleHistoricoMedico(false));
+        painelRadioHist.add(radioHistNao);
+
+        ButtonGroup grupoRadioHist = new ButtonGroup();
+        grupoRadioHist.add(radioHistSim);
+        grupoRadioHist.add(radioHistNao);
+
+        constraints.gridx = 1;
         constraints.gridy = 6;
         constraints.gridwidth = 2;
         constraints.anchor = GridBagConstraints.WEST;
-        painelEntrada.add(radioSim, constraints);
+        painelEntrada.add(painelRadioHist, constraints);
 
-        radioNao = new JRadioButton("Não");
-        radioNao.addActionListener(this::acaoBotaoNao);
+        labelHistoricoMedico = new JLabel("Histórico:");
         constraints.gridx = 0;
-        constraints.gridy = 6;
-        constraints.anchor = GridBagConstraints.CENTER;
-        painelEntrada.add(radioNao, constraints);
+        constraints.gridy = 7;
+        labelHistoricoMedico.setVisible(false);
+        painelEntrada.add(labelHistoricoMedico, constraints);
 
-        ButtonGroup grupoRadio = new ButtonGroup();
-        grupoRadio.add(radioSim);
-        grupoRadio.add(radioNao);
+        campoHistoricoMedico = new JTextField(20);
+        constraints.gridx = 1;
+        constraints.gridy = 7;
+        campoHistoricoMedico.setVisible(false);
+        painelEntrada.add(campoHistoricoMedico, constraints);
 
-        constraints.gridwidth = 1;
+        labelTemAlergia = new JLabel("Possui Alergia?");
+        constraints.gridx = 0;
+        constraints.gridy = 8;
+        painelEntrada.add(labelTemAlergia, constraints);
+
+        JPanel painelRadioAlergia = new JPanel(new FlowLayout(FlowLayout.LEFT, 30, 0));
+        radioAlergiaSim = new JRadioButton("Sim");
+        radioAlergiaSim.addActionListener(e -> toggleAlergia(true));
+        painelRadioAlergia.add(radioAlergiaSim);
+
+        radioAlergiaNao = new JRadioButton("Não");
+        radioAlergiaNao.addActionListener(e -> toggleAlergia(false));
+        painelRadioAlergia.add(radioAlergiaNao);
+
+        ButtonGroup grupoRadioAlergia = new ButtonGroup();
+        grupoRadioAlergia.add(radioAlergiaSim);
+        grupoRadioAlergia.add(radioAlergiaNao);
+
+        constraints.gridx = 1;
+        constraints.gridy = 8;
+        constraints.gridwidth = 2;
+        constraints.anchor = GridBagConstraints.WEST;
+        painelEntrada.add(painelRadioAlergia, constraints);
 
         labelAlergia = new JLabel("Alergia do que?");
         constraints.gridx = 0;
-        constraints.gridy = 7;
+        constraints.gridy = 9;
         labelAlergia.setVisible(false);
         painelEntrada.add(labelAlergia, constraints);
 
         campoAlergia = new JTextField(20);
         constraints.gridx = 1;
-        constraints.gridy = 7;
+        constraints.gridy = 9;
         campoAlergia.setVisible(false);
         painelEntrada.add(campoAlergia, constraints);
 
+        labelTemCondPreExistente = new JLabel("Condições pré-existentes?");
+        constraints.gridx = 0;
+        constraints.gridy = 10;
+        painelEntrada.add(labelTemCondPreExistente, constraints);
 
-        botaoCadastrar = new JButton("Cadatrar");
+        JPanel painelRadioCond = new JPanel(new FlowLayout(FlowLayout.LEFT, 30, 0));
+        radioCondSim = new JRadioButton("Sim");
+        radioCondSim.addActionListener(e -> toggleCondicoesPreExistente(true));
+        painelRadioCond.add(radioCondSim);
+
+        radioCondNao = new JRadioButton("Não");
+        radioCondNao.addActionListener(e -> toggleCondicoesPreExistente(false));
+        painelRadioCond.add(radioCondNao);
+
+        ButtonGroup grupoRadioCond = new ButtonGroup();
+        grupoRadioCond.add(radioCondSim);
+        grupoRadioCond.add(radioCondNao);
+
+        constraints.gridx = 1;
+        constraints.gridy = 10;
+        constraints.gridwidth = 2;
+        constraints.anchor = GridBagConstraints.WEST;
+        painelEntrada.add(painelRadioCond, constraints);
+
+        labelCondicoesPreExistente = new JLabel("Condição pré-existente:");
+        constraints.gridx = 0;
+        constraints.gridy = 11;
+        labelCondicoesPreExistente.setVisible(false);
+        painelEntrada.add(labelCondicoesPreExistente, constraints);
+
+        campoCondicoesPreExistente = new JTextField(20);
+        constraints.gridx = 1;
+        constraints.gridy = 11;
+        campoCondicoesPreExistente.setVisible(false);
+        painelEntrada.add(campoCondicoesPreExistente, constraints);
+
+        botaoCadastrar = new JButton("Cadastrar");
         botaoCadastrar.addActionListener(e -> salvar());
         constraints.gridx = 1;
-        constraints.gridy = 8;
+        constraints.gridy = 12;
         constraints.anchor = GridBagConstraints.EAST;
         painelEntrada.add(botaoCadastrar, constraints);
 
         botaoCancelar = new JButton("Cancelar");
         botaoCancelar.addActionListener(e -> limpaCampos());
         constraints.gridx = 0;
-        constraints.gridy = 8;
+        constraints.gridy = 12;
         constraints.anchor = GridBagConstraints.WEST;
         painelEntrada.add(botaoCancelar, constraints);
 
         return painelEntrada;
     }
 
-    private void acaoBotaoSim(ActionEvent e) {
-        if (radioSim.isSelected()) {
-            labelAlergia.setVisible(true);
-            campoAlergia.setVisible(true);
-        }
+    private void toggleHistoricoMedico(boolean visible) {
+        labelHistoricoMedico.setVisible(visible);
+        campoHistoricoMedico.setVisible(visible);
     }
 
-    private void acaoBotaoNao(ActionEvent e) {
-        if (radioNao.isSelected()) {
-            labelAlergia.setVisible(false);
-            campoAlergia.setVisible(false);
-        }
+    private void toggleAlergia(boolean visible) {
+        labelAlergia.setVisible(visible);
+        campoAlergia.setVisible(visible);
+    }
+
+    private void toggleCondicoesPreExistente(boolean visible) {
+        labelCondicoesPreExistente.setVisible(visible);
+        campoCondicoesPreExistente.setVisible(visible);
     }
 
     public void validarCampos() {
@@ -211,6 +291,12 @@ public class IdosoCadastroForm extends JFrame {
 
     }
 
+    public void voltar() {
+        MenuForm menuForm = new MenuForm();
+        menuForm.setVisible(true);
+        dispose();
+    }
+
     private void salvar() {
         try {
             validarCampos();
@@ -228,36 +314,54 @@ public class IdosoCadastroForm extends JFrame {
         campoTelefone.setText("");
     }
 
-    public void  voltar() {
-        MenuForm menuForm = new MenuForm();
-        menuForm.setVisible(true);
-        dispose();
-    }
-
     private Idoso construirIdoso() {
         return campoId.getText().isEmpty()
-                ? new Idoso(campoNome.getText(), parseInt(campoCpf.getText()), parseInt(campoIdade.getText()),
-                parseInt(campoTelefone.getText()), campoAlergia.getText())
+                ? new Idoso(campoNome.getText(),parseInt(campoIdade.getText()), campoCpf.getText(), campoEndereco.getText(),
+                 parseInt(campoTelefone.getText()), campoHistoricoMedico.getText() ,
+                campoAlergia.getText(), campoCondicoesPreExistente.getText())
                 : new Idoso(
                 parseInt(campoId.getText()),
                 campoNome.getText(),
                 parseInt(campoIdade.getText()),
-                parseInt(campoCpf.getText()),
+                campoCpf.getText(),
+                campoEndereco.getText(),
                 parseInt(campoTelefone.getText()),
-                campoAlergia.getText()
-        );
+                campoHistoricoMedico.getText(),
+                campoAlergia.getText(),
+                campoCondicoesPreExistente.getText());
+    }
+
+    private void createMenuBar() {
+        JMenuBar menuBar = new JMenuBar();
+
+        JMenu menu = new JMenu("Menu");
+        menuBar.add(menu);
+
+        JMenuItem listarMenuItem = new JMenuItem("Voltar");
+        listarMenuItem.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                voltar();
+            }
+        });
+        menu.add(listarMenuItem);
+
+        JMenuItem sairMenuItem = new JMenuItem("Sair");
+        sairMenuItem.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.exit(0);
+            }
+        });
+        menu.add(sairMenuItem);
+
+        setJMenuBar(menuBar);
     }
 
     public static class Main {
         public static void main(String[] args) {
             SwingUtilities.invokeLater(() -> {
-                JFrame frame = new JFrame("Cadastro de Idoso");
-                frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                IdosoCadastroForm cadastroForm = new IdosoCadastroForm();
-                frame.getContentPane().add(cadastroForm.painel());
-                frame.pack();
-                frame.setLocationRelativeTo(null);
-                frame.setVisible(true);
+                new IdosoCadastroForm();
             });
         }
     }

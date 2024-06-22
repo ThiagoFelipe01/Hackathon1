@@ -4,25 +4,44 @@ public class Idoso {
     private Integer id;
     private String nome;
     private int idade;
-    private int cpf;
+    private String cpf;
+    private String endereco;
     private int telefone;
-    private String Alergia;
+    private String historicoMedico;
+    private String alergia;
+    private String condicaoPreExistente;
 
-    public Idoso(String nome, int idade, int cpf, int telefone, String Alergia) {
+    public Idoso(String nome, int idade, String cpf, String endereco, int telefone,
+                 String historicoMedico, String alergia, String condicaoPreExistente) {
         this.nome = nome;
         this.idade = idade;
         this.cpf = cpf;
+        this.endereco = endereco;
         this.telefone = telefone;
-        this.Alergia = Alergia;
+        this.historicoMedico = historicoMedico;
+        this.alergia = alergia;
+        this.condicaoPreExistente = condicaoPreExistente;
     }
 
-    public Idoso(Integer id, String nome, int idade, int cpf, int telefone, String Alergia) {
+    public Idoso(Integer id, String nome, int idade, String cpf, String endereco, int telefone,
+                 String historicoMedico, String alergia, String condicaoPreExistente) {
         this.id = id;
         this.nome = nome;
         this.idade = idade;
         this.cpf = cpf;
+        this.endereco = endereco;
         this.telefone = telefone;
-        this.Alergia = Alergia;
+        this.historicoMedico = historicoMedico;
+        this.alergia = alergia;
+        this.condicaoPreExistente = condicaoPreExistente;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getNome() {
@@ -41,12 +60,20 @@ public class Idoso {
         this.idade = idade;
     }
 
-    public int getCpf() {
+    public String getCpf() {
         return cpf;
     }
 
-    public void setCpf(int cpf) {
+    public void setCpf(String cpf) {
         this.cpf = cpf;
+    }
+
+    public String getEndereco() {
+        return endereco;
+    }
+
+    public void setEndereco(String endereco) {
+        this.endereco = endereco;
     }
 
     public int getTelefone() {
@@ -57,25 +84,34 @@ public class Idoso {
         this.telefone = telefone;
     }
 
-    public Integer getId() {
-        return id;
+    public String getHistoricoMedico() {
+        return historicoMedico;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setHistoricoMedico(String historicoMedico) {
+        this.historicoMedico = historicoMedico;
     }
 
     public String getAlergia() {
-        return Alergia;
+        return alergia;
     }
 
     public void setAlergia(String alergia) {
-        this.Alergia = alergia;
+        this.alergia = alergia;
+    }
+
+    public String getCondicaoPreExistente() {
+        return condicaoPreExistente;
+    }
+
+    public void setCondicaoPreExistente(String condicaoPreExistente) {
+        this.condicaoPreExistente = condicaoPreExistente;
     }
 
     @Override
     public String toString() {
-        return "Id: " + id + " Nome: " + nome + " CPF: " + cpf + " Telefone: "
-                + telefone + " medicamento: " + Alergia;
+        return  "Id: " + id + " Nome: " + nome + " CPF: " + cpf + " Endereço: " + endereco +
+                " Telefone: " + telefone + " Historico Medico: " + historicoMedico +
+                " Alergia: " + alergia + " Condição Pré Existente " + condicaoPreExistente;
     }
 }
