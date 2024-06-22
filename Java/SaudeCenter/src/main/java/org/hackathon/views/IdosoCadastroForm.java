@@ -2,7 +2,6 @@ package org.hackathon.views;
 
 import org.hackathon.model.Idoso;
 import org.hackathon.service.IdosoService;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -42,7 +41,7 @@ public class IdosoCadastroForm extends JFrame {
 
     public IdosoCadastroForm() {
         service = new IdosoService();
-        createMenuBar(); // Adiciona a barra de menu
+        createMenuBar();
         setContentPane(painel());
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         pack();
@@ -115,11 +114,11 @@ public class IdosoCadastroForm extends JFrame {
 
         JPanel painelRadioHist = new JPanel(new FlowLayout(FlowLayout.LEFT, 30, 0));
         radioHistSim = new JRadioButton("Sim");
-        radioHistSim.addActionListener(e -> toggleHistoricoMedico(true));
+        radioHistSim.addActionListener(e -> BtnSimNaoHistMedico(true));
         painelRadioHist.add(radioHistSim);
 
         radioHistNao = new JRadioButton("Não");
-        radioHistNao.addActionListener(e -> toggleHistoricoMedico(false));
+        radioHistNao.addActionListener(e -> BtnSimNaoHistMedico(false));
         painelRadioHist.add(radioHistNao);
 
         ButtonGroup grupoRadioHist = new ButtonGroup();
@@ -151,11 +150,11 @@ public class IdosoCadastroForm extends JFrame {
 
         JPanel painelRadioAlergia = new JPanel(new FlowLayout(FlowLayout.LEFT, 30, 0));
         radioAlergiaSim = new JRadioButton("Sim");
-        radioAlergiaSim.addActionListener(e -> toggleAlergia(true));
+        radioAlergiaSim.addActionListener(e -> BtnSimNaoAlergia(true));
         painelRadioAlergia.add(radioAlergiaSim);
 
         radioAlergiaNao = new JRadioButton("Não");
-        radioAlergiaNao.addActionListener(e -> toggleAlergia(false));
+        radioAlergiaNao.addActionListener(e -> BtnSimNaoAlergia(false));
         painelRadioAlergia.add(radioAlergiaNao);
 
         ButtonGroup grupoRadioAlergia = new ButtonGroup();
@@ -187,11 +186,11 @@ public class IdosoCadastroForm extends JFrame {
 
         JPanel painelRadioCond = new JPanel(new FlowLayout(FlowLayout.LEFT, 30, 0));
         radioCondSim = new JRadioButton("Sim");
-        radioCondSim.addActionListener(e -> toggleCondicoesPreExistente(true));
+        radioCondSim.addActionListener(e -> BtnSimNaoCondPreExistente(true));
         painelRadioCond.add(radioCondSim);
 
         radioCondNao = new JRadioButton("Não");
-        radioCondNao.addActionListener(e -> toggleCondicoesPreExistente(false));
+        radioCondNao.addActionListener(e -> BtnSimNaoCondPreExistente(false));
         painelRadioCond.add(radioCondNao);
 
         ButtonGroup grupoRadioCond = new ButtonGroup();
@@ -233,17 +232,17 @@ public class IdosoCadastroForm extends JFrame {
         return painelEntrada;
     }
 
-    private void toggleHistoricoMedico(boolean visible) {
+    private void BtnSimNaoHistMedico(boolean visible) {
         labelHistoricoMedico.setVisible(visible);
         campoHistoricoMedico.setVisible(visible);
     }
 
-    private void toggleAlergia(boolean visible) {
+    private void BtnSimNaoAlergia(boolean visible) {
         labelAlergia.setVisible(visible);
         campoAlergia.setVisible(visible);
     }
 
-    private void toggleCondicoesPreExistente(boolean visible) {
+    private void BtnSimNaoCondPreExistente(boolean visible) {
         labelCondicoesPreExistente.setVisible(visible);
         campoCondicoesPreExistente.setVisible(visible);
     }

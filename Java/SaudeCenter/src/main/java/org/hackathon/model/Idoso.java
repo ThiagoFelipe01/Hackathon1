@@ -110,7 +110,7 @@ public class Idoso {
 
     @Override
     public String toString() {
-        return  "Id: " + id + " Nome: " + nome + " CPF: " + cpf + " Endereço: " + endereco +
+        return  "Id: " + id + " Nome: " + nome +  " Idade: " + idade + " CPF: " + cpf + " Endereço: " + endereco +
                 " Telefone: " + telefone + " Historico Medico: " + historicoMedico +
                 " Alergia: " + alergia + " Condição Pré Existente " + condicaoPreExistente;
     }

@@ -22,26 +22,16 @@ public class IdosoDao {
     }
 
     public void inserir (Idoso idoso) throws  SQLException {
-        String sql = "insert into idosos(nome,idade,cpf,telefone,alergia) values(?,?,?,?,?)";
+        String sql = "insert into idosos(nome,idade,cpf,endereco,telefone,historicoMedico,alergia,CondicoesPreexistentes) values(?,?,?,?,?,?,?,?)";
         PreparedStatement ps = connection.prepareStatement(sql);
         ps.setString(1, idoso.getNome());
         ps.setInt(2, idoso.getIdade());
         ps.setString(3, idoso.getCpf());
-        ps.setInt(4, idoso.getTelefone());
-        ps.setString(5,idoso.getAlergia());
-        ps.execute();
-    }
-
-
-    public void  atualizar(Idoso idoso) throws SQLException {
-        String sql = "update idosos set nome = ?, idade = ?, cpf = ?, telefone = ?, alergia = ? where id = ?";
-        PreparedStatement ps = connection.prepareStatement(sql);
-        ps.setString(1, idoso.getNome());
-        ps.setInt(2, idoso.getIdade());
-        ps.setString(3, idoso.getCpf());
-        ps.setInt(4, idoso.getTelefone());
-        ps.setString(5, idoso.getAlergia());
-        ps.setInt(6, idoso.getId());
+        ps.setString(4, idoso.getEndereco());
+        ps.setInt(5, idoso.getTelefone());
+        ps.setString(6, idoso.getHistoricoMedico());
+        ps.setString(7,idoso.getAlergia());
+        ps.setString(8, idoso.getCondicaoPreExistente());
         ps.execute();
     }
 }

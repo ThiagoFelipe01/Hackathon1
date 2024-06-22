@@ -3,6 +3,8 @@ package org.hackathon.dao;
 import org.hackathon.model.Agendamento;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class AgendamentoDao {
     private Connection connection;
@@ -26,6 +28,20 @@ public class AgendamentoDao {
         ps.execute();
     }
 
+    public List<Agendamento> listarTodos() throws SQLException {
+        List<Agendamento> agendamentos = new ArrayList<Agendamento>();
+
+        ResultSet rs = connection.prepareStatement("select * from diretor").executeQuery();
+        while (rs.next()) {
+            agendamentos.add(new Agendamento(
+                    rs.getInt("id"),
+                    rs.getString("nome"),
+                    rs.getDate("dataVisita"),
+                    rs.getTime("horaVisita")));
+        }
+        rs.close();
+        return agendamentos;
+    }
 
     public void atualizar(Agendamento agendamento) throws SQLException {
         String sql = "update agendamento set nome = ?, dataVisita = ?, horaVisita = ?, where id = ?";

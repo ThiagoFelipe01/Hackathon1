@@ -2,21 +2,21 @@ package org.hackathon.model;
 
 import java.sql.Time;
 import java.util.Date;
-import java.util.Timer;
 
 public class Agendamento {
     private Integer id;
     private String nome;
     private Date dataVisita;
-    private Timer horaVisita;
+    private Time horaVisita;
 
-    public Agendamento(Date dataVisita, Timer horaVisita, String nome) {
+    public Agendamento(String nome, Date dataVisita, Time horaVisita) {
+        this.nome = nome;
         this.dataVisita = dataVisita;
         this.horaVisita = horaVisita;
-        this.nome = nome;
+
     }
 
-    public Agendamento(Integer id, String nome, Date dataVisita, Timer horaVisita) {
+    public Agendamento(Integer id, String nome, Date dataVisita, Time horaVisita) {
         this.id = id;
         this.nome = nome;
         this.dataVisita = dataVisita;
@@ -51,7 +51,13 @@ public class Agendamento {
         return (Time) dataVisita;
     }
 
-    public void setHoraVisita(Timer horaVisita) {
+    public void setHoraVisita(Time horaVisita) {
         this.horaVisita = horaVisita;
+    }
+
+    @Override
+    public String toString() {
+        return "Id: " + id + " Nome: " + nome + " Data Visita: " + dataVisita + " Hora Visita: "
+                + horaVisita;
     }
 }
