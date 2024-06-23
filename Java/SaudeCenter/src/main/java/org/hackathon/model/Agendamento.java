@@ -5,19 +5,19 @@ import java.util.Date;
 
 public class Agendamento {
     private Integer id;
-    private String nome;
+    private Integer idIdoso;
     private Date dataAgendamento;
     private Time horario;
 
-    public Agendamento(String nome, Date dataAgendamento, Time horario) {
-        this.nome = nome;
+    public Agendamento(Integer idIdoso, Date dataAgendamento, Time horario) {
+        this.idIdoso = idIdoso;
         this.dataAgendamento = dataAgendamento;
         this.horario = horario;
     }
 
-    public Agendamento(Integer id, String nome, Date dataAgendamento, Time horario) {
+    public Agendamento(Integer id, Integer idIdoso, Date dataAgendamento, Time horario) {
         this.id = id;
-        this.nome = nome;
+        this.idIdoso = idIdoso;
         this.dataAgendamento = dataAgendamento;
         this.horario = horario;
     }
@@ -30,12 +30,12 @@ public class Agendamento {
         this.id = id;
     }
 
-    public String getNome() {
-        return nome;
+    public Integer getIdIdoso() {
+        return idIdoso;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setIdIdoso(Integer idIdoso) {
+        this.idIdoso = idIdoso;
     }
 
     public Date getDataAgendamento() {
@@ -56,6 +56,6 @@ public class Agendamento {
 
     @Override
     public String toString() {
-        return "Id: " + id + " Nome: " + nome + " Data Visita: " + dataAgendamento + " Hora Visita: " + horario;
+        return "Id: " + id + " Id: " + idIdoso + " Data Visita: " + dataAgendamento + " Hora Visita: " + horario;
     }
 }
