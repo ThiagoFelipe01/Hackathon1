@@ -28,7 +28,7 @@ public class IdosoDao {
         ps.setInt(2, idoso.getIdade());
         ps.setString(3, idoso.getCpf());
         ps.setString(4, idoso.getEndereco());
-        ps.setInt(5, idoso.getTelefone());
+        ps.setString(5, idoso.getTelefone());
         ps.setString(6, idoso.getHistoricoMedico());
         ps.setString(7,idoso.getAlergia());
         ps.setString(8, idoso.getCondicaoPreExistente());

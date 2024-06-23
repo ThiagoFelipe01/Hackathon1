@@ -4,15 +4,21 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5cbb86a9-888b-46f1-9af3-a22f3719d138" name="Changes" comment="Tentando fazer conexão com o banco">
+    <list default="true" id="5cbb86a9-888b-46f1-9af3-a22f3719d138" name="Changes" comment="Adicionado o campo Observaçao, e editando o SQL">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/hackathon/dao/AgendamentoDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/hackathon/dao/AgendamentoDao.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/hackathon/dao/IdosoDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/hackathon/dao/IdosoDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/hackathon/model/Agendamento.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/hackathon/model/Agendamento.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/hackathon/model/Idoso.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/hackathon/model/Idoso.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/hackathon/views/AgendamentoForm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/hackathon/views/AgendamentoForm.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/hackathon/views/IdosoCadastroForm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/hackathon/views/IdosoCadastroForm.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/hackathon/dao/AgendamentoDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/hackathon/dao/AgendamentoDao.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/hackathon/dao/IdosoDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/hackathon/dao/IdosoDao.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/hackathon/model/Agendamento.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/hackathon/model/Agendamento.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/hackathon/model/Idoso.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/hackathon/model/Idoso.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/hackathon/views/AgendamentoForm$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/hackathon/views/AgendamentoForm$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/hackathon/views/AgendamentoForm$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/hackathon/views/AgendamentoForm$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/hackathon/views/AgendamentoForm.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/hackathon/views/AgendamentoForm.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/hackathon/views/IdosoCadastroForm$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/hackathon/views/IdosoCadastroForm$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/hackathon/views/IdosoCadastroForm$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/hackathon/views/IdosoCadastroForm$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/hackathon/views/IdosoCadastroForm$Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/hackathon/views/IdosoCadastroForm$Main.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/hackathon/views/IdosoCadastroForm.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/hackathon/views/IdosoCadastroForm.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -146,8 +152,8 @@
     <recent_temporary>
       <list>
         <item itemvalue="Application.IdosoCadastroForm$Main" />
-        <item itemvalue="Application.AgendamentoForm" />
         <item itemvalue="Application.AgendamentoForm$Main" />
+        <item itemvalue="Application.AgendamentoForm" />
         <item itemvalue="Application.Main" />
         <item itemvalue="Application.Agendamento" />
       </list>
@@ -354,7 +360,15 @@
       <option name="project" value="LOCAL" />
       <updated>1719105986772</updated>
     </task>
-    <option name="localTasksCounter" value="25" />
+    <task id="LOCAL-00025" summary="Adicionado o campo Observaçao, e editando o SQL">
+      <option name="closed" value="true" />
+      <created>1719108905677</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1719108905677</updated>
+    </task>
+    <option name="localTasksCounter" value="26" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -384,6 +398,7 @@
     <MESSAGE value="arrumando umas coisas que faltaram" />
     <MESSAGE value="renomenado nome da tabela" />
     <MESSAGE value="Tentando fazer conexão com o banco" />
-    <option name="LAST_COMMIT_MESSAGE" value="Tentando fazer conexão com o banco" />
+    <MESSAGE value="Adicionado o campo Observaçao, e editando o SQL" />
+    <option name="LAST_COMMIT_MESSAGE" value="Adicionado o campo Observaçao, e editando o SQL" />
   </component>
 </project>

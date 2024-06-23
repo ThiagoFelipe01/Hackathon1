@@ -12,6 +12,7 @@ import static java.lang.Integer.parseInt;
 
 public class IdosoCadastroForm extends JFrame {
     private IdosoService service;
+    private JLabel labelId;
     private JTextField campoId;
     private JLabel labelNome;
     private JTextField campoNome;
@@ -57,9 +58,20 @@ public class IdosoCadastroForm extends JFrame {
         setTitle("Tela de Cadastro");
         JPanel painelEntrada = new JPanel(new GridBagLayout());
         GridBagConstraints constraints = new GridBagConstraints();
-        painelEntrada.setPreferredSize(new Dimension(450, 480));
+        painelEntrada.setPreferredSize(new Dimension(450, 520));
         painelEntrada.revalidate();
         constraints.insets = new Insets(10, 5, 5, 5);
+
+        labelId = new JLabel("ID:");
+        constraints.gridx = 0;
+        constraints.gridy = 0;
+        painelEntrada.add(labelId, constraints);
+
+        campoId = new JTextField(20);
+        campoId.setEnabled(false);
+        constraints.gridx = 1;
+        constraints.gridy = 0;
+        painelEntrada.add(campoId, constraints);
 
         labelNome = new JLabel("Digite seu nome:");
         constraints.gridx = 0;
@@ -336,7 +348,7 @@ public class IdosoCadastroForm extends JFrame {
     private Idoso construirIdoso() {
         return campoId.getText().isEmpty()
                 ? new Idoso(campoNome.getText(), parseInt(campoIdade.getText()), campoCpf.getText(), campoEndereco.getText(),
-                parseInt(campoTelefone.getText()), campoHistoricoMedico.getText(),
+                campoTelefone.getText(), campoHistoricoMedico.getText(),
                 campoAlergia.getText(), campoCondicoesPreExistente.getText(), campoObservacao.getText())
                 : new Idoso(
                 parseInt(campoId.getText()),
@@ -344,7 +356,7 @@ public class IdosoCadastroForm extends JFrame {
                 parseInt(campoIdade.getText()),
                 campoCpf.getText(),
                 campoEndereco.getText(),
-                parseInt(campoTelefone.getText()),
+                campoTelefone.getText(),
                 campoHistoricoMedico.getText(),
                 campoAlergia.getText(),
                 campoCondicoesPreExistente.getText(),

@@ -6,13 +6,13 @@ public class Idoso {
     private int idade;
     private String cpf;
     private String endereco;
-    private int telefone;
+    private String telefone;
     private String historicoMedico;
     private String alergia;
     private String condicaoPreExistente;
     private String observacoes;
 
-    public Idoso(String nome, int idade, String cpf, String endereco, int telefone,
+    public Idoso(String nome, int idade, String cpf, String endereco, String telefone,
                  String historicoMedico, String alergia, String condicaoPreExistente, String observacoes) {
         this.nome = nome;
         this.idade = idade;
@@ -25,7 +25,7 @@ public class Idoso {
         this.observacoes = observacoes;
     }
 
-    public Idoso(Integer id, String nome, int idade, String cpf, String endereco, int telefone,
+    public Idoso(Integer id, String nome, int idade, String cpf, String endereco, String telefone,
                  String historicoMedico, String alergia, String condicaoPreExistente, String observacoes) {
         this.id = id;
         this.nome = nome;
@@ -79,11 +79,11 @@ public class Idoso {
         this.endereco = endereco;
     }
 
-    public int getTelefone() {
+    public String getTelefone() {
         return telefone;
     }
 
-    public void setTelefone(int telefone) {
+    public void setTelefone(String telefone) {
         this.telefone = telefone;
     }
 
