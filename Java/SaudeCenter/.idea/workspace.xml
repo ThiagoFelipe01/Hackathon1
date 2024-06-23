@@ -4,11 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5cbb86a9-888b-46f1-9af3-a22f3719d138" name="Changes" comment="editando o layout ta tela de cadastro">
+    <list default="true" id="5cbb86a9-888b-46f1-9af3-a22f3719d138" name="Changes" comment="instalando dependencias no arquivo pom.xml, que serve para conectar com o banco">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/hackathon/dao/IdosoDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/hackathon/dao/IdosoDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/hackathon/views/IdosoCadastroForm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/hackathon/views/IdosoCadastroForm.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/hackathon/views/AgendamentoForm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/hackathon/views/AgendamentoForm.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/hackathon/dao/IdosoDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/hackathon/dao/IdosoDao.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/hackathon/views/IdosoCadastroForm$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/hackathon/views/IdosoCadastroForm$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/hackathon/views/IdosoCadastroForm$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/hackathon/views/IdosoCadastroForm$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/hackathon/views/IdosoCadastroForm$Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/hackathon/views/IdosoCadastroForm$Main.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/hackathon/views/IdosoCadastroForm.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/hackathon/views/IdosoCadastroForm.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -141,8 +144,8 @@
     <recent_temporary>
       <list>
         <item itemvalue="Application.IdosoCadastroForm$Main" />
-        <item itemvalue="Application.AgendamentoForm$Main" />
         <item itemvalue="Application.AgendamentoForm" />
+        <item itemvalue="Application.AgendamentoForm$Main" />
         <item itemvalue="Application.Main" />
         <item itemvalue="Application.Agendamento" />
       </list>
@@ -365,7 +368,15 @@
       <option name="project" value="LOCAL" />
       <updated>1719110602685</updated>
     </task>
-    <option name="localTasksCounter" value="27" />
+    <task id="LOCAL-00027" summary="instalando dependencias no arquivo pom.xml, que serve para conectar com o banco">
+      <option name="closed" value="true" />
+      <created>1719165183656</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1719165183656</updated>
+    </task>
+    <option name="localTasksCounter" value="28" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -397,6 +408,7 @@
     <MESSAGE value="Tentando fazer conexão com o banco" />
     <MESSAGE value="Adicionado o campo Observaçao, e editando o SQL" />
     <MESSAGE value="editando o layout ta tela de cadastro" />
-    <option name="LAST_COMMIT_MESSAGE" value="editando o layout ta tela de cadastro" />
+    <MESSAGE value="instalando dependencias no arquivo pom.xml, que serve para conectar com o banco" />
+    <option name="LAST_COMMIT_MESSAGE" value="instalando dependencias no arquivo pom.xml, que serve para conectar com o banco" />
   </component>
 </project>
