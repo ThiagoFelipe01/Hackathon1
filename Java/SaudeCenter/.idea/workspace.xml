@@ -100,7 +100,7 @@
     "last_opened_file_path": "C:/workspace-java/locadora"
   }
 }]]></component>
-  <component name="RunManager" selected="Application.HistoricoForm">
+  <component name="RunManager" selected="Application.AlertaForm">
     <configuration name="AgendamentoForm" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="org.hackathon.views.AgendamentoForm" />
       <module name="Hackathon1" />
@@ -168,10 +168,10 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.AlertaForm" />
         <item itemvalue="Application.HistoricoForm" />
         <item itemvalue="Application.AgendamentoForm" />
         <item itemvalue="Application.IdosoCadastroForm$Main" />
-        <item itemvalue="Application.AlertaForm" />
         <item itemvalue="Application.VacinaForm" />
       </list>
     </recent_temporary>
