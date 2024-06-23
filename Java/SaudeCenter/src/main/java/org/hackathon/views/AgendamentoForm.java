@@ -9,7 +9,9 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Date;
+import java.sql.SQLException;
 import java.sql.Time;
+import java.util.List;
 
 import static java.lang.Integer.parseInt;
 
@@ -19,7 +21,7 @@ public class AgendamentoForm extends JFrame {
     private JLabel labelId;
     private JTextField campoId;
     private JLabel labelNome;
-    private JTextField campoNome;
+    private JComboBox<String> comboBoxNomes;
     private JLabel labelDataAgendamento;
     private JTextField campoDataAgendamento;
     private JLabel labelHorario;
@@ -82,12 +84,17 @@ public class AgendamentoForm extends JFrame {
         constraints.gridy = 1;
         painelEntrada.add(labelNome, constraints);
 
-        campoNome = new JTextField(20);
+        List<String> nomesIdosos = service.listarNomesIdosos();
+
+        comboBoxNomes = new JComboBox<>(nomesIdosos.toArray(new String[0])); ;
+        comboBoxNomes.setSelectedItem(null);
+        comboBoxNomes.setPreferredSize(new Dimension(200, comboBoxNomes.getPreferredSize().height));
+        comboBoxNomes.setEditable(false);
         constraints.gridx = 1;
         constraints.gridy = 1;
-        painelEntrada.add(campoNome, constraints);
+        painelEntrada.add(comboBoxNomes, constraints);
 
-        labelDataAgendamento = new JLabel("Data:");
+        labelDataAgendamento = new JLabel("Data Visita:");
         constraints.gridx = 0;
         constraints.gridy = 2;
         painelEntrada.add(labelDataAgendamento, constraints);
@@ -97,7 +104,7 @@ public class AgendamentoForm extends JFrame {
         constraints.gridy = 2;
         painelEntrada.add(campoDataAgendamento, constraints);
 
-        labelHorario = new JLabel("Hora:");
+        labelHorario = new JLabel("Hora Visita:");
         constraints.gridx = 0;
         constraints.gridy = 3;
         painelEntrada.add(labelHorario, constraints);
@@ -138,19 +145,15 @@ public class AgendamentoForm extends JFrame {
         service.listaAgendamento().forEach(agendamento -> model.addRow(
                 new Object[]{
                         agendamento.getId(),
-                        agendamento.getNome(),
+                        agendamento.getIdIdoso(),
                         agendamento.getDataAgendamento(),
                         agendamento.getHorario()}));
         return model;
     }
 
     private void validarCampos() {
-        if (campoNome.getText().trim().isEmpty()) {
-            throw new IllegalArgumentException("O Campo Nome Não pode ser vazio");
-        }
-
-        if (!campoNome.getText().matches("[a-zA-Z\\s]+")) {
-            throw new IllegalArgumentException("O nome deve conter apenas letras.");
+        if (comboBoxNomes.getSelectedItem() == null) {
+            throw new IllegalArgumentException("Selecione um nome de idoso.");
         }
 
         if (campoDataAgendamento.getText().trim().isEmpty()) {
@@ -188,9 +191,9 @@ public class AgendamentoForm extends JFrame {
         }
     }
 
+
     private void limparCampos() {
         campoId.setText("");
-        campoNome.setText("");
         campoDataAgendamento.setText("");
         campoHorario.setText("");
         tabela.clearSelection();
@@ -207,15 +210,19 @@ public class AgendamentoForm extends JFrame {
     }
 
     private Agendamento construirAgendamento() {
+        String nomeSelecionado = (String) comboBoxNomes.getSelectedItem();
+        int idIdoso = service.obterIdIdosoPorNome(nomeSelecionado);
+
         return campoId.getText().isEmpty()
-                ? new Agendamento(campoNome.getText(), Date.valueOf(campoDataAgendamento.getText()),
+                ? new Agendamento(idIdoso, Date.valueOf(campoDataAgendamento.getText()),
                 Time.valueOf(campoHorario.getText()))
                 : new Agendamento(
                 parseInt(campoId.getText()),
-                campoNome.getText(),
+                idIdoso,
                 Date.valueOf(campoDataAgendamento.getText()),
                 Time.valueOf(campoHorario.getText()));
     }
+
 
     private void selecionarAgendamento(ListSelectionEvent e) {
         if (!e.getValueIsAdjusting()) {
@@ -223,13 +230,13 @@ public class AgendamentoForm extends JFrame {
             if (selectedRow != -1) {
                 var id = (Integer) tabela.getValueAt(selectedRow, 0);
                 var nome = (String) tabela.getValueAt(selectedRow, 1);
-                var dataVisita = (Integer) tabela.getValueAt(selectedRow, 2);
-                var horaVisita = (String) tabela.getValueAt(selectedRow, 3);
+                var dataVisita = (Date) tabela.getValueAt(selectedRow, 2);
+                var horaVisita = (Time) tabela.getValueAt(selectedRow, 3);
 
                 campoId.setText(id.toString());
-                campoNome.setText(nome);
+                comboBoxNomes.setSelectedItem(nome);
                 campoDataAgendamento.setText(String.valueOf(dataVisita));
-                campoHorario.setText(horaVisita);
+                campoHorario.setText(String.valueOf(horaVisita));
             }
         }
     }
