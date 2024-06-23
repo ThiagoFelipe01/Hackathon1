@@ -152,10 +152,6 @@ public class AgendamentoForm extends JFrame {
     }
 
     private void validarCampos() {
-        if (comboBoxNomes.getSelectedItem() == null) {
-            throw new IllegalArgumentException("Selecione um nome de idoso.");
-        }
-
         if (campoDataAgendamento.getText().trim().isEmpty()) {
             throw new IllegalArgumentException("O Campo Data Não pode ser vazio");
         }
@@ -190,7 +186,6 @@ public class AgendamentoForm extends JFrame {
             JOptionPane.showMessageDialog(this, ex.getMessage(), "Erro de Validação", JOptionPane.ERROR_MESSAGE);
         }
     }
-
 
     private void limparCampos() {
         campoId.setText("");
@@ -230,13 +225,13 @@ public class AgendamentoForm extends JFrame {
             if (selectedRow != -1) {
                 var id = (Integer) tabela.getValueAt(selectedRow, 0);
                 var nome = (String) tabela.getValueAt(selectedRow, 1);
-                var dataVisita = (Date) tabela.getValueAt(selectedRow, 2);
-                var horaVisita = (Time) tabela.getValueAt(selectedRow, 3);
+                var dataVisita = (Integer) tabela.getValueAt(selectedRow, 2);
+                var horaVisita = (String) tabela.getValueAt(selectedRow, 3);
 
                 campoId.setText(id.toString());
                 comboBoxNomes.setSelectedItem(nome);
                 campoDataAgendamento.setText(String.valueOf(dataVisita));
-                campoHorario.setText(String.valueOf(horaVisita));
+                campoHorario.setText(horaVisita);
             }
         }
     }

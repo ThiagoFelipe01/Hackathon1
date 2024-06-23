@@ -34,7 +34,7 @@ public class AgendamentoDao {
         while (rs.next()) {
             agendamentos.add(new Agendamento(
                     rs.getInt("id"),
-                    rs.getInt("idIdoso"),
+                    rs.getInt("idoso_id"),
                     rs.getDate("data_agendamento"),
                     rs.getTime("horario")));
         }
