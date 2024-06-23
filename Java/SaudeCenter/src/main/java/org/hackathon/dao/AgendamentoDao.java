@@ -23,14 +23,16 @@ public class AgendamentoDao {
         String sql = "insert into agendamentos(nome,dataVisita,horaVisita) values(?,?,?)";
         PreparedStatement ps = connection.prepareStatement(sql);
         ps.setString(1, agendamento.getNome());
-        ps.setDate(2, agendamento.getDataVisita());
+        java.util.Date utilDate = agendamento.getDataVisita();
+        java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
+
+        ps.setDate(2, sqlDate);
         ps.setTime(3, agendamento.getHoraVisita());
         ps.execute();
     }
 
     public List<Agendamento> listarTodos() throws SQLException {
-        List<Agendamento> agendamentos = new ArrayList<Agendamento>();
-
+        List<Agendamento> agendamentos = new ArrayList<>();
         ResultSet rs = connection.prepareStatement("select * from agendamentos").executeQuery();
         while (rs.next()) {
             agendamentos.add(new Agendamento(
@@ -44,12 +46,15 @@ public class AgendamentoDao {
     }
 
     public void atualizar(Agendamento agendamento) throws SQLException {
-        String sql = "update agendamentos set nome = ?, dataVisita = ?, horaVisita = ?, where id = ?";
+        String sql = "update agendamentos set nome = ?, dataVisita = ?, horaVisita = ? where id = ?";
         PreparedStatement ps = connection.prepareStatement(sql);
         ps.setString(1, agendamento.getNome());
-        ps.setDate(2, agendamento.getDataVisita());
+        java.util.Date utilDate = agendamento.getDataVisita();
+        java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
+
+        ps.setDate(2, sqlDate);
         ps.setTime(3, agendamento.getHoraVisita());
-        ps.setInt(5, agendamento.getId());
+        ps.setInt(4, agendamento.getId());
         ps.execute();
     }
 
@@ -60,4 +65,3 @@ public class AgendamentoDao {
         ps.execute();
     }
 }
-

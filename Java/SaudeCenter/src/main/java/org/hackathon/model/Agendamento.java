@@ -13,7 +13,6 @@ public class Agendamento {
         this.nome = nome;
         this.dataVisita = dataVisita;
         this.horaVisita = horaVisita;
-
     }
 
     public Agendamento(Integer id, String nome, Date dataVisita, Time horaVisita) {
@@ -39,8 +38,8 @@ public class Agendamento {
         this.nome = nome;
     }
 
-    public java.sql.Date getDataVisita() {
-        return (java.sql.Date) dataVisita;
+    public Date getDataVisita() {
+        return dataVisita;
     }
 
     public void setDataVisita(Date dataVisita) {
@@ -48,7 +47,7 @@ public class Agendamento {
     }
 
     public Time getHoraVisita() {
-        return (Time) dataVisita;
+        return horaVisita;
     }
 
     public void setHoraVisita(Time horaVisita) {
@@ -57,7 +56,6 @@ public class Agendamento {
 
     @Override
     public String toString() {
-        return "Id: " + id + " Nome: " + nome + " Data Visita: " + dataVisita + " Hora Visita: "
-                + horaVisita;
+        return "Id: " + id + " Nome: " + nome + " Data Visita: " + dataVisita + " Hora Visita: " + horaVisita;
     }
 }
