@@ -4,11 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5cbb86a9-888b-46f1-9af3-a22f3719d138" name="Changes" comment="renomenado nome da tabela">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/hackathon/dao/AgendamentoDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/hackathon/dao/AgendamentoDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/hackathon/model/Agendamento.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/hackathon/model/Agendamento.java" afterDir="false" />
-    </list>
+    <list default="true" id="5cbb86a9-888b-46f1-9af3-a22f3719d138" name="Changes" comment="Tentando fazer conexão com o banco" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -333,7 +329,15 @@
       <option name="project" value="LOCAL" />
       <updated>1719102296609</updated>
     </task>
-    <option name="localTasksCounter" value="23" />
+    <task id="LOCAL-00023" summary="Tentando fazer conexão com o banco">
+      <option name="closed" value="true" />
+      <created>1719105869394</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1719105869394</updated>
+    </task>
+    <option name="localTasksCounter" value="24" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -362,6 +366,7 @@
     <MESSAGE value="adicionado menu na tela de Agendamento" />
     <MESSAGE value="arrumando umas coisas que faltaram" />
     <MESSAGE value="renomenado nome da tabela" />
-    <option name="LAST_COMMIT_MESSAGE" value="renomenado nome da tabela" />
+    <MESSAGE value="Tentando fazer conexão com o banco" />
+    <option name="LAST_COMMIT_MESSAGE" value="Tentando fazer conexão com o banco" />
   </component>
 </project>
