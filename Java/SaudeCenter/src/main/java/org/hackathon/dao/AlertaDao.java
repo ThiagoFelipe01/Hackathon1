@@ -9,10 +9,20 @@ import java.util.List;
 public class AlertaDao {
     private Connection connection;
 
-    public AlertaDao(Connection connection) {
-        this.connection = connection;
+    public AlertaDao() throws SQLException {
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            connection = DriverManager.getConnection(
+                    "jdbc:mysql://localhost:3306/saudecenter?useTimezone=true&serverTimezone=UTC", "root", "");
+        } catch (Exception e) {
+            // throw new SQLException(e.getMessage());
+            throw new SQLException("Driver JDBC do MySQL não encontrado.", e);
+        }
     }
 
+    public Connection getConnection() {
+        return connection;
+    }
     public void adicionarAlerta(Alerta alerta) throws SQLException {
         String sql = "INSERT INTO alertas (idoso_id, mensagem, data_alerta, horario_alerta) VALUES (?, ?, ?, ?)";
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {

@@ -8,12 +8,6 @@ public class Historico {
     private int vacinaId;
     private Date dataVacinacao;
 
-    public Historico(int idosoId, int vacinaId, Date dataVacinacao) {
-        this.idosoId = idosoId;
-        this.vacinaId = vacinaId;
-        this.dataVacinacao = dataVacinacao;
-    }
-
     public Historico(int id, int idosoId, int vacinaId, Date dataVacinacao) {
         this.id = id;
         this.idosoId = idosoId;
@@ -21,40 +15,16 @@ public class Historico {
         this.dataVacinacao = dataVacinacao;
     }
 
-    public int getId() {
-        return id;
-    }
+    // Getters e Setters
+    public int getId() { return id; }
+    public void setId(int id) { this.id = id; }
 
-    public int getIdosoId() {
-        return idosoId;
-    }
+    public int getIdosoId() { return idosoId; }
+    public void setIdosoId(int idosoId) { this.idosoId = idosoId; }
 
-    public void setId(int id) {
-        this.id = id;
-    }
+    public int getVacinaId() { return vacinaId; }
+    public void setVacinaId(int vacinaId) { this.vacinaId = vacinaId; }
 
-    public void setIdosoId(int idosoId) {
-        this.idosoId = idosoId;
-    }
-
-    public void setVacinaId(int vacinaId) {
-        this.vacinaId = vacinaId;
-    }
-
-    public void setDataVacinacao(Date dataVacinacao) {
-        this.dataVacinacao = dataVacinacao;
-    }
-
-    public int getVacinaId() {
-        return vacinaId;
-    }
-
-    public Date getDataVacinacao() {
-        return dataVacinacao;
-    }
-
-    @Override
-    public String toString() {
-        return "Id: " + id + " Idoso: " + idosoId + " Vacina: " + vacinaId + " Data Vacinação: " + dataVacinacao;
-    }
+    public Date getDataVacinacao() { return dataVacinacao; }
+    public void setDataVacinacao(Date dataVacinacao) { this.dataVacinacao = dataVacinacao; }
 }

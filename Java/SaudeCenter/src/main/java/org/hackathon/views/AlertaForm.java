@@ -1,224 +1,153 @@
 package org.hackathon.views;
 
-import org.hackathon.model.Alerta;
+import org.hackathon.service.AlertaService;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Connection;
-import java.sql.Date;
-import java.sql.Time;
+import java.sql.SQLException;
+import java.util.List;
 
 public class AlertaForm extends JFrame {
     private JTextField idosoIdTextField;
     private JTextField mensagemTextField;
-    private JTextField dataAlertaTextField;
-    private JTextField horarioAlertaTextField;
-    private JButton adicionarButton;
-    private JButton atualizarButton;
-    private JButton deletarButton;
+    private JButton enviarButton;
     private JButton listarButton;
+    private JButton limparButton;
     private JTextArea outputTextArea;
-    private Connection connection;
+    private AlertaService alertaService;
 
     public AlertaForm(Connection connection) {
-        this.connection = connection;
+        this.alertaService = new AlertaService(connection);
         setTitle("Gerenciamento de Alertas");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(600, 400);
+        setSize(500, 400);
         setLocationRelativeTo(null);
 
         initComponents();
-        createMenuBar();
     }
 
     private void initComponents() {
         JPanel panel = new JPanel(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
-        gbc.insets = new Insets(5, 5, 5, 5);
+        gbc.insets = new Insets(10, 10, 10, 10);
         gbc.fill = GridBagConstraints.HORIZONTAL;
 
+        JLabel titleLabel = new JLabel("Gerenciamento de Alertas");
+        titleLabel.setFont(new Font("Arial", Font.BOLD, 24));
+        gbc.gridwidth = 2;
         gbc.gridx = 0;
         gbc.gridy = 0;
+        panel.add(titleLabel, gbc);
+
+        gbc.gridwidth = 1;
+        gbc.gridy++;
         panel.add(new JLabel("ID do Idoso:"), gbc);
         gbc.gridx = 1;
-        idosoIdTextField = new JTextField(15);
+        idosoIdTextField = new JTextField();
         panel.add(idosoIdTextField, gbc);
 
         gbc.gridx = 0;
-        gbc.gridy = 1;
+        gbc.gridy++;
         panel.add(new JLabel("Mensagem:"), gbc);
         gbc.gridx = 1;
-        mensagemTextField = new JTextField(15);
+        mensagemTextField = new JTextField();
         panel.add(mensagemTextField, gbc);
 
+        gbc.gridy++;
         gbc.gridx = 0;
-        gbc.gridy = 2;
-        panel.add(new JLabel("Data do Alerta (YYYY-MM-DD):"), gbc);
+        enviarButton = new JButton("Enviar");
+        enviarButton.setBackground(new Color(60, 179, 113));
+        enviarButton.setForeground(Color.WHITE);
+        enviarButton.setFocusPainted(false);
+        enviarButton.setFont(new Font("Arial", Font.BOLD, 12));
+        enviarButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                enviarAlerta();
+            }
+        });
+        panel.add(enviarButton, gbc);
+
         gbc.gridx = 1;
-        dataAlertaTextField = new JTextField(15);
-        panel.add(dataAlertaTextField, gbc);
-
-        gbc.gridx = 0;
-        gbc.gridy = 3;
-        panel.add(new JLabel("Horário do Alerta (HH:MM:SS):"), gbc);
-        gbc.gridx = 1;
-        horarioAlertaTextField = new JTextField(15);
-        panel.add(horarioAlertaTextField, gbc);
-
-        adicionarButton = new JButton("Adicionar");
-        gbc.gridx = 0;
-        gbc.gridy = 4;
-        panel.add(adicionarButton, gbc);
-
-        atualizarButton = new JButton("Atualizar");
-        gbc.gridx = 1;
-        panel.add(atualizarButton, gbc);
-
-        deletarButton = new JButton("Deletar");
-        gbc.gridx = 0;
-        gbc.gridy = 5;
-        panel.add(deletarButton, gbc);
-
         listarButton = new JButton("Listar");
-        gbc.gridx = 1;
-        panel.add(listarButton, gbc);
-
-        outputTextArea = new JTextArea(10, 30);
-        outputTextArea.setEditable(false);
-        JScrollPane scrollPane = new JScrollPane(outputTextArea);
-
-        JPanel mainPanel = new JPanel(new BorderLayout());
-        mainPanel.add(panel, BorderLayout.NORTH);
-        mainPanel.add(scrollPane, BorderLayout.CENTER);
-
-        adicionarButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                adicionarAlerta();
-            }
-        });
-
-        atualizarButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                atualizarAlerta();
-            }
-        });
-
-        deletarButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                deletarAlerta();
-            }
-        });
-
+        listarButton.setBackground(new Color(30, 144, 255));
+        listarButton.setForeground(Color.WHITE);
+        listarButton.setFocusPainted(false);
+        listarButton.setFont(new Font("Arial", Font.BOLD, 12));
         listarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 listarAlertas();
             }
         });
+        panel.add(listarButton, gbc);
 
-        getContentPane().add(mainPanel);
+        gbc.gridy++;
+        gbc.gridx = 0;
+        limparButton = new JButton("Limpar");
+        limparButton.setBackground(new Color(220, 20, 60));
+        limparButton.setForeground(Color.WHITE);
+        limparButton.setFocusPainted(false);
+        limparButton.setFont(new Font("Arial", Font.BOLD, 12));
+        limparButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                limparAlertas();
+            }
+        });
+        panel.add(limparButton, gbc);
+
+        gbc.gridy++;
+        gbc.gridx = 0;
+        gbc.gridwidth = 2;
+        outputTextArea = new JTextArea(10, 40);
+        outputTextArea.setEditable(false);
+        JScrollPane scrollPane = new JScrollPane(outputTextArea);
+        panel.add(scrollPane, gbc);
+
+        add(panel);
     }
 
-    private void createMenuBar() {
-        JMenuBar menuBar = new JMenuBar();
-
-        JMenu menu = new JMenu("Menu");
-        menuBar.add(menu);
-
-        JMenuItem listarMenuItem = new JMenuItem("Listar");
-        listarMenuItem.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                listarAlertas();
-            }
-        });
-        menu.add(listarMenuItem);
-
-        JMenuItem obterPorIdMenuItem = new JMenuItem("Obter por ID");
-        obterPorIdMenuItem.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                obterAlertaPorId();
-            }
-        });
-        menu.add(obterPorIdMenuItem);
-
-        JMenuItem sairMenuItem = new JMenuItem("Sair");
-        sairMenuItem.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                System.exit(0);
-            }
-        });
-        menu.add(sairMenuItem);
-
-        setJMenuBar(menuBar);
-    }
-
-    private void adicionarAlerta() {
+    private void enviarAlerta() {
         try {
             int idosoId = Integer.parseInt(idosoIdTextField.getText());
             String mensagem = mensagemTextField.getText();
-            Date dataAlerta = Date.valueOf(dataAlertaTextField.getText());
-            Time horarioAlerta = Time.valueOf(horarioAlertaTextField.getText());
-
-            Alerta alerta = new Alerta(0, idosoId, mensagem, dataAlerta, horarioAlerta);
-            outputTextArea.append("Alerta a ser adicionado: " + alerta + "\n");
-        } catch (Exception ex) {
-            outputTextArea.append("Erro ao adicionar alerta: " + ex.getMessage() + "\n");
-        }
-    }
-
-    private void atualizarAlerta() {
-        try {
-            int idosoId = Integer.parseInt(idosoIdTextField.getText());
-            String mensagem = mensagemTextField.getText();
-            Date dataAlerta = Date.valueOf(dataAlertaTextField.getText());
-            Time horarioAlerta = Time.valueOf(horarioAlertaTextField.getText());
-
-            Alerta alerta = new Alerta(0, idosoId, mensagem, dataAlerta, horarioAlerta);
-            outputTextArea.append("Alerta a ser atualizado: " + alerta + "\n");
-        } catch (Exception ex) {
-            outputTextArea.append("Erro ao atualizar alerta: " + ex.getMessage() + "\n");
-        }
-    }
-
-    private void deletarAlerta() {
-        try {
-            int idosoId = Integer.parseInt(idosoIdTextField.getText());
-            outputTextArea.append("Alerta a ser deletado para o idoso ID = " + idosoId + "\n");
-        } catch (Exception ex) {
-            outputTextArea.append("Erro ao deletar alerta: " + ex.getMessage() + "\n");
+            alertaService.enviarAlerta(idosoId, mensagem);
+            outputTextArea.setText("Alerta enviado com sucesso!\n");
+        } catch (SQLException e) {
+            outputTextArea.setText("Erro ao enviar alerta: " + e.getMessage() + "\n");
         }
     }
 
     private void listarAlertas() {
-        outputTextArea.append("Listando todos os alertas...\n");
+        try {
+            int idosoId = Integer.parseInt(idosoIdTextField.getText());
+            List<String> alertas = alertaService.listarAlertas(idosoId);
+            StringBuilder sb = new StringBuilder();
+            for (String alerta : alertas) {
+                sb.append(alerta).append("\n");
+            }
+            outputTextArea.setText(sb.toString());
+        } catch (SQLException e) {
+            outputTextArea.setText("Erro ao listar alertas: " + e.getMessage() + "\n");
+        }
     }
 
-    private void obterAlertaPorId() {
-        String id = JOptionPane.showInputDialog(this, "Digite o ID do Alerta:", "Obter Alerta por ID", JOptionPane.PLAIN_MESSAGE);
-        if (id != null) {
-            try {
-                int alertaId = Integer.parseInt(id);
-                outputTextArea.append("Obtendo alerta com ID: " + alertaId + "\n");
-            } catch (NumberFormatException ex) {
-                outputTextArea.append("ID inválido: " + id + "\n");
-            }
+    private void limparAlertas() {
+        try {
+            int idosoId = Integer.parseInt(idosoIdTextField.getText());
+            alertaService.limparAlertas(idosoId);
+            outputTextArea.setText("Alertas limpos com sucesso!\n");
+        } catch (SQLException e) {
+            outputTextArea.setText("Erro ao limpar alertas: " + e.getMessage() + "\n");
         }
     }
 
     public static void main(String[] args) {
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                new AlertaForm(null).setVisible(true);
-            }
-        });
+        Connection connection = null;
+        SwingUtilities.invokeLater(() -> new AlertaForm(connection).setVisible(true));
     }
 }

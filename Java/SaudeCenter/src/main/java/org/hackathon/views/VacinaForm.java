@@ -25,7 +25,7 @@ public class VacinaForm extends JFrame {
         this.vacinaService = new VacinaService(connection);
         setTitle("Gerenciamento de Vacinas");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(600, 400);
+        setSize(500, 400);
         setLocationRelativeTo(null);
 
         initComponents();
@@ -35,71 +35,88 @@ public class VacinaForm extends JFrame {
     private void initComponents() {
         JPanel panel = new JPanel(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
-        gbc.insets = new Insets(5, 5, 5, 5);
+        gbc.insets = new Insets(10, 10, 10, 10);
         gbc.fill = GridBagConstraints.HORIZONTAL;
 
+        JLabel titleLabel = new JLabel("Gerenciamento de Vacinas");
+        titleLabel.setFont(new Font("Arial", Font.BOLD, 24));
+        gbc.gridwidth = 2;
         gbc.gridx = 0;
         gbc.gridy = 0;
-        panel.add(new JLabel("Nome Da Vacina:"), gbc);
+        panel.add(titleLabel, gbc);
+
+        gbc.gridwidth = 1;
+        gbc.gridy++;
+        panel.add(new JLabel("Nome da Vacina:"), gbc);
         gbc.gridx = 1;
-        nomeTextField = new JTextField(15);
+        nomeTextField = new JTextField();
         panel.add(nomeTextField, gbc);
 
         gbc.gridx = 0;
-        gbc.gridy = 1;
+        gbc.gridy++;
         panel.add(new JLabel("Descrição:"), gbc);
         gbc.gridx = 1;
-        descricaoTextField = new JTextField(15);
+        descricaoTextField = new JTextField();
         panel.add(descricaoTextField, gbc);
 
         gbc.gridx = 0;
-        gbc.gridy = 2;
+        gbc.gridy++;
         panel.add(new JLabel("Intervalo Recomendado (meses):"), gbc);
         gbc.gridx = 1;
-        intervaloRecomendadoTextField = new JTextField(15);
+        intervaloRecomendadoTextField = new JTextField();
         panel.add(intervaloRecomendadoTextField, gbc);
 
+        gbc.gridy++;
+        gbc.gridx = 0;
         adicionarButton = new JButton("Adicionar");
-        gbc.gridx = 0;
-        gbc.gridy = 3;
-        panel.add(adicionarButton, gbc);
-
-        atualizarButton = new JButton("Atualizar");
-        gbc.gridx = 1;
-        panel.add(atualizarButton, gbc);
-
-        deletarButton = new JButton("Deletar");
-        gbc.gridx = 2;
-        panel.add(deletarButton, gbc);
-
-        outputTextArea = new JTextArea(10, 50);
-        outputTextArea.setEditable(false);
-        outputTextArea.setVisible(false);
-        gbc.gridx = 0;
-        gbc.gridy = 4;
-        gbc.gridwidth = 3;
-        panel.add(new JScrollPane(outputTextArea), gbc);
-
+        adicionarButton.setBackground(new Color(60, 179, 113));
+        adicionarButton.setForeground(Color.WHITE);
+        adicionarButton.setFocusPainted(false);
+        adicionarButton.setFont(new Font("Arial", Font.BOLD, 12));
         adicionarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 adicionarVacina();
             }
         });
+        panel.add(adicionarButton, gbc);
 
+        gbc.gridx = 1;
+        atualizarButton = new JButton("Atualizar");
+        atualizarButton.setBackground(new Color(255, 165, 0));
+        atualizarButton.setForeground(Color.WHITE);
+        atualizarButton.setFocusPainted(false);
+        atualizarButton.setFont(new Font("Arial", Font.BOLD, 12));
         atualizarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 atualizarVacina();
             }
         });
+        panel.add(atualizarButton, gbc);
 
+        gbc.gridy++;
+        gbc.gridx = 0;
+        deletarButton = new JButton("Deletar");
+        deletarButton.setBackground(new Color(220, 20, 60));
+        deletarButton.setForeground(Color.WHITE);
+        deletarButton.setFocusPainted(false);
+        deletarButton.setFont(new Font("Arial", Font.BOLD, 12));
         deletarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 deletarVacina();
             }
         });
+        panel.add(deletarButton, gbc);
+
+        gbc.gridy++;
+        gbc.gridx = 0;
+        gbc.gridwidth = 2;
+        outputTextArea = new JTextArea(10, 40);
+        outputTextArea.setEditable(false);
+        JScrollPane scrollPane = new JScrollPane(outputTextArea);
+        panel.add(scrollPane, gbc);
 
         add(panel);
     }
@@ -137,10 +154,8 @@ public class VacinaForm extends JFrame {
             int intervaloRecomendado = Integer.parseInt(intervaloRecomendadoTextField.getText());
             vacinaService.adicionarVacina(nome, descricao, intervaloRecomendado);
             outputTextArea.setText("Vacina adicionada com sucesso!\n");
-            outputTextArea.setVisible(true);
         } catch (SQLException e) {
             outputTextArea.setText("Erro ao adicionar vacina: " + e.getMessage() + "\n");
-            outputTextArea.setVisible(true);
         }
     }
 
@@ -152,10 +167,8 @@ public class VacinaForm extends JFrame {
             int intervaloRecomendado = Integer.parseInt(intervaloRecomendadoTextField.getText());
             vacinaService.atualizarVacina(id, nome, descricao, intervaloRecomendado);
             outputTextArea.setText("Vacina atualizada com sucesso!\n");
-            outputTextArea.setVisible(true);
         } catch (SQLException e) {
             outputTextArea.setText("Erro ao atualizar vacina: " + e.getMessage() + "\n");
-            outputTextArea.setVisible(true);
         }
     }
 
@@ -164,10 +177,8 @@ public class VacinaForm extends JFrame {
             int id = Integer.parseInt(JOptionPane.showInputDialog("Digite o ID da vacina a ser deletada:"));
             vacinaService.deletarVacina(id);
             outputTextArea.setText("Vacina deletada com sucesso!\n");
-            outputTextArea.setVisible(true);
         } catch (SQLException e) {
             outputTextArea.setText("Erro ao deletar vacina: " + e.getMessage() + "\n");
-            outputTextArea.setVisible(true);
         }
     }
 
@@ -179,10 +190,8 @@ public class VacinaForm extends JFrame {
                 sb.append(vacina.toString()).append("\n");
             }
             outputTextArea.setText(sb.toString());
-            outputTextArea.setVisible(true);
         } catch (SQLException e) {
             outputTextArea.setText("Erro ao listar vacinas: " + e.getMessage() + "\n");
-            outputTextArea.setVisible(true);
         }
     }
 
