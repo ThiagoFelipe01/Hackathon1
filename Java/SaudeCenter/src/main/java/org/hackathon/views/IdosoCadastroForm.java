@@ -2,10 +2,12 @@ package org.hackathon.views;
 
 import org.hackathon.model.Idoso;
 import org.hackathon.service.IdosoService;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
 import static java.lang.Integer.parseInt;
 
 public class IdosoCadastroForm extends JFrame {
@@ -26,10 +28,12 @@ public class IdosoCadastroForm extends JFrame {
     private JTextField campoHistoricoMedico;
     private JLabel labelAlergia;
     private JTextField campoAlergia;
+    private JLabel labelTemAlergia;
     private JLabel labelTemCondPreExistente;
     private JLabel labelCondicoesPreExistente;
     private JTextField campoCondicoesPreExistente;
-    private JLabel labelTemAlergia;
+    private JLabel labelObservacao;
+    private JTextField campoObservacao;
     private JButton botaoCadastrar;
     private JButton botaoCancelar;
     private JRadioButton radioHistSim;
@@ -53,7 +57,7 @@ public class IdosoCadastroForm extends JFrame {
         setTitle("Tela de Cadastro");
         JPanel painelEntrada = new JPanel(new GridBagLayout());
         GridBagConstraints constraints = new GridBagConstraints();
-        painelEntrada.setPreferredSize(new Dimension(450, 450));
+        painelEntrada.setPreferredSize(new Dimension(450, 480));
         painelEntrada.revalidate();
         constraints.insets = new Insets(10, 5, 5, 5);
 
@@ -215,17 +219,27 @@ public class IdosoCadastroForm extends JFrame {
         campoCondicoesPreExistente.setVisible(false);
         painelEntrada.add(campoCondicoesPreExistente, constraints);
 
+        labelObservacao = new JLabel("Observações:");
+        constraints.gridx = 0;
+        constraints.gridy = 12;
+        painelEntrada.add(labelObservacao, constraints);
+
+        campoObservacao = new JTextField(20);
+        constraints.gridx = 1;
+        constraints.gridy = 12;
+        painelEntrada.add(campoObservacao, constraints);
+
         botaoCadastrar = new JButton("Cadastrar");
         botaoCadastrar.addActionListener(e -> salvar());
         constraints.gridx = 1;
-        constraints.gridy = 12;
+        constraints.gridy = 13;
         constraints.anchor = GridBagConstraints.EAST;
         painelEntrada.add(botaoCadastrar, constraints);
 
         botaoCancelar = new JButton("Cancelar");
         botaoCancelar.addActionListener(e -> limpaCampos());
         constraints.gridx = 0;
-        constraints.gridy = 12;
+        constraints.gridy = 13;
         constraints.anchor = GridBagConstraints.WEST;
         painelEntrada.add(botaoCancelar, constraints);
 
@@ -315,14 +329,15 @@ public class IdosoCadastroForm extends JFrame {
         campoHistoricoMedico.setText("");
         campoAlergia.setText("");
         campoCondicoesPreExistente.setText("");
+        campoObservacao.setText("");
 
     }
 
     private Idoso construirIdoso() {
         return campoId.getText().isEmpty()
-                ? new Idoso(campoNome.getText(),parseInt(campoIdade.getText()), campoCpf.getText(), campoEndereco.getText(),
-                 parseInt(campoTelefone.getText()), campoHistoricoMedico.getText() ,
-                campoAlergia.getText(), campoCondicoesPreExistente.getText())
+                ? new Idoso(campoNome.getText(), parseInt(campoIdade.getText()), campoCpf.getText(), campoEndereco.getText(),
+                parseInt(campoTelefone.getText()), campoHistoricoMedico.getText(),
+                campoAlergia.getText(), campoCondicoesPreExistente.getText(), campoObservacao.getText())
                 : new Idoso(
                 parseInt(campoId.getText()),
                 campoNome.getText(),
@@ -332,7 +347,8 @@ public class IdosoCadastroForm extends JFrame {
                 parseInt(campoTelefone.getText()),
                 campoHistoricoMedico.getText(),
                 campoAlergia.getText(),
-                campoCondicoesPreExistente.getText());
+                campoCondicoesPreExistente.getText(),
+                campoObservacao.getText());
     }
 
     private void createMenuBar() {
@@ -364,9 +380,7 @@ public class IdosoCadastroForm extends JFrame {
 
     public static class Main {
         public static void main(String[] args) {
-            SwingUtilities.invokeLater(() -> {
-                new IdosoCadastroForm();
-            });
+            SwingUtilities.invokeLater(IdosoCadastroForm::new);
         }
     }
 }

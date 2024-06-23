@@ -2,7 +2,6 @@ package org.hackathon.views;
 
 import org.hackathon.model.Agendamento;
 import org.hackathon.service.AgendamentoService;
-import org.hackathon.service.IdosoService;
 
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
@@ -22,10 +21,10 @@ public class AgendamentoForm extends JFrame {
     private JTextField campoId;
     private JLabel labelNome;
     private JTextField campoNome;
-    private JLabel labelData;
-    private JTextField campoDataVisita;
-    private JLabel labelHora;
-    private JTextField campoHoraVisita;
+    private JLabel labelDataAgendamento;
+    private JTextField campoDataAgendamento;
+    private JLabel labelHorario;
+    private JTextField campoHorario;
     private JButton botaoSalvar;
     private JButton botaoLimpar;
     private JButton botaoDeletar;
@@ -89,25 +88,25 @@ public class AgendamentoForm extends JFrame {
         constraints.gridy = 1;
         painelEntrada.add(campoNome, constraints);
 
-        labelData = new JLabel("Data:");
+        labelDataAgendamento = new JLabel("Data:");
         constraints.gridx = 0;
         constraints.gridy = 2;
-        painelEntrada.add(labelData, constraints);
+        painelEntrada.add(labelDataAgendamento, constraints);
 
-        campoDataVisita = new JTextField(20);
+        campoDataAgendamento = new JTextField(20);
         constraints.gridx = 1;
         constraints.gridy = 2;
-        painelEntrada.add(campoDataVisita, constraints);
+        painelEntrada.add(campoDataAgendamento, constraints);
 
-        labelHora = new JLabel("Hora:");
+        labelHorario = new JLabel("Hora:");
         constraints.gridx = 0;
         constraints.gridy = 3;
-        painelEntrada.add(labelHora, constraints);
+        painelEntrada.add(labelHorario, constraints);
 
-        campoHoraVisita = new JTextField(20);
+        campoHorario = new JTextField(20);
         constraints.gridx = 1;
         constraints.gridy = 3;
-        painelEntrada.add(campoHoraVisita, constraints);
+        painelEntrada.add(campoHorario, constraints);
 
         botaoSalvar = new JButton("Salvar / Editar");
         botaoSalvar.addActionListener(e -> salvar());
@@ -141,8 +140,8 @@ public class AgendamentoForm extends JFrame {
                 new Object[]{
                         agendamento.getId(),
                         agendamento.getNome(),
-                        agendamento.getDataVisita(),
-                        agendamento.getHoraVisita()}));
+                        agendamento.getDataAgendamento(),
+                        agendamento.getHorario()}));
         return model;
     }
 
@@ -155,21 +154,21 @@ public class AgendamentoForm extends JFrame {
             throw new IllegalArgumentException("O nome deve conter apenas letras.");
         }
 
-        if (campoDataVisita.getText().trim().isEmpty()) {
+        if (campoDataAgendamento.getText().trim().isEmpty()) {
             throw new IllegalArgumentException("O Campo Data Não pode ser vazio");
         }
 
         try {
-            Date.valueOf(campoDataVisita.getText());
+            Date.valueOf(campoDataAgendamento.getText());
         } catch (IllegalArgumentException e) {
             throw new IllegalArgumentException("A data deve estar no formato aaaa-mm-dd.");
         }
 
-        if (campoHoraVisita.getText().trim().isEmpty()) {
+        if (campoHorario.getText().trim().isEmpty()) {
             throw new IllegalArgumentException("O Campo Hora Não pode ser vazio");
         }
 
-        if (!campoHoraVisita.getText().matches("\\d{2}:\\d{2}")) {
+        if (!campoHorario.getText().matches("\\d{2}:\\d{2}")) {
             throw new IllegalArgumentException("A hora deve estar no formato hh:mm.");
         }
     }
@@ -193,8 +192,8 @@ public class AgendamentoForm extends JFrame {
     private void limparCampos() {
         campoId.setText("");
         campoNome.setText("");
-        campoDataVisita.setText("");
-        campoHoraVisita.setText("");
+        campoDataAgendamento.setText("");
+        campoHorario.setText("");
         tabela.clearSelection();
     }
 
@@ -210,13 +209,13 @@ public class AgendamentoForm extends JFrame {
 
     private Agendamento construirAgendamento() {
         return campoId.getText().isEmpty()
-                ? new Agendamento(campoNome.getText(), Date.valueOf(campoDataVisita.getText()),
-                Time.valueOf(campoHoraVisita.getText()))
+                ? new Agendamento(campoNome.getText(), Date.valueOf(campoDataAgendamento.getText()),
+                Time.valueOf(campoHorario.getText()))
                 : new Agendamento(
                 parseInt(campoId.getText()),
                 campoNome.getText(),
-                Date.valueOf(campoDataVisita.getText()),
-                Time.valueOf(campoHoraVisita.getText()));
+                Date.valueOf(campoDataAgendamento.getText()),
+                Time.valueOf(campoHorario.getText()));
     }
 
     private void selecionarAgendamento(ListSelectionEvent e) {
@@ -230,8 +229,8 @@ public class AgendamentoForm extends JFrame {
 
                 campoId.setText(id.toString());
                 campoNome.setText(nome);
-                campoDataVisita.setText(String.valueOf(dataVisita));
-                campoHoraVisita.setText(horaVisita);
+                campoDataAgendamento.setText(String.valueOf(dataVisita));
+                campoHorario.setText(horaVisita);
             }
         }
     }

@@ -6,20 +6,20 @@ import java.util.Date;
 public class Agendamento {
     private Integer id;
     private String nome;
-    private Date dataVisita;
-    private Time horaVisita;
+    private Date dataAgendamento;
+    private Time horario;
 
-    public Agendamento(String nome, Date dataVisita, Time horaVisita) {
+    public Agendamento(String nome, Date dataAgendamento, Time horario) {
         this.nome = nome;
-        this.dataVisita = dataVisita;
-        this.horaVisita = horaVisita;
+        this.dataAgendamento = dataAgendamento;
+        this.horario = horario;
     }
 
-    public Agendamento(Integer id, String nome, Date dataVisita, Time horaVisita) {
+    public Agendamento(Integer id, String nome, Date dataAgendamento, Time horario) {
         this.id = id;
         this.nome = nome;
-        this.dataVisita = dataVisita;
-        this.horaVisita = horaVisita;
+        this.dataAgendamento = dataAgendamento;
+        this.horario = horario;
     }
 
     public Integer getId() {
@@ -38,24 +38,24 @@ public class Agendamento {
         this.nome = nome;
     }
 
-    public Date getDataVisita() {
-        return dataVisita;
+    public Date getDataAgendamento() {
+        return dataAgendamento;
     }
 
-    public void setDataVisita(Date dataVisita) {
-        this.dataVisita = dataVisita;
+    public void setDataAgendamento(Date dataAgendamento) {
+        this.dataAgendamento = dataAgendamento;
     }
 
-    public Time getHoraVisita() {
-        return horaVisita;
+    public Time getHorario() {
+        return horario;
     }
 
-    public void setHoraVisita(Time horaVisita) {
-        this.horaVisita = horaVisita;
+    public void setHorario(Time horario) {
+        this.horario = horario;
     }
 
     @Override
     public String toString() {
-        return "Id: " + id + " Nome: " + nome + " Data Visita: " + dataVisita + " Hora Visita: " + horaVisita;
+        return "Id: " + id + " Nome: " + nome + " Data Visita: " + dataAgendamento + " Hora Visita: " + horario;
     }
 }

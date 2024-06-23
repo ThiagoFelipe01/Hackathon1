@@ -10,9 +10,10 @@ public class Idoso {
     private String historicoMedico;
     private String alergia;
     private String condicaoPreExistente;
+    private String observacoes;
 
     public Idoso(String nome, int idade, String cpf, String endereco, int telefone,
-                 String historicoMedico, String alergia, String condicaoPreExistente) {
+                 String historicoMedico, String alergia, String condicaoPreExistente, String observacoes) {
         this.nome = nome;
         this.idade = idade;
         this.cpf = cpf;
@@ -21,10 +22,11 @@ public class Idoso {
         this.historicoMedico = historicoMedico;
         this.alergia = alergia;
         this.condicaoPreExistente = condicaoPreExistente;
+        this.observacoes = observacoes;
     }
 
     public Idoso(Integer id, String nome, int idade, String cpf, String endereco, int telefone,
-                 String historicoMedico, String alergia, String condicaoPreExistente) {
+                 String historicoMedico, String alergia, String condicaoPreExistente, String observacoes) {
         this.id = id;
         this.nome = nome;
         this.idade = idade;
@@ -34,6 +36,7 @@ public class Idoso {
         this.historicoMedico = historicoMedico;
         this.alergia = alergia;
         this.condicaoPreExistente = condicaoPreExistente;
+        this.observacoes = observacoes;
     }
 
     public Integer getId() {
@@ -108,10 +111,18 @@ public class Idoso {
         this.condicaoPreExistente = condicaoPreExistente;
     }
 
+    public String getObservacoes() {
+        return observacoes;
+    }
+
+    public void setObservacoes(String observacoes) {
+        this.observacoes = observacoes;
+    }
+
     @Override
     public String toString() {
         return  "Id: " + id + " Nome: " + nome +  " Idade: " + idade + " CPF: " + cpf + " Endereço: " + endereco +
-                " Telefone: " + telefone + " Historico Medico: " + historicoMedico +
-                " Alergia: " + alergia + " Condição Pré Existente " + condicaoPreExistente;
+                " Telefone: " + telefone + " Historico Medico: " + historicoMedico + " Alergia: " + alergia +
+                " Condição Pré Existente: " + condicaoPreExistente + " Observações: ";
     }
 }

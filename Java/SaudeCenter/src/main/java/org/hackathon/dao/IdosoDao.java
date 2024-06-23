@@ -22,7 +22,7 @@ public class IdosoDao {
     }
 
     public void inserir (Idoso idoso) throws  SQLException {
-        String sql = "insert into idosos(nome,idade,cpf,endereco,telefone,historicoMedico,alergia,CondicoesPreexistentes) values(?,?,?,?,?,?,?,?)";
+        String sql = "insert into idosos(nome,idade,cpf,endereco,telefone,historico_medico,alergias,Condicoes_preexistentes,observacoes) values(?,?,?,?,?,?,?,?,?)";
         PreparedStatement ps = connection.prepareStatement(sql);
         ps.setString(1, idoso.getNome());
         ps.setInt(2, idoso.getIdade());
@@ -32,6 +32,7 @@ public class IdosoDao {
         ps.setString(6, idoso.getHistoricoMedico());
         ps.setString(7,idoso.getAlergia());
         ps.setString(8, idoso.getCondicaoPreExistente());
+        ps.setString(9, idoso.getObservacoes());
         ps.execute();
     }
 }
