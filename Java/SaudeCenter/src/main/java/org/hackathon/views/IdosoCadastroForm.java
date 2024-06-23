@@ -327,10 +327,14 @@ public class IdosoCadastroForm extends JFrame {
             validarCampos();
             service.salvar(construirIdoso());
             limpaCampos();
+            JOptionPane.showMessageDialog(this, "Cadastrado com sucesso", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
         } catch (IllegalArgumentException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage(), "Erro de Validação", JOptionPane.ERROR_MESSAGE);
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, "Erro ao salvar dados: " + ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
         }
     }
+
 
     private void limpaCampos() {
         campoNome.setText("");

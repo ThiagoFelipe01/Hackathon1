@@ -13,9 +13,11 @@ public class IdosoDao {
             connection = DriverManager.getConnection(
                     "jdbc:mysql://localhost:3306/saudecenter?useTimezone=true&serverTimezone=UTC", "root", "");
         } catch (Exception e) {
-            throw new SQLException(e.getMessage());
+           // throw new SQLException(e.getMessage());
+            throw new SQLException("Driver JDBC do MySQL não encontrado.", e);
         }
     }
+
 
     public Connection getConnection() {
         return connection;
