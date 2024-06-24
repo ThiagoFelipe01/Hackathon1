@@ -1,0 +1,14 @@
+# Ativa o módulo de reescrita
+RewriteEngine On
+
+# Define a base para a reescrita
+RewriteBase /agendamento_vacina/
+
+# Redireciona todas as requisições para arquivos ou pastas inexistentes para index.php
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ index.php?url=$1 [L,QSA]
+
+# Reescreve URLs amigáveis para os arquivos PHP
+RewriteRule ^agendar$ agendar.php [L]
+RewriteRule ^listar_agendamentos$ listar_agendamentos.php [L]
