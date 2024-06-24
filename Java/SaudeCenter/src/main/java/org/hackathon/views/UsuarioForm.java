@@ -120,66 +120,105 @@ public class UsuarioForm extends JFrame {
         btnAdicionar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                try {
-                    String nome = textNome.getText();
-                    String email = textEmail.getText();
-                    String senha = new String(textSenha.getPassword());
-
-                    Usuario usuario = new Usuario(0, nome, email, senha);
-                    usuarioService.addUsuario(usuario);
-                    loadUsuarios();
-                } catch (SQLException ex) {
-                    ex.printStackTrace();
-                }
+                adicionarUsuario(textNome, textEmail, textSenha);
             }
         });
 
         btnAtualizar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                try {
-                    int selectedRow = table.getSelectedRow();
-                    if (selectedRow >= 0) {
-                        int id = Integer.parseInt(tableModel.getValueAt(selectedRow, 0).toString());
-                        String nome = textNome.getText();
-                        String email = textEmail.getText();
-                        String senha = new String(textSenha.getPassword());
-
-                        Usuario usuario = new Usuario(id, nome, email, senha);
-                        usuarioService.updateUsuario(usuario);
-                        loadUsuarios();
-                    }
-                } catch (SQLException ex) {
-                    ex.printStackTrace();
-                }
+                atualizarUsuario(textNome, textEmail, textSenha);
             }
         });
 
         btnExcluir.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                try {
-                    int selectedRow = table.getSelectedRow();
-                    if (selectedRow >= 0) {
-                        int id = Integer.parseInt(tableModel.getValueAt(selectedRow, 0).toString());
-                        usuarioService.deleteUsuario(id);
-                        loadUsuarios();
-                    }
-                } catch (SQLException ex) {
-                    ex.printStackTrace();
-                }
+                excluirUsuario();
             }
         });
 
         loadUsuarios();
     }
 
-    public void voltar() {
-        MenuForm menuForm = new MenuForm();
-        menuForm.setVisible(true);
-        dispose();
+    private void adicionarUsuario(JTextField textNome, JTextField textEmail, JPasswordField textSenha) {
+        try {
+            String nome = textNome.getText().trim();
+            String email = textEmail.getText().trim();
+            String senha = new String(textSenha.getPassword()).trim();
+
+            if (nome.isEmpty() || email.isEmpty() || senha.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Todos os campos são obrigatórios.", "Erro", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            if (!email.matches("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,6}$")) {
+                JOptionPane.showMessageDialog(this, "Email inválido.", "Erro", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            Usuario usuario = new Usuario(0, nome, email, senha);
+            usuarioService.addUsuario(usuario);
+            loadUsuarios();
+            limparCampos(textNome, textEmail, textSenha);
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(this, "Erro ao adicionar usuário: " + ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+        }
     }
 
+    private void atualizarUsuario(JTextField textNome, JTextField textEmail, JPasswordField textSenha) {
+        try {
+            int selectedRow = table.getSelectedRow();
+            if (selectedRow < 0) {
+                JOptionPane.showMessageDialog(this, "Selecione um usuário para atualizar.", "Erro", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            int id = Integer.parseInt(tableModel.getValueAt(selectedRow, 0).toString());
+            String nome = textNome.getText().trim();
+            String email = textEmail.getText().trim();
+            String senha = new String(textSenha.getPassword()).trim();
+
+            if (nome.isEmpty() || email.isEmpty() || senha.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Todos os campos são obrigatórios.", "Erro", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            if (!email.matches("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,6}$")) {
+                JOptionPane.showMessageDialog(this, "Email inválido.", "Erro", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            Usuario usuario = new Usuario(id, nome, email, senha);
+            usuarioService.updateUsuario(usuario);
+            loadUsuarios();
+            limparCampos(textNome, textEmail, textSenha);
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(this, "Erro ao atualizar usuário: " + ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    private void excluirUsuario() {
+        try {
+            int selectedRow = table.getSelectedRow();
+            if (selectedRow < 0) {
+                JOptionPane.showMessageDialog(this, "Selecione um usuário para excluir.", "Erro", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            int id = Integer.parseInt(tableModel.getValueAt(selectedRow, 0).toString());
+            usuarioService.deleteUsuario(id);
+            loadUsuarios();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(this, "Erro ao excluir usuário: " + ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    private void limparCampos(JTextField textNome, JTextField textEmail, JPasswordField textSenha) {
+        textNome.setText("");
+        textEmail.setText("");
+        textSenha.setText("");
+    }
 
     private void loadUsuarios() {
         try {
@@ -191,6 +230,12 @@ public class UsuarioForm extends JFrame {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    public void voltar() {
+        MenuForm menuForm = new MenuForm();
+        menuForm.setVisible(true);
+        dispose();
     }
 
     private void createMenuBar() {
@@ -219,14 +264,4 @@ public class UsuarioForm extends JFrame {
 
         setJMenuBar(menuBar);
     }
-
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                new UsuarioForm().setVisible(true);
-            }
-        });
-    }
-
 }

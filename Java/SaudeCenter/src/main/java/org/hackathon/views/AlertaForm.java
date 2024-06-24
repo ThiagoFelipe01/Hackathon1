@@ -102,7 +102,6 @@ public class AlertaForm extends JFrame {
         panel.add(limparButton, gbc);
 
         gbc.gridy++;
-        gbc.gridx = 0;
         gbc.gridwidth = 2;
         outputTextArea = new JTextArea(10, 40);
         outputTextArea.setEditable(false);
@@ -120,10 +119,17 @@ public class AlertaForm extends JFrame {
 
     private void enviarAlerta() {
         try {
-            int idosoId = Integer.parseInt(idosoIdTextField.getText());
-            String mensagem = mensagemTextField.getText();
+            int idosoId = Integer.parseInt(idosoIdTextField.getText().trim());
+            String mensagem = mensagemTextField.getText().trim();
+            if (mensagem.isEmpty()) {
+                throw new IllegalArgumentException("Mensagem não pode ser vazia.");
+            }
             alertaService.enviarAlerta(idosoId, mensagem);
             outputTextArea.setText("Alerta enviado com sucesso!\n");
+        } catch (NumberFormatException e) {
+            outputTextArea.setText("Erro: ID do Idoso deve ser um número inteiro.\n");
+        } catch (IllegalArgumentException e) {
+            outputTextArea.setText("Erro: " + e.getMessage() + "\n");
         } catch (SQLException e) {
             outputTextArea.setText("Erro ao enviar alerta: " + e.getMessage() + "\n");
         }
@@ -131,13 +137,15 @@ public class AlertaForm extends JFrame {
 
     private void listarAlertas() {
         try {
-            int idosoId = Integer.parseInt(idosoIdTextField.getText());
+            int idosoId = Integer.parseInt(idosoIdTextField.getText().trim());
             List<String> alertas = alertaService.listarAlertas(idosoId);
             StringBuilder sb = new StringBuilder();
             for (String alerta : alertas) {
                 sb.append(alerta).append("\n");
             }
             outputTextArea.setText(sb.toString());
+        } catch (NumberFormatException e) {
+            outputTextArea.setText("Erro: ID do Idoso deve ser um número inteiro.\n");
         } catch (SQLException e) {
             outputTextArea.setText("Erro ao listar alertas: " + e.getMessage() + "\n");
         }
@@ -145,9 +153,11 @@ public class AlertaForm extends JFrame {
 
     private void limparAlertas() {
         try {
-            int idosoId = Integer.parseInt(idosoIdTextField.getText());
+            int idosoId = Integer.parseInt(idosoIdTextField.getText().trim());
             alertaService.limparAlertas(idosoId);
             outputTextArea.setText("Alertas limpos com sucesso!\n");
+        } catch (NumberFormatException e) {
+            outputTextArea.setText("Erro: ID do Idoso deve ser um número inteiro.\n");
         } catch (SQLException e) {
             outputTextArea.setText("Erro ao limpar alertas: " + e.getMessage() + "\n");
         }

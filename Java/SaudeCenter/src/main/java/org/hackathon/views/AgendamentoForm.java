@@ -10,7 +10,6 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Date;
-import java.sql.SQLException;
 import java.sql.Time;
 import java.util.List;
 
