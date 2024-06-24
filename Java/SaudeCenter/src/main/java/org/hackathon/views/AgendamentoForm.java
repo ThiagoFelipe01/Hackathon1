@@ -9,7 +9,6 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Date;
-import java.sql.SQLException;
 import java.sql.Time;
 import java.util.List;
 
@@ -31,26 +30,108 @@ public class AgendamentoForm extends JFrame {
     private JButton botaoDeletar;
     private JTable tabela;
 
-
     public AgendamentoForm() {
         service = new AgendamentoService();
 
         setTitle("Agendamento de Visitas");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-        setSize(450, 450);
-
-        getContentPane().add(montarPainelEntrada(), BorderLayout.NORTH);
-        getContentPane().add(montarPainelSaida(), BorderLayout.CENTER);
-
         createMenuBar();
+        initComponents();
 
+        setSize(500, 500);
         setLocationRelativeTo(null);
         setVisible(true);
     }
 
-    private JPanel montarPainelSaida() {
-        JPanel painelSaida = new JPanel(new BorderLayout());
+    private void initComponents() {
+        JPanel panel = new JPanel(new GridBagLayout());
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.insets = new Insets(10, 10, 10, 10);
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+
+        JLabel titleLabel = new JLabel("Agendamento de Visitas");
+        titleLabel.setFont(new Font("Arial", Font.BOLD, 24));
+        gbc.gridwidth = 3;
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        panel.add(titleLabel, gbc);
+
+        labelId = new JLabel("ID:");
+        gbc.gridwidth = 1;
+        gbc.gridx = 0;
+        gbc.gridy = 1;
+        panel.add(labelId, gbc);
+
+        campoId = new JTextField(20);
+        campoId.setEnabled(false);
+        gbc.gridx = 1;
+        gbc.gridy = 1;
+        panel.add(campoId, gbc);
+
+        labelNome = new JLabel("Nome:");
+        gbc.gridx = 0;
+        gbc.gridy = 2;
+        panel.add(labelNome, gbc);
+
+        List<String> nomesIdosos = service.listarNomesIdosos();
+        comboBoxNomes = new JComboBox<>(nomesIdosos.toArray(new String[0]));
+        comboBoxNomes.setSelectedItem(null);
+        comboBoxNomes.setPreferredSize(new Dimension(200, comboBoxNomes.getPreferredSize().height));
+        comboBoxNomes.setEditable(false);
+        gbc.gridx = 1;
+        gbc.gridy = 2;
+        panel.add(comboBoxNomes, gbc);
+
+        labelDataAgendamento = new JLabel("Data Visita:");
+        gbc.gridx = 0;
+        gbc.gridy = 3;
+        panel.add(labelDataAgendamento, gbc);
+
+        campoDataAgendamento = new JTextField(20);
+        gbc.gridx = 1;
+        gbc.gridy = 3;
+        panel.add(campoDataAgendamento, gbc);
+
+        labelHorario = new JLabel("Hora Visita:");
+        gbc.gridx = 0;
+        gbc.gridy = 4;
+        panel.add(labelHorario, gbc);
+
+        campoHorario = new JTextField(20);
+        gbc.gridx = 1;
+        gbc.gridy = 4;
+        panel.add(campoHorario, gbc);
+
+        botaoSalvar = new JButton("Salvar / Editar");
+        botaoSalvar.setBackground(new Color(60, 179, 113)); // Green color
+        botaoSalvar.setForeground(Color.WHITE);
+        botaoSalvar.setFocusPainted(false);
+        botaoSalvar.setFont(new Font("Arial", Font.BOLD, 12));
+        botaoSalvar.addActionListener(e -> salvar());
+        gbc.gridwidth = 1;
+        gbc.gridx = 0;
+        gbc.gridy = 5;
+        panel.add(botaoSalvar, gbc);
+
+        botaoLimpar = new JButton("Limpar Campos");
+        botaoLimpar.setBackground(new Color(220, 20, 60)); // Red color
+        botaoLimpar.setForeground(Color.WHITE);
+        botaoLimpar.setFocusPainted(false);
+        botaoLimpar.setFont(new Font("Arial", Font.BOLD, 12));
+        botaoLimpar.addActionListener(e -> limparCampos());
+        gbc.gridx = 1;
+        gbc.gridy = 5;
+        panel.add(botaoLimpar, gbc);
+
+        botaoDeletar = new JButton("Cancelar");
+        botaoDeletar.setBackground(new Color(30, 144, 255)); // Blue color
+        botaoDeletar.setForeground(Color.WHITE);
+        botaoDeletar.setFocusPainted(false);
+        botaoDeletar.setFont(new Font("Arial", Font.BOLD, 12));
+        botaoDeletar.addActionListener(e -> deletar());
+        gbc.gridx = 2;
+        gbc.gridy = 5;
+        panel.add(botaoDeletar, gbc);
 
         tabela = new JTable();
         tabela.setDefaultEditor(Object.class, null);
@@ -59,80 +140,12 @@ public class AgendamentoForm extends JFrame {
         tabela.getSelectionModel().addListSelectionListener(this::selecionarAgendamento);
 
         JScrollPane scrollPane = new JScrollPane(tabela);
-        painelSaida.add(scrollPane, BorderLayout.CENTER);
-        return painelSaida;
-    }
+        gbc.gridwidth = 3;
+        gbc.gridx = 0;
+        gbc.gridy = 6;
+        panel.add(scrollPane, gbc);
 
-    private JPanel montarPainelEntrada() {
-        JPanel painelEntrada = new JPanel(new GridBagLayout());
-        GridBagConstraints constraints = new GridBagConstraints();
-        constraints.insets = new Insets(5, 5, 5, 5);
-
-        labelId = new JLabel("ID:");
-        constraints.gridx = 0;
-        constraints.gridy = 0;
-        painelEntrada.add(labelId, constraints);
-
-        campoId = new JTextField(20);
-        campoId.setEnabled(false);
-        constraints.gridx = 1;
-        constraints.gridy = 0;
-        painelEntrada.add(campoId, constraints);
-
-        labelNome = new JLabel("Nome:");
-        constraints.gridx = 0;
-        constraints.gridy = 1;
-        painelEntrada.add(labelNome, constraints);
-
-        List<String> nomesIdosos = service.listarNomesIdosos();
-
-        comboBoxNomes = new JComboBox<>(nomesIdosos.toArray(new String[0])); ;
-        comboBoxNomes.setSelectedItem(null);
-        comboBoxNomes.setPreferredSize(new Dimension(200, comboBoxNomes.getPreferredSize().height));
-        comboBoxNomes.setEditable(false);
-        constraints.gridx = 1;
-        constraints.gridy = 1;
-        painelEntrada.add(comboBoxNomes, constraints);
-
-        labelDataAgendamento = new JLabel("Data Visita:");
-        constraints.gridx = 0;
-        constraints.gridy = 2;
-        painelEntrada.add(labelDataAgendamento, constraints);
-
-        campoDataAgendamento = new JTextField(20);
-        constraints.gridx = 1;
-        constraints.gridy = 2;
-        painelEntrada.add(campoDataAgendamento, constraints);
-
-        labelHorario = new JLabel("Hora Visita:");
-        constraints.gridx = 0;
-        constraints.gridy = 3;
-        painelEntrada.add(labelHorario, constraints);
-
-        campoHorario = new JTextField(20);
-        constraints.gridx = 1;
-        constraints.gridy = 3;
-        painelEntrada.add(campoHorario, constraints);
-
-        botaoSalvar = new JButton("Salvar / Editar");
-        botaoSalvar.addActionListener(e -> salvar());
-        constraints.gridx = 0;
-        constraints.gridy = 4;
-        painelEntrada.add(botaoSalvar, constraints);
-
-        botaoLimpar = new JButton("Limpar Campos");
-        botaoLimpar.addActionListener(e -> limparCampos());
-        constraints.gridx = 1;
-        constraints.gridy = 4;
-        painelEntrada.add(botaoLimpar, constraints);
-
-        botaoDeletar = new JButton("Cancelar");
-        botaoDeletar.addActionListener(e -> deletar());
-        constraints.gridx = 2;
-        constraints.gridy = 4;
-        painelEntrada.add(botaoDeletar, constraints);
-
-        return painelEntrada;
+        getContentPane().add(panel);
     }
 
     private DefaultTableModel carregarDadosAgendamentos() {
@@ -218,7 +231,6 @@ public class AgendamentoForm extends JFrame {
                 Time.valueOf(campoHorario.getText()));
     }
 
-
     private void selecionarAgendamento(ListSelectionEvent e) {
         if (!e.getValueIsAdjusting()) {
             int selectedRow = tabela.getSelectedRow();
@@ -234,6 +246,12 @@ public class AgendamentoForm extends JFrame {
                 campoHorario.setText(horaVisita);
             }
         }
+    }
+
+    public void voltar() {
+        MenuForm menuForm = new MenuForm();
+        menuForm.setVisible(true);
+        dispose();
     }
 
     private void createMenuBar() {
@@ -261,18 +279,5 @@ public class AgendamentoForm extends JFrame {
         menu.add(sairMenuItem);
 
         setJMenuBar(menuBar);
-    }
-
-    public void voltar() {
-        MenuForm menuForm = new MenuForm();
-        menuForm.setVisible(true);
-        dispose();
-    }
-
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> {
-            AgendamentoForm form = new AgendamentoForm();
-            form.setVisible(true);
-        });
     }
 }

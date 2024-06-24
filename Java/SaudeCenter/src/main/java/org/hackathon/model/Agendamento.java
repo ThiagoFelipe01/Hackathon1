@@ -1,3 +1,4 @@
+
 package org.hackathon.model;
 
 import java.sql.Time;
