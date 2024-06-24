@@ -305,6 +305,10 @@ public class IdosoCadastroForm extends JFrame {
             throw new IllegalArgumentException("O campo CPF deve conter exatamente 11 dígitos");
         }
 
+        if (campoEndereco.getText().trim().isEmpty()) {
+            throw new IllegalArgumentException("O campo Endereço não pode ser vazio");
+        }
+
         if (campoTelefone.getText().trim().isEmpty()) {
             throw new IllegalArgumentException("O campo Telefone Não pode ser vazio");
         }

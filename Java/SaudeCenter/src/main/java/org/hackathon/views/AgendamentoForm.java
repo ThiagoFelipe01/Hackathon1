@@ -2,6 +2,7 @@ package org.hackathon.views;
 
 import org.hackathon.model.Agendamento;
 import org.hackathon.service.AgendamentoService;
+
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.table.DefaultTableModel;
@@ -46,7 +47,7 @@ public class AgendamentoForm extends JFrame {
     private void initComponents() {
         JPanel panel = new JPanel(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
-        gbc.insets = new Insets(10, 10, 10, 10);
+        gbc.insets = new Insets(5, 10, 10, 10);
         gbc.fill = GridBagConstraints.HORIZONTAL;
 
         JLabel titleLabel = new JLabel("Agendamento de Visitas");
@@ -73,8 +74,11 @@ public class AgendamentoForm extends JFrame {
         gbc.gridy = 2;
         panel.add(labelNome, gbc);
 
-        List<String> nomesIdosos = service.listarNomesIdosos();
-        comboBoxNomes = new JComboBox<>(nomesIdosos.toArray(new String[0]));
+        List<Object[]> idosos = service.listarIdosos();
+        comboBoxNomes = new JComboBox<>();
+        for (Object[] idoso : idosos) {
+            comboBoxNomes.addItem(idoso[0] + " - " + idoso[1]);
+        }
         comboBoxNomes.setSelectedItem(null);
         comboBoxNomes.setPreferredSize(new Dimension(200, comboBoxNomes.getPreferredSize().height));
         comboBoxNomes.setEditable(false);
@@ -103,7 +107,7 @@ public class AgendamentoForm extends JFrame {
         panel.add(campoHorario, gbc);
 
         botaoSalvar = new JButton("Salvar / Editar");
-        botaoSalvar.setBackground(new Color(60, 179, 113)); // Green color
+        botaoSalvar.setBackground(new Color(60, 179, 113));
         botaoSalvar.setForeground(Color.WHITE);
         botaoSalvar.setFocusPainted(false);
         botaoSalvar.setFont(new Font("Arial", Font.BOLD, 12));
@@ -114,17 +118,17 @@ public class AgendamentoForm extends JFrame {
         panel.add(botaoSalvar, gbc);
 
         botaoLimpar = new JButton("Limpar Campos");
-        botaoLimpar.setBackground(new Color(220, 20, 60)); // Red color
+        botaoLimpar.setBackground(new Color(220, 20, 60));
         botaoLimpar.setForeground(Color.WHITE);
         botaoLimpar.setFocusPainted(false);
         botaoLimpar.setFont(new Font("Arial", Font.BOLD, 12));
-        botaoLimpar.addActionListener(e -> limparCampos());
+        botaoLimpar.addActionListener(e -> limpaCampos());
         gbc.gridx = 1;
         gbc.gridy = 5;
         panel.add(botaoLimpar, gbc);
 
         botaoDeletar = new JButton("Cancelar");
-        botaoDeletar.setBackground(new Color(30, 144, 255)); // Blue color
+        botaoDeletar.setBackground(new Color(30, 144, 255));
         botaoDeletar.setForeground(Color.WHITE);
         botaoDeletar.setFocusPainted(false);
         botaoDeletar.setFont(new Font("Arial", Font.BOLD, 12));
@@ -165,6 +169,11 @@ public class AgendamentoForm extends JFrame {
     }
 
     private void validarCampos() {
+        if (comboBoxNomes.getSelectedItem() == null) {
+            throw new IllegalArgumentException("Nenhum nome selecionado no campo de nomes");
+
+        }
+
         if (campoDataAgendamento.getText().trim().isEmpty()) {
             throw new IllegalArgumentException("O Campo Data Não pode ser vazio");
         }
@@ -193,17 +202,20 @@ public class AgendamentoForm extends JFrame {
         try {
             validarCampos();
             service.salvar(construirAgendamento());
-            limparCampos();
-            tabela.setModel(carregarDadosAgendamentos());
+            limpaCampos();
+            JOptionPane.showMessageDialog(this, "Agendado com sucesso", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
         } catch (IllegalArgumentException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage(), "Erro de Validação", JOptionPane.ERROR_MESSAGE);
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, "Erro ao salvar dados: " + ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
         }
     }
 
-    private void limparCampos() {
+    private void limpaCampos() {
         campoId.setText("");
         campoDataAgendamento.setText("");
         campoHorario.setText("");
+        comboBoxNomes.setSelectedItem(null);
         tabela.clearSelection();
     }
 
@@ -212,23 +224,28 @@ public class AgendamentoForm extends JFrame {
             JOptionPane.showMessageDialog(null, "Selecione um Agendamento para poder Cancelar!", "Erro de Validação", JOptionPane.ERROR_MESSAGE);
         } else {
             service.deletar(construirAgendamento());
-            limparCampos();
+            limpaCampos();
             tabela.setModel(carregarDadosAgendamentos());
         }
     }
 
     private Agendamento construirAgendamento() {
         String nomeSelecionado = (String) comboBoxNomes.getSelectedItem();
-        int idIdoso = service.obterIdIdosoPorNome(nomeSelecionado);
+        int idIdoso = parseInt(nomeSelecionado.split(" - ")[0]);
+
+        String horario = campoHorario.getText().trim();
+        if (!horario.matches("\\d{2}:\\d{2}:\\d{2}")) {
+            horario += ":00";
+        }
 
         return campoId.getText().isEmpty()
                 ? new Agendamento(idIdoso, Date.valueOf(campoDataAgendamento.getText()),
-                Time.valueOf(campoHorario.getText()))
+                Time.valueOf(horario))
                 : new Agendamento(
                 parseInt(campoId.getText()),
                 idIdoso,
                 Date.valueOf(campoDataAgendamento.getText()),
-                Time.valueOf(campoHorario.getText()));
+                Time.valueOf(horario));
     }
 
     private void selecionarAgendamento(ListSelectionEvent e) {

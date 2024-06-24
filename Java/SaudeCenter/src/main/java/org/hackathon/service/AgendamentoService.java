@@ -48,7 +48,7 @@ public class AgendamentoService {
         }
     }
 
-    public List<String> listarNomesIdosos() {
+    public List<Object[]> listarIdosos() {
         try {
             return dao.listarIdosos();
         } catch (SQLException e) {
