@@ -34,7 +34,7 @@ public class AgendamentoDao {
         while (rs.next()) {
             agendamentos.add(new Agendamento(
                     rs.getInt("id"),
-                    rs.getInt("idIdoso"),
+                    rs.getInt("idoso_id"),
                     rs.getDate("data_agendamento"),
                     rs.getTime("horario")));
         }
@@ -59,16 +59,16 @@ public class AgendamentoDao {
         ps.execute();
     }
 
-    public List<String> listarIdosos() throws SQLException {
-        List<String> nomes = new ArrayList<>();
-        String sql = "select nome from idosos";
+    public List<Object[]> listarIdosos() throws SQLException {
+        List<Object[]> idosos = new ArrayList<>();
+        String sql = "select id, nome from idosos";
         try (PreparedStatement ps = connection.prepareStatement(sql)) {
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                nomes.add(rs.getString("nome"));
+                idosos.add(new Object[]{rs.getInt("id"), rs.getString("nome")});
             }
         }
-        return nomes;
+        return idosos;
     }
 
     public int obterIdIdosoPorNome(String nome) throws SQLException {
