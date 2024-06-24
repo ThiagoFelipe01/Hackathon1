@@ -10,6 +10,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Date;
+import java.sql.SQLException;
 import java.sql.Time;
 import java.util.List;
 
@@ -39,7 +40,7 @@ public class AgendamentoForm extends JFrame {
         createMenuBar();
         initComponents();
 
-        setSize(500, 500);
+        setSize(530, 500);
         setLocationRelativeTo(null);
         setVisible(true);
     }
@@ -127,7 +128,7 @@ public class AgendamentoForm extends JFrame {
         gbc.gridy = 5;
         panel.add(botaoLimpar, gbc);
 
-        botaoDeletar = new JButton("Cancelar");
+        botaoDeletar = new JButton("Cancelar agend.");
         botaoDeletar.setBackground(new Color(30, 144, 255));
         botaoDeletar.setForeground(Color.WHITE);
         botaoDeletar.setFocusPainted(false);
@@ -144,6 +145,7 @@ public class AgendamentoForm extends JFrame {
         tabela.getSelectionModel().addListSelectionListener(this::selecionarAgendamento);
 
         JScrollPane scrollPane = new JScrollPane(tabela);
+        scrollPane.setPreferredSize(new Dimension(450, 150));
         gbc.gridwidth = 3;
         gbc.gridx = 0;
         gbc.gridy = 6;
@@ -159,12 +161,20 @@ public class AgendamentoForm extends JFrame {
         model.addColumn("Data Visita");
         model.addColumn("Hora Visita");
 
-        service.listaAgendamento().forEach(agendamento -> model.addRow(
-                new Object[]{
+        try {
+            List<Agendamento> agendamentos = service.listaAgendamento();
+            for (Agendamento agendamento : agendamentos) {
+                model.addRow(new Object[]{
                         agendamento.getId(),
-                        agendamento.getIdIdoso(),
+                        agendamento.getNomeIdoso(),
                         agendamento.getDataAgendamento(),
-                        agendamento.getHorario()}));
+                        agendamento.getHorario()
+                });
+            }
+        } catch (RuntimeException e) {
+            JOptionPane.showMessageDialog(this, "Erro ao carregar agendamentos: " + e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+        }
+
         return model;
     }
 
@@ -203,10 +213,11 @@ public class AgendamentoForm extends JFrame {
             validarCampos();
             service.salvar(construirAgendamento());
             limpaCampos();
+            tabela.setModel(carregarDadosAgendamentos());
             JOptionPane.showMessageDialog(this, "Agendado com sucesso", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
         } catch (IllegalArgumentException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage(), "Erro de Validação", JOptionPane.ERROR_MESSAGE);
-        } catch (Exception ex) {
+        }catch (Exception ex) {
             JOptionPane.showMessageDialog(this, "Erro ao salvar dados: " + ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
         }
     }
@@ -219,34 +230,52 @@ public class AgendamentoForm extends JFrame {
         tabela.clearSelection();
     }
 
-    public void deletar() {
-        if (!agendamentoSelecionado()) {
-            JOptionPane.showMessageDialog(null, "Selecione um Agendamento para poder Cancelar!", "Erro de Validação", JOptionPane.ERROR_MESSAGE);
-        } else {
-            service.deletar(construirAgendamento());
-            limpaCampos();
-            tabela.setModel(carregarDadosAgendamentos());
+    private void deletar() {
+        try {
+            if (!agendamentoSelecionado()) {
+                JOptionPane.showMessageDialog(null, "Selecione um Agendamento para poder Cancelar!", "Erro de Validação", JOptionPane.ERROR_MESSAGE);
+            } else {
+                service.deletar(construirAgendamento());
+                limpaCampos();
+                tabela.setModel(carregarDadosAgendamentos());
+                tabela.setModel(carregarDadosAgendamentos());
+            }
+        } catch (RuntimeException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage(), "Erro de Conexão", JOptionPane.ERROR_MESSAGE);
         }
     }
 
     private Agendamento construirAgendamento() {
         String nomeSelecionado = (String) comboBoxNomes.getSelectedItem();
-        int idIdoso = parseInt(nomeSelecionado.split(" - ")[0]);
+
+        String[] partesNome = nomeSelecionado.split(" - ");
+        if (partesNome.length != 2) {
+            throw new IllegalArgumentException("Formato do nome selecionado está incorreto");
+        }
+
+        int idIdoso = Integer.parseInt(partesNome[0]);
+        String nomeIdoso = partesNome[1];
 
         String horario = campoHorario.getText().trim();
         if (!horario.matches("\\d{2}:\\d{2}:\\d{2}")) {
             horario += ":00";
         }
 
-        return campoId.getText().isEmpty()
-                ? new Agendamento(idIdoso, Date.valueOf(campoDataAgendamento.getText()),
-                Time.valueOf(horario))
-                : new Agendamento(
-                parseInt(campoId.getText()),
-                idIdoso,
-                Date.valueOf(campoDataAgendamento.getText()),
-                Time.valueOf(horario));
+        try {
+            return campoId.getText().isEmpty()
+                    ? new Agendamento(idIdoso, Date.valueOf(campoDataAgendamento.getText()),
+                    Time.valueOf(horario), nomeIdoso)
+                    : new Agendamento(
+                    parseInt(campoId.getText()),
+                    idIdoso,
+                    Date.valueOf(campoDataAgendamento.getText()),
+                    Time.valueOf(horario),
+                    nomeIdoso);
+        } catch (IllegalArgumentException e) {
+            throw new IllegalArgumentException("Erro ao construir o objeto Agendamento: " + e.getMessage());
+        }
     }
+
 
     private void selecionarAgendamento(ListSelectionEvent e) {
         if (!e.getValueIsAdjusting()) {
@@ -254,13 +283,15 @@ public class AgendamentoForm extends JFrame {
             if (selectedRow != -1) {
                 var id = (Integer) tabela.getValueAt(selectedRow, 0);
                 var nome = (String) tabela.getValueAt(selectedRow, 1);
-                var dataVisita = (Integer) tabela.getValueAt(selectedRow, 2);
-                var horaVisita = (String) tabela.getValueAt(selectedRow, 3);
+                var dataVisita = (Date) tabela.getValueAt(selectedRow, 2);
+                var horaVisita = (Time) tabela.getValueAt(selectedRow, 3);
 
-                campoId.setText(id.toString());
+                campoId.setText(String.valueOf(id));
                 comboBoxNomes.setSelectedItem(nome);
                 campoDataAgendamento.setText(String.valueOf(dataVisita));
-                campoHorario.setText(horaVisita);
+
+                String horaFormatada = horaVisita.toString().substring(0, 5);
+                campoHorario.setText(horaFormatada);
             }
         }
     }
