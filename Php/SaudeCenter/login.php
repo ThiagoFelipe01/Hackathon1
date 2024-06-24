@@ -16,8 +16,10 @@
 </div>
 
 <?php
-$username = $_POST['login']; 
-$password = $_POST['senha'];
-var_dump($_POST);
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $username = isset($_POST['login']) ? $_POST['login'] : ''; 
+    $password = isset($_POST['senha']) ? $_POST['senha'] : '';
+    var_dump($_POST);
+}
 ?>
 <?php include 'templates/footer.php'; ?>

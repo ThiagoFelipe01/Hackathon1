@@ -20,7 +20,7 @@
 <?php
     // URL da API Node
     $apiUrl = 'http://localhost:8000/agendamentos';
-
+    
     // Opções da requisição (opcional)
     $options = [
         'http' => [
