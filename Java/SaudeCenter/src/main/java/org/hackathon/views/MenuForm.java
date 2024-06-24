@@ -125,11 +125,4 @@ public class MenuForm extends JFrame {
         usuarioForm.setVisible(true);
         dispose();
     }
-
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> {
-            MenuForm menuForm = new MenuForm();
-            menuForm.setVisible(true);
-        });
-    }
 }
