@@ -52,7 +52,7 @@ public class AgendamentoDao {
         String sql = "update agendamentos set idoso_id = ?, data_agendamento = ?, horario = ? where id = ?";
         PreparedStatement ps = connection.prepareStatement(sql);
         ps.setInt(1, agendamento.getIdIdoso());
-        ps.setDate(4, (Date) agendamento.getDataAgendamento());
+        ps.setDate(2, (Date) agendamento.getDataAgendamento());
         ps.setTime(3, agendamento.getHorario());
         ps.setInt(4, agendamento.getId());
         ps.execute();

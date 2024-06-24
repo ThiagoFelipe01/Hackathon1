@@ -4,15 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5cbb86a9-888b-46f1-9af3-a22f3719d138" name="Changes" comment="subindo os arquivos">
+    <list default="true" id="5cbb86a9-888b-46f1-9af3-a22f3719d138" name="Changes" comment="tentando fazer as exceções">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/hackathon/dao/AgendamentoDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/hackathon/dao/AgendamentoDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/hackathon/model/Agendamento.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/hackathon/model/Agendamento.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/hackathon/service/AgendamentoService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/hackathon/service/AgendamentoService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/hackathon/views/AgendamentoForm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/hackathon/views/AgendamentoForm.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/hackathon/dao/AgendamentoDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/hackathon/dao/AgendamentoDao.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/hackathon/model/Agendamento.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/hackathon/model/Agendamento.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/hackathon/service/AgendamentoService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/hackathon/service/AgendamentoService.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/org/hackathon/views/AgendamentoForm$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/hackathon/views/AgendamentoForm$1.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/org/hackathon/views/AgendamentoForm$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/hackathon/views/AgendamentoForm$2.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/org/hackathon/views/AgendamentoForm.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/hackathon/views/AgendamentoForm.class" afterDir="false" />
@@ -400,7 +394,15 @@
       <option name="project" value="LOCAL" />
       <updated>1719192930546</updated>
     </task>
-    <option name="localTasksCounter" value="30" />
+    <task id="LOCAL-00030" summary="tentando fazer as exceções">
+      <option name="closed" value="true" />
+      <created>1719251356734</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1719251356734</updated>
+    </task>
+    <option name="localTasksCounter" value="31" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -436,6 +438,7 @@
     <MESSAGE value="Estilizando as interface" />
     <MESSAGE value="tentando resolver exceções tela de agendamento" />
     <MESSAGE value="subindo os arquivos" />
-    <option name="LAST_COMMIT_MESSAGE" value="subindo os arquivos" />
+    <MESSAGE value="tentando fazer as exceções" />
+    <option name="LAST_COMMIT_MESSAGE" value="tentando fazer as exceções" />
   </component>
 </project>
