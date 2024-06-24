@@ -241,18 +241,21 @@ public class IdosoCadastroForm extends JFrame {
         constraints.gridy = 12;
         painelEntrada.add(campoObservacao, constraints);
 
-        botaoCadastrar = new JButton("Cadastrar");
-        botaoCadastrar.addActionListener(e -> salvar());
         constraints.gridx = 1;
-        constraints.gridy = 13;
-        constraints.anchor = GridBagConstraints.EAST;
+        constraints.gridy++;
+        botaoCadastrar = new JButton("Cadastrar");
+        botaoCadastrar.setBackground(new Color(60, 179, 113));
+        botaoCadastrar.setForeground(Color.WHITE);
+        botaoCadastrar.setFocusPainted(false);
+        botaoCadastrar.addActionListener(e -> salvar());
         painelEntrada.add(botaoCadastrar, constraints);
 
-        botaoCancelar = new JButton("Cancelar");
-        botaoCancelar.addActionListener(e -> limpaCampos());
         constraints.gridx = 0;
-        constraints.gridy = 13;
-        constraints.anchor = GridBagConstraints.WEST;
+        botaoCancelar = new JButton("Cancelar");
+        botaoCancelar.setBackground(new Color(220, 20, 60));
+        botaoCancelar.setForeground(Color.WHITE);
+        botaoCancelar.setFocusPainted(false);
+        botaoCancelar.addActionListener(e -> limpaCampos());
         painelEntrada.add(botaoCancelar, constraints);
 
         return painelEntrada;
@@ -392,11 +395,5 @@ public class IdosoCadastroForm extends JFrame {
         menu.add(sairMenuItem);
 
         setJMenuBar(menuBar);
-    }
-
-    public static class Main {
-        public static void main(String[] args) {
-            SwingUtilities.invokeLater(IdosoCadastroForm::new);
-        }
     }
 }

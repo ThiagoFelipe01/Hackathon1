@@ -121,31 +121,12 @@ public class VacinaForm extends JFrame {
         add(panel);
     }
 
-    private void createMenuBar() {
-        JMenuBar menuBar = new JMenuBar();
-        JMenu menu = new JMenu("Menu");
-
-        JMenuItem listarItem = new JMenuItem("Listar Vacinas");
-        listarItem.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                listarVacinas();
-            }
-        });
-
-        JMenuItem exitItem = new JMenuItem("Sair");
-        exitItem.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                System.exit(0);
-            }
-        });
-
-        menu.add(listarItem);
-        menu.add(exitItem);
-        menuBar.add(menu);
-        setJMenuBar(menuBar);
+    public void voltar() {
+        MenuForm menuForm = new MenuForm();
+        menuForm.setVisible(true);
+        dispose();
     }
+
 
     private void adicionarVacina() {
         try {
@@ -195,8 +176,38 @@ public class VacinaForm extends JFrame {
         }
     }
 
-    public static void main(String[] args) {
-        Connection connection = null;
-        SwingUtilities.invokeLater(() -> new VacinaForm(connection).setVisible(true));
+    private void createMenuBar() {
+        JMenuBar menuBar = new JMenuBar();
+
+        JMenu menu = new JMenu("Menu");
+        menuBar.add(menu);
+
+        JMenuItem listarMenuItem = new JMenuItem("Voltar");
+        listarMenuItem.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                voltar();
+            }
+        });
+        menu.add(listarMenuItem);
+
+        JMenuItem listarItem = new JMenuItem("Listar Vacinas");
+        listarItem.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                listarVacinas();
+            }
+        });
+
+        JMenuItem sairMenuItem = new JMenuItem("Sair");
+        sairMenuItem.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.exit(0);
+            }
+        });
+        menu.add(sairMenuItem);
+
+        setJMenuBar(menuBar);
     }
 }

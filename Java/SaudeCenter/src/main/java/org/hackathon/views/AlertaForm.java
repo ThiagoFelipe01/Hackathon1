@@ -23,6 +23,7 @@ public class AlertaForm extends JFrame {
         this.alertaService = new AlertaService(connection);
         setTitle("Gerenciamento de Alertas");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        createMenuBar();
         setSize(500, 400);
         setLocationRelativeTo(null);
 
@@ -111,6 +112,12 @@ public class AlertaForm extends JFrame {
         add(panel);
     }
 
+    public void voltar() {
+        MenuForm menuForm = new MenuForm();
+        menuForm.setVisible(true);
+        dispose();
+    }
+
     private void enviarAlerta() {
         try {
             int idosoId = Integer.parseInt(idosoIdTextField.getText());
@@ -146,8 +153,30 @@ public class AlertaForm extends JFrame {
         }
     }
 
-    public static void main(String[] args) {
-        Connection connection = null;
-        SwingUtilities.invokeLater(() -> new AlertaForm(connection).setVisible(true));
+    private void createMenuBar() {
+        JMenuBar menuBar = new JMenuBar();
+
+        JMenu menu = new JMenu("Menu");
+        menuBar.add(menu);
+
+        JMenuItem listarMenuItem = new JMenuItem("Voltar");
+        listarMenuItem.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                voltar();
+            }
+        });
+        menu.add(listarMenuItem);
+
+        JMenuItem sairMenuItem = new JMenuItem("Sair");
+        sairMenuItem.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.exit(0);
+            }
+        });
+        menu.add(sairMenuItem);
+
+        setJMenuBar(menuBar);
     }
 }

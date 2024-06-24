@@ -9,8 +9,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Connection;
 import java.sql.Date;
-import java.sql.DriverManager;
-import java.sql.SQLException;
 import java.util.List;
 
 public class HistoricoForm extends JFrame {
@@ -21,6 +19,7 @@ public class HistoricoForm extends JFrame {
 
     public HistoricoForm(Connection connection) {
         historicoService = new HistoricoService(connection);
+        createMenuBar();
         initUI();
     }
 
@@ -86,6 +85,7 @@ public class HistoricoForm extends JFrame {
             }
         });
         panel.add(btnSalvar, gbc);
+
 
         gbc.gridx = 1;
         btnBuscar = new JButton("Buscar");
@@ -178,19 +178,36 @@ public class HistoricoForm extends JFrame {
         add(panel);
     }
 
-    public static void main(String[] args) {
-        Connection connection = null;
-        try {
-            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/saudecenter", "root", "");
-        } catch (SQLException e) {
-            e.printStackTrace();
-            JOptionPane.showMessageDialog(null, "Falha na conexão com o banco de dados: " + e.getMessage());
-            System.exit(1); // Encerra o programa em caso de falha de conexão
-        }
-        Connection finalConnection = connection;
-        EventQueue.invokeLater(() -> {
-            HistoricoForm view = new HistoricoForm(finalConnection);
-            view.setVisible(true);
+    public void voltar() {
+        MenuForm menuForm = new MenuForm();
+        menuForm.setVisible(true);
+        dispose();
+    }
+
+    private void createMenuBar() {
+        JMenuBar menuBar = new JMenuBar();
+
+        JMenu menu = new JMenu("Menu");
+        menuBar.add(menu);
+
+        JMenuItem listarMenuItem = new JMenuItem("Voltar");
+        listarMenuItem.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                voltar();
+            }
         });
+        menu.add(listarMenuItem);
+
+        JMenuItem sairMenuItem = new JMenuItem("Sair");
+        sairMenuItem.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.exit(0);
+            }
+        });
+        menu.add(sairMenuItem);
+
+        setJMenuBar(menuBar);
     }
 }
