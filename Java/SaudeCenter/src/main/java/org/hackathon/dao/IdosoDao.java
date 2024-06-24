@@ -3,8 +3,6 @@ package org.hackathon.dao;
 import org.hackathon.model.Idoso;
 
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
 
 public class IdosoDao {
     private Connection connection;
@@ -15,34 +13,27 @@ public class IdosoDao {
             connection = DriverManager.getConnection(
                     "jdbc:mysql://localhost:3306/saudecenter?useTimezone=true&serverTimezone=UTC", "root", "");
         } catch (Exception e) {
-            throw new SQLException(e.getMessage());
+            throw new SQLException("Driver JDBC do MySQL não encontrado.", e);
         }
     }
+
 
     public Connection getConnection() {
         return connection;
     }
 
     public void inserir (Idoso idoso) throws  SQLException {
-        String sql = "insert into idoso(nome,idade,cpf,telefone) values(?,?,?,?)";
+        String sql = "insert into idosos(nome,idade,cpf,endereco,telefone,historico_medico,alergias,Condicoes_preexistentes,observacoes) values(?,?,?,?,?,?,?,?,?)";
         PreparedStatement ps = connection.prepareStatement(sql);
         ps.setString(1, idoso.getNome());
         ps.setInt(2, idoso.getIdade());
-        ps.setInt(3, idoso.getCpf());
-        ps.setInt(4, idoso.getTelefone());
+        ps.setString(3, idoso.getCpf());
+        ps.setString(4, idoso.getEndereco());
+        ps.setString(5, idoso.getTelefone());
+        ps.setString(6, idoso.getHistoricoMedico());
+        ps.setString(7,idoso.getAlergia());
+        ps.setString(8, idoso.getCondicaoPreExistente());
+        ps.setString(9, idoso.getObservacoes());
         ps.execute();
     }
-
-
-    public void  atualizar(Idoso idoso) throws SQLException {
-        String sql = "update idoso set nome = ?, idade = ?, cpf = ?, telefone = ? where id = ?";
-        PreparedStatement ps = connection.prepareStatement(sql);
-        ps.setString(1, idoso.getNome());
-        ps.setInt(2, idoso.getIdade());
-        ps.setInt(3, idoso.getCpf());
-        ps.setInt(4, idoso.getTelefone());
-        ps.setInt(5, idoso.getId());
-        ps.execute();
-    }
-
 }
