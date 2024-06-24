@@ -6,15 +6,32 @@
     <form action="agendamento.php" method="POST">
         <div class="form-group">
 
-            <label for="nome">Nome:</label>
-            <select name="nome" id="nome" class="form-control"></select>
+        <label for="nome">Nome:</label>
+        <input type="text" id="nome" name="nome" required>
 
-            <label for="data">Data:</label>
-            <select name="data" id="data" class="form-control"></select>
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
 
-            <label for="hora">Hora:</label>
-            <select name="hora" id="hora" class="form-control"></select>
+        <label for="telefone">Telefone:</label>
+        <input type="text" id="telefone" name="telefone" required>
+
+        <label for="tipo_agendamento">Tipo de Agendamento:</label>
+        <select id="tipo_agendamento" name="tipo_agendamento" required>
+            <option value="vacina">Vacina</option>
+            <option value="visita">Visita</option>
+        </select>
+
+        <label for="data_agendamento">Data:</label>
+        <input type="date" id="data_agendamento" name="data_agendamento" required>
+
+        <label for="horario">Horário:</label>
+        <input type="time" id="horario" name="horario" required>
+        <br>
+        <label></label>
+        <input class="btn btn-primary" type="submit" value="Agendar">
+    
         </div>
+    </form>
 </div>
 
 <?php

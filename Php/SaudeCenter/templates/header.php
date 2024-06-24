@@ -20,7 +20,7 @@
         <nav class="header-nav">
             <ul>
                 <li>
-                    <a href="index.php" title="Home">Home</a>
+                    <a href="index.php" title="Home">Ínicio</a>
                 </li>
                 <li>
                     <a href="login.php" title="Agente">Agente</a>
