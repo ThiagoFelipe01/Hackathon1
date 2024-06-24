@@ -68,6 +68,15 @@ public class MenuForm extends JFrame {
         });
         panel.add(btnHistoricoForm);
 
+        JButton btnGestaoUsuarios = new JButton("Gestão de Usuários");
+        btnGestaoUsuarios.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                abrirUsuarioForm();
+            }
+        });
+        panel.add(btnGestaoUsuarios);
+
         add(panel);
     }
 
@@ -111,6 +120,11 @@ public class MenuForm extends JFrame {
         dispose();
     }
 
+    private void abrirUsuarioForm() {
+        UsuarioForm usuarioForm = new UsuarioForm();
+        usuarioForm.setVisible(true);
+        dispose();
+    }
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
