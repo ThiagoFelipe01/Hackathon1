@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 19/06/2024 às 02:49
--- Versão do servidor: 10.4.32-MariaDB
--- Versão do PHP: 8.0.30
+-- Tempo de geração: 22/06/2024 às 22:09
+-- Versão do servidor: 10.4.28-MariaDB
+-- Versão do PHP: 8.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -27,6 +27,7 @@ SET time_zone = "+00:00";
 -- Estrutura para tabela `agendamentos`
 --
 
+DROP TABLE IF EXISTS `agendamentos`;
 CREATE TABLE `agendamentos` (
   `id` int(11) NOT NULL,
   `idoso_id` int(11) DEFAULT NULL,
@@ -40,6 +41,7 @@ CREATE TABLE `agendamentos` (
 -- Estrutura para tabela `alertas`
 --
 
+DROP TABLE IF EXISTS `alertas`;
 CREATE TABLE `alertas` (
   `id` int(11) NOT NULL,
   `idoso_id` int(11) DEFAULT NULL,
@@ -54,6 +56,7 @@ CREATE TABLE `alertas` (
 -- Estrutura para tabela `historico_vacinacao`
 --
 
+DROP TABLE IF EXISTS `historico_vacinacao`;
 CREATE TABLE `historico_vacinacao` (
   `id` int(11) NOT NULL,
   `idoso_id` int(11) DEFAULT NULL,
@@ -67,10 +70,12 @@ CREATE TABLE `historico_vacinacao` (
 -- Estrutura para tabela `idosos`
 --
 
+DROP TABLE IF EXISTS `idosos`;
 CREATE TABLE `idosos` (
   `id` int(11) NOT NULL,
   `nome` varchar(100) NOT NULL,
   `idade` int(11) NOT NULL,
+  `cpf` varchar(11) NOT NULL,
   `endereco` varchar(255) NOT NULL,
   `telefone` varchar(15) DEFAULT NULL,
   `historico_medico` text DEFAULT NULL,
@@ -83,8 +88,8 @@ CREATE TABLE `idosos` (
 -- Despejando dados para a tabela `idosos`
 --
 
-INSERT INTO `idosos` (`id`, `nome`, `idade`, `endereco`, `telefone`, `historico_medico`, `alergias`, `condicoes_preexistentes`, `observacoes`) VALUES
-(1, 'João da Silva', 78, 'Área rural, S/N, Cidade', '(44) 9999-9999', 'Histórico de hipertensão', 'Nenhuma', 'Diabetes', 'Mobilidade reduzida');
+INSERT INTO `idosos` (`id`, `nome`, `idade`, `cpf`, `endereco`, `telefone`, `historico_medico`, `alergias`, `condicoes_preexistentes`, `observacoes`) VALUES
+(1, 'João da Silva', 78, '', 'Área rural, S/N, Cidade', '(44) 9999-9999', 'Histórico de hipertensão', 'Nenhuma', 'Diabetes', 'Mobilidade reduzida');
 
 -- --------------------------------------------------------
 
@@ -92,6 +97,7 @@ INSERT INTO `idosos` (`id`, `nome`, `idade`, `endereco`, `telefone`, `historico_
 -- Estrutura para tabela `usuarios`
 --
 
+DROP TABLE IF EXISTS `usuarios`;
 CREATE TABLE `usuarios` (
   `id` int(11) NOT NULL,
   `nome` varchar(100) NOT NULL,
@@ -114,6 +120,7 @@ INSERT INTO `usuarios` (`id`, `nome`, `email`, `senha`, `tipo_usuario`) VALUES
 -- Estrutura para tabela `vacinas`
 --
 
+DROP TABLE IF EXISTS `vacinas`;
 CREATE TABLE `vacinas` (
   `id` int(11) NOT NULL,
   `nome` varchar(100) NOT NULL,
