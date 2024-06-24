@@ -1,57 +1,49 @@
+<?php include 'templates/header.php'; ?>
+
+<div class="containeragendamento">
+    <h1>Agendamento</h1>
+
+    <form action="agendamento.php" method="POST">
+        <div class="form-group">
+
+            <label for="nome">Nome:</label>
+            <select name="nome" id="nome" class="form-control"></select>
+
+            <label for="data">Data:</label>
+            <select name="data" id="data" class="form-control"></select>
+
+            <label for="hora">Hora:</label>
+            <select name="hora" id="hora" class="form-control"></select>
+        </div>
+</div>
+
 <?php
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Coletar dados do formulário
-    $nome = $_POST['nome'];
-    $email = $_POST['email'];
-    $tipo = $_POST['tipo'];
-    $data = $_POST['data'];
-    $hora = $_POST['hora'];
-    $observacoes = $_POST['observacoes'];
+    // URL da API Node
+    $apiUrl = 'http://localhost:8000/agendamentos';
 
-    // Dados para enviar para a API
-    $agendamentoDados = array(
-        'nome' => $nome,
-        'email' => $email,
-        'tipo' => $tipo,
-        'data' => $data,
-        'hora' => $hora,
-        'observacoes' => $observacoes
-    );
+    // Opções da requisição (opcional)
+    $options = [
+        'http' => [
+            'header' => [
+                'Content-Type: application/json' // Definir cabeçalho Content-Type
+            ]
+        ]
+    ];
 
-    // Converter dados para JSON
-    $jsonDados = json_encode($agendamentoDados);
+    // Fazer a requisição HTTP
+    $response = file_get_contents($apiUrl, false, stream_context_create($options));
 
-    // URL da API de agendamento
-    $url = 'https://api.exemplo.com/agendar';
+    // Verificar se a requisição foi bem-sucedida
+    if ($response !== false) {
+        // Processar a resposta da API
+        $responseData = json_decode($response, true); // Assumindo que a resposta é JSON
 
-    // Inicializar cURL
-    $ch = curl_init($url);
-
-    // Configurar cURL para enviar uma requisição POST com JSON
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-    curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
-    curl_setopt($ch, CURLOPT_POST, true);
-    curl_setopt($ch, CURLOPT_POSTFIELDS, $jsonDados);
-
-    // Executar a requisição
-    $resposta = curl_exec($ch);
-
-    // Verificar se houve erro na requisição
-    if ($resposta === FALSE) {
-        die('Erro na API: ' . curl_error($ch));
-    }
-
-    // Fechar cURL
-    curl_close($ch);
-
-    // Decodificar resposta da API
-    $respostaDados = json_decode($resposta, true);
-
-    // Exibir mensagem de sucesso ou erro
-    if (isset($respostaDados['success']) && $respostaDados['success'] == true) {
-        echo "Agendamento realizado com sucesso!";
+        // Exibir os dados da resposta
+        //var_dump($responseData);
     } else {
-        echo "Erro ao realizar agendamento: " . $respostaDados['message'];
+        // Erro ao fazer a requisição
+        echo "Erro ao conectar na API Node";
     }
-}
 ?>
+
+<?php include 'templates/footer.php'; ?>

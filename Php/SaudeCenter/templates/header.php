@@ -20,16 +20,19 @@
         <nav class="header-nav">
             <ul>
                 <li>
-                    <a href="index.php" title="Home">Ínicio</a>
+                    <a href="index.php" title="Home">Home</a>
                 </li>
                 <li>
-                    <a href="about.php" title="Home">Sobre</a>
+                    <a href="login.php" title="Agente">Agente</a>
                 </li>
                 <li>
-                    <a href="services.php" title="Service">Serviços</a>
+                    <a href="agendamento.php" title="Agendamento">Agendamento</a>
                 </li>
                 <li>
-                    <a href="contact.php" title="Contato">Contatos</a>
+                    <a href="contato.php" title="Contato">Contato</a>
+                </li>
+                <li>
+                    <a href="sobre.php" title="Home">Sobre</a>
                 </li>
             </ul>
         </nav>
