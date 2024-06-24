@@ -12,7 +12,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $headers = "De: noreply@vacinacao.com";
 
     if (mail($to, $subject, $message, $headers)) {
-        // Se o e-mail foi enviado com sucesso, fazemos uma requisição para atualizar o status na API
+
         $updateApiUrl = 'http://localhost:8000/agendamentos/' . $id;
         $updateOptions = [
             'http' => [

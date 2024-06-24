@@ -18,25 +18,25 @@
 </div>
 
 <?php
-    // URL da API Node
+
     $apiUrl = 'http://localhost:8000/agendamentos';
     
-    // Opções da requisição (opcional)
+
     $options = [
         'http' => [
             'header' => [
-                'Content-Type: application/json' // Definir cabeçalho Content-Type
+                'Content-Type: application/json' 
             ]
         ]
     ];
 
-    // Fazer a requisição HTTP
+    
     $response = file_get_contents($apiUrl, false, stream_context_create($options));
 
-    // Verificar se a requisição foi bem-sucedida
+    
     if ($response !== false) {
-        // Processar a resposta da API
-        $responseData = json_decode($response, true); // Assumindo que a resposta é JSON
+        
+        $responseData = json_decode($response, true); 
 
         // Exibir os dados da resposta
         //var_dump($responseData);

@@ -1,35 +1,35 @@
 <?php include 'templates/header.php'; ?>
 
-<!-- 
+
 <?php
-    // URL da API Node
+
     $apiUrl = 'http://localhost:8000/agendamentos';
 
-    // Opções da requisição (opcional)
+
     $options = [
         'http' => [
             'header' => [
-                'Content-Type: application/json' // Definir cabeçalho Content-Type
+                'Content-Type: application/json'
             ]
         ]
     ];
 
-    // Fazer a requisição HTTP
+
     $response = file_get_contents($apiUrl, false, stream_context_create($options));
 
-    // Verificar se a requisição foi bem-sucedida
-    if ($response !== false) {
-        // Processar a resposta da API
-        $responseData = json_decode($response, true); // Assumindo que a resposta é JSON
 
-        // Exibir os dados da resposta
+    if ($response !== false) {
+
+        $responseData = json_decode($response, true); 
+
+
         var_dump($responseData);
     } else {
-        // Erro ao fazer a requisição
+
         echo "Erro ao conectar na API Node";
     }
 ?>
--->
+
 
 <div class="containercadastro">
     <h1>Cadastro</h1>
@@ -169,7 +169,7 @@
 
 <?php
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Coletar dados do formulário
+
     $nome = $_POST['nome'];
     $idade = $_POST['idade'];
     $cpf = $_POST['cpf'];
@@ -181,7 +181,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $observacoes = $_POST['observacoes'];
 var_dump($_POST);
 
-    // Dados para enviar para a API
+
     $agendamentoDados = array(
         'nome' => $nome,
         'idade' => $idade,
@@ -194,36 +194,36 @@ var_dump($_POST);
        'observacoes' => $observacoes,
     );
 
-    // Converter dados para JSON
+
     $jsonDados = json_encode($agendamentoDados);
 
-    // URL da API de agendamento
+
     $url = 'http://localhost:8000/idosos';
 
-    // Inicializar cURL
+
     $ch = curl_init($url);
 
-    // Configurar cURL para enviar uma requisição POST com JSON
+
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
     curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
     curl_setopt($ch, CURLOPT_POST, true);
     curl_setopt($ch, CURLOPT_POSTFIELDS, $jsonDados);
 
-    // Executar a requisição
+
     $resposta = curl_exec($ch);
 
-    // Verificar se houve erro na requisição
+
     if ($resposta === FALSE) {
         die('Erro na API: ' . curl_error($ch));
     }
 
-    // Fechar cURL
+
     curl_close($ch);
 
-    // Decodificar resposta da API
+
     $respostaDados = json_decode($resposta, true);
 
-    // Exibir mensagem de sucesso ou erro
+
     if (isset($respostaDados['success']) && $respostaDados['success'] == true) {
         echo "Agendamento realizado com sucesso!";
     } else {

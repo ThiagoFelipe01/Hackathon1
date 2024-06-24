@@ -45,7 +45,7 @@
 <h1>Lembretes de Vacinação</h1>
 
 <?php
-// Configurações da API
+
 $apiUrl = 'http://localhost:8000/agendamentos';
 $options = [
     'http' => [
