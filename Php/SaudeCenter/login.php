@@ -16,10 +16,39 @@
 </div>
 
 <?php
+$apiUrl = 'http://localhost:8000/usuarios';
+
+$options = [
+    'http' => [
+        'header' => [
+            'Content-Type: application/json' 
+        ]
+    ]
+];
+
+$response = file_get_contents($apiUrl, false, stream_context_create($options));
+
+if ($response !== false) {
+    $responseData = json_decode($response, true); 
+
+    var_dump($responseData);
+} else {
+    echo "Erro ao conectar na API Node";
+}
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $username = isset($_POST['login']) ? $_POST['login'] : ''; 
     $password = isset($_POST['senha']) ? $_POST['senha'] : '';
     var_dump($_POST);
+
+    $senhaIncorreta = !password_verify($password, $responseData->senha);
+    if($senhaIncorreta) {
+        echo ('Senha incorreta');
+    }
+
+    echo "<script>location.href='index.php'</script>";
 }
+
+
 ?>
 <?php include 'templates/footer.php'; ?>
