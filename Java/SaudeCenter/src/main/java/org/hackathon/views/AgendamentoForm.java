@@ -261,16 +261,21 @@ public class AgendamentoForm extends JFrame {
             horario += ":00";
         }
 
-        return campoId.getText().isEmpty()
-                ? new Agendamento(idIdoso, Date.valueOf(campoDataAgendamento.getText()),
-                Time.valueOf(horario), nomeIdoso)
-                : new Agendamento(
-                parseInt(campoId.getText()),
-                idIdoso,
-                Date.valueOf(campoDataAgendamento.getText()),
-                Time.valueOf(horario),
-                nomeIdoso);
+        try {
+            return campoId.getText().isEmpty()
+                    ? new Agendamento(idIdoso, Date.valueOf(campoDataAgendamento.getText()),
+                    Time.valueOf(horario), nomeIdoso)
+                    : new Agendamento(
+                    parseInt(campoId.getText()),
+                    idIdoso,
+                    Date.valueOf(campoDataAgendamento.getText()),
+                    Time.valueOf(horario),
+                    nomeIdoso);
+        } catch (IllegalArgumentException e) {
+            throw new IllegalArgumentException("Erro ao construir o objeto Agendamento: " + e.getMessage());
+        }
     }
+
 
     private void selecionarAgendamento(ListSelectionEvent e) {
         if (!e.getValueIsAdjusting()) {
@@ -284,7 +289,9 @@ public class AgendamentoForm extends JFrame {
                 campoId.setText(String.valueOf(id));
                 comboBoxNomes.setSelectedItem(nome);
                 campoDataAgendamento.setText(String.valueOf(dataVisita));
-                campoHorario.setText(String.valueOf(horaVisita));
+
+                String horaFormatada = horaVisita.toString().substring(0, 5);
+                campoHorario.setText(horaFormatada);
             }
         }
     }
