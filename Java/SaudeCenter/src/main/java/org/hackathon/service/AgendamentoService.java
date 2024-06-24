@@ -14,6 +14,8 @@ public class AgendamentoService {
     public AgendamentoService() {
         try {
             this.dao = new AgendamentoDao();
+        } catch (RuntimeException e) {
+            throw new RuntimeException("Erro ao conectar ao banco de dados. Verifique a conexão.");
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
