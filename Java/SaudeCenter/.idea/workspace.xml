@@ -4,15 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5cbb86a9-888b-46f1-9af3-a22f3719d138" name="Changes" comment="Estilizando as interface">
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/hackathon/service/UsuarioService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/hackathon/views/UsuarioForm.java" afterDir="false" />
+    <list default="true" id="5cbb86a9-888b-46f1-9af3-a22f3719d138" name="Changes" comment="Fazendo o Usuario.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/hackathon/dao/UsuarioDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/hackathon/dao/UsuarioDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/hackathon/model/Usuario.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/hackathon/model/Usuario.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/hackathon/views/MenuForm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/hackathon/views/MenuForm.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/hackathon/dao/UsuarioDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/hackathon/dao/UsuarioDao.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/hackathon/model/Usuario.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/hackathon/model/Usuario.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -52,18 +45,18 @@
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
   </component>
-  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
-  "lastFilter": {
-    "state": "OPEN",
-    "assignee": "wellingtonjoaquim"
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;wellingtonjoaquim&quot;
   }
-}]]></component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/ThiagoFelipe01/Hackathon1.git",
-    "accountId": "567965bf-dd69-4f64-b83e-bbf02f29b7fb"
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/ThiagoFelipe01/Hackathon1.git&quot;,
+    &quot;accountId&quot;: &quot;567965bf-dd69-4f64-b83e-bbf02f29b7fb&quot;
   }
-}]]></component>
+}</component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 2
 }</component>
@@ -416,7 +409,15 @@
       <option name="project" value="LOCAL" />
       <updated>1719191062462</updated>
     </task>
-    <option name="localTasksCounter" value="30" />
+    <task id="LOCAL-00030" summary="Fazendo o Usuario.">
+      <option name="closed" value="true" />
+      <created>1719202539949</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1719202539949</updated>
+    </task>
+    <option name="localTasksCounter" value="31" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -450,6 +451,7 @@
     <MESSAGE value="editando o layout ta tela de cadastro" />
     <MESSAGE value="instalando dependencias no arquivo pom.xml, que serve para conectar com o banco" />
     <MESSAGE value="Estilizando as interface" />
-    <option name="LAST_COMMIT_MESSAGE" value="Estilizando as interface" />
+    <MESSAGE value="Fazendo o Usuario." />
+    <option name="LAST_COMMIT_MESSAGE" value="Fazendo o Usuario." />
   </component>
 </project>
